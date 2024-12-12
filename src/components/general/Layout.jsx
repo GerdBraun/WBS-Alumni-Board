@@ -9,9 +9,9 @@ const Layout = () => {
   return (
     <ContextProvider>
       <Header />
-      <main>
+      <div className="container mx-auto">
         <Outlet />
-      </main>
+        </div>
       <Footer />
       <ToastContainer />
     </ContextProvider>
