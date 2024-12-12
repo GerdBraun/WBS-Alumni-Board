@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className="relative">
-      <div className="navbar bg-base-100 fixed">
+      <div className="navbar bg-base-100  fixed ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -25,7 +26,7 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Item 1</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
                 <a>Parent</a>
@@ -48,7 +49,7 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Item 1</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <details>
@@ -87,10 +88,10 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-28 p-2 shadow"
             >
               <li>
-                <a>Profile</a>
+                <Link to="/signUp">Sign Up</Link>
               </li>
               <li>
-                <a>Log out</a>
+                <Link to="/login">Login</Link>
               </li>
             </ul>
           </div>
