@@ -1,8 +1,14 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignupForm from './components/authentication/SignupForm';
+import LoginForm from './components/authentication/LoginForm';
 
-const App = () => {
+export default function App() {
   return (
-    <div>App</div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/login" element={<LoginForm />} />
+      </Routes>
+    </Router>
+  );
 }
-
-export default App
