@@ -3,10 +3,26 @@ export default function SignupForm() {
     <form className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
 
-      {/* Name Field */}
+      {/* First Name Field */}
       <label className="input input-bordered flex items-center gap-2 mb-4">
-        Name
-        <input type="text" className="grow" placeholder="Your Name" />
+        First Name
+        <input
+          type="text"
+          name="firstName" 
+          className="grow"
+          placeholder="Enter First Name"
+        />
+      </label>
+
+      {/* Last Name Field */}
+      <label className="input input-bordered flex items-center gap-2 mb-4">
+        Last Name
+        <input
+          type="text"
+          name="lastName" 
+          className="grow"
+          placeholder="Enter Last Name"
+        />
       </label>
 
       {/* Email Field */}
