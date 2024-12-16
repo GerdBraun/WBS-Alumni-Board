@@ -11,8 +11,8 @@ const ProjectList = () => {
   }, []);
 
   const loader = async () => {
-    const res = await getProjects();
-    setProjects(res);
+    const data = await getProjects();
+    setProjects(data.results);
   };
 
   return (

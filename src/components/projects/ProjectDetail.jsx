@@ -11,8 +11,8 @@ const ProjectDetail = () => {
   }, [id]);
 
   const loader = async () => {
-    const res = await getProjects(id);
-    setProject(res);
+    const data = await getProjects(id);
+    setProject(data);
   };
 
   return (

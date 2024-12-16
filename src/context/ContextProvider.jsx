@@ -44,8 +44,7 @@ function ContextProvider({ children }) {
           console.error(error);
           toast.warning(error.response.data.error);
         });
-      if (id) return data;
-      return data.results;
+      return data;
     } catch (error) {
       toast.error("Something went wrong: " + error);
     } finally {
