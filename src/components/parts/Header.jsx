@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
+import { useApp } from "../../context/AppContext";
+
 const Header = () => {
+  const { appUser, logout } = useApp();
   return (
     <div className="relative">
       <div className="navbar bg-base-100  fixed ">
@@ -91,7 +94,19 @@ const Header = () => {
                 <Link to="/signUp">Sign Up</Link>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                {!appUser ? (
+                  <Link to="/login">Login</Link>
+                ) : (
+                  console.log("user is logged out ")
+                )}
+              </li>
+
+              <li>
+                {appUser ? (
+                  <button onClick={logout}>log out</button>
+                ) : (
+                  console.log("user is logged out")
+                )}
               </li>
             </ul>
           </div>

@@ -9,6 +9,10 @@ function ContextProvider({ children }) {
   const navigate = useNavigate();
 
   const login = async (payload) => {
+    if (appUser) {
+      navigate(-1);
+      return toast.warn("already logged in!");
+    }
     try {
       const {
         data: { user, token },
@@ -17,23 +21,28 @@ function ContextProvider({ children }) {
         .catch((error) => {
           console.error(error);
           toast.warning(JSON.stringify(error.response.data.error));
-          console.log(
-            "here is the error message: " +
-              JSON.stringify(error.response.data.error)
-          );
         });
+
       setAppUser(user);
       localStorage.setItem("token", token);
       localStorage.setItem("appUser", JSON.stringify(user));
       toast.info("log in was successful");
       navigate("/");
-    } catch (error) {
-      toast.error("Something went wrong: " + error);
+    } catch (err) {
+      console.log("something went wrong: " + err);
     }
   };
 
+  const logout = () => {
+    if (appUser) {
+      toast.info("logging out");
+      setAppUser(null);
+      localStorage.removeItem("token");
+      localStorage.removeItem("appUser");
+    }
+  };
   return (
-    <AppContext.Provider value={{ appUser, setAppUser, login }}>
+    <AppContext.Provider value={{ appUser, setAppUser, login, logout }}>
       {children}
     </AppContext.Provider>
   );
