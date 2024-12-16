@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <div className="relative">
@@ -37,6 +37,9 @@ const Header = () => {
                   <li>
                     <a>Submenu 2</a>
                   </li>
+                  <li>
+                    <NavLink to="/projects">Projects</NavLink>
+                  </li>
                 </ul>
               </li>
               <li>
@@ -67,6 +70,9 @@ const Header = () => {
             <li>
               <a>Item 3</a>
             </li>
+            <li>
+              <NavLink to="/projects">Projects</NavLink>
+            </li>
           </ul>
         </div>
         <div className="navbar-end">
@@ -88,10 +94,10 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-28 p-2 shadow"
             >
               <li>
-                <Link to="/signUp">Sign Up</Link>
+                <NavLink to="/signUp">Sign Up</NavLink>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                <NavLink to="/login">Login</NavLink>
               </li>
             </ul>
           </div>

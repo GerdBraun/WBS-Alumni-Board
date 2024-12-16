@@ -6,6 +6,7 @@ import axios from "axios";
 
 function ContextProvider({ children }) {
   const [appUser, setAppUser] = useState(null); // logged-in user
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const login = async (payload) => {
@@ -32,8 +33,30 @@ function ContextProvider({ children }) {
     }
   };
 
+  const getProjects = async (id) => {
+    setLoading(true);
+    const idString = id ? `/${id}` : "";
+    try {
+      console.log(`${import.meta.env.VITE_API_SERVER}/projects${idString}`);
+      const { data } = await axios
+        .get(`${import.meta.env.VITE_API_SERVER}/projects${idString}`)
+        .catch((error) => {
+          console.error(error);
+          toast.warning(error.response.data.error);
+        });
+      if (id) return data;
+      return data.results;
+    } catch (error) {
+      toast.error("Something went wrong: " + error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <AppContext.Provider value={{ appUser, setAppUser, login }}>
+    <AppContext.Provider
+      value={{ appUser, loading, setAppUser, login, getProjects }}
+    >
       {children}
     </AppContext.Provider>
   );
