@@ -8,6 +8,7 @@ import Layout from "./components/general/Layout";
 import HomePage from "./components/general/HomePage";
 import SignupForm from "./components/authentication/SignupForm";
 import LoginForm from "./components/authentication/LoginForm";
+import JobListPage from "./components/jobs/JobListPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -16,6 +17,7 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path="/signUp" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/jobs" element={<JobListPage />} />
       </Route>
     )
   );
