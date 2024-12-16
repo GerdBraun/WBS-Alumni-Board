@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import { useApp } from "../../context/AppContext";
 import { Link, useParams } from "react-router-dom";
+import CommentCard from "../comments/CommentCard";
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
-  const { getProjects, loading } = useApp();
+  const [comments, setComments] = useState(null);
+  const { getProjects, getCommentsByModelAndId,loading } = useApp();
   useEffect(() => {
     loader(id);
+    commentsLoader(id);
   }, [id]);
 
   const loader = async () => {
     const data = await getProjects(id);
     setProject(data);
+  };
+
+  const commentsLoader = async () => {
+    const data = await getCommentsByModelAndId({ model: "projects", id });
+    setComments(data.results);
   };
 
   return (
@@ -26,7 +34,7 @@ const ProjectDetail = () => {
             <p>
               posted by&nbsp;
               <Link to={`/users/${project.User.id}`} className="link">
-                 {project.User.firstName} {project.User.lastName}
+                {project.User.firstName} {project.User.lastName}
               </Link>
             </p>
             <h3 className="font-bold">Description:</h3>
@@ -45,6 +53,15 @@ const ProjectDetail = () => {
                 Back
               </Link>
             </div>
+            <h3 className="font-bold">Comments:</h3>
+            <ul>
+              {comments &&
+                comments.map((comment) => (
+                  <li key={comment.id}>
+                    <CommentCard comment={comment} />
+                  </li>
+                ))}
+            </ul>
           </div>
         </div>
       )}

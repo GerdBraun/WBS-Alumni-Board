@@ -37,7 +37,6 @@ function ContextProvider({ children }) {
     setLoading(true);
     const idString = id ? `/${id}` : "";
     try {
-      console.log(`${import.meta.env.VITE_API_SERVER}/projects${idString}`);
       const { data } = await axios
         .get(`${import.meta.env.VITE_API_SERVER}/projects${idString}`)
         .catch((error) => {
@@ -52,9 +51,34 @@ function ContextProvider({ children }) {
     }
   };
 
+  const getCommentsByModelAndId = async (payload) => {
+    const { model, id } = payload;
+    setLoading(true);
+    try {
+      const { data } = await axios
+        .get(`${import.meta.env.VITE_API_SERVER}/comments/${model}/${id}`)
+        .catch((error) => {
+          console.error(error);
+          toast.warning(error.response.data.error);
+        });
+      return data;
+    } catch (error) {
+      toast.error("Something went wrong: " + error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <AppContext.Provider
-      value={{ appUser, loading, setAppUser, login, getProjects }}
+      value={{
+        appUser,
+        loading,
+        setAppUser,
+        login,
+        getProjects,
+        getCommentsByModelAndId,
+      }}
     >
       {children}
     </AppContext.Provider>
