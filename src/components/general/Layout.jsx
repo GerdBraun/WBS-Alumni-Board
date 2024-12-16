@@ -8,10 +8,12 @@ import "react-toastify/dist/ReactToastify.css";
 const Layout = () => {
   return (
     <ContextProvider>
-      <Header /> 
+      <Header />
       <div className="container mx-auto">
-        <Outlet />
-        </div>
+        <main className="pt-24">
+          <Outlet />
+        </main>
+      </div>
       <Footer />
       <ToastContainer />
     </ContextProvider>
