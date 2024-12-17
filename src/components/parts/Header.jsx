@@ -33,6 +33,9 @@ const Header = () => {
                 <Link to="/">Home</Link>
               </li>
               <li>
+                <Link to="/welcome">Welcome</Link>
+              </li>
+              <li>
                 <a>Projects</a>
                 <ul className="p-2">
                   <li>
@@ -100,6 +103,9 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/welcome">Welcome</Link>
             </li>
             <li>
               <details>

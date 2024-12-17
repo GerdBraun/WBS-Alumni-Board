@@ -11,12 +11,14 @@ import LoginForm from "./components/authentication/LoginForm";
 import ProjectList from "./components/projects/ProjectList";
 import ProjectDetail from "./components/projects/ProjectDetail";
 import ErrorPage from "./components/general/ErrorPage";
+import WelcomePage from "./components/general/WelcomePage";
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/projects">
