@@ -1,17 +1,25 @@
 import { useForm } from "react-hook-form";
+import { useApp } from "../../context/AppContext";
+
 
 export default function SignupForm() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  //get signup from context provider
+   const { signup } = useApp();
+
+  //testing form out put
+  //const onSubmit = (data) => console.log(data);
 
   return (
     <form
       className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(signup)}
     >
       <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
 
@@ -62,9 +70,13 @@ export default function SignupForm() {
           className="grow"
           placeholder="Enter Password"
           name="password"
-          {...register("password", { required: true })}
+          {...register("password", {
+            required: true,
+            maxLength: 11,
+            minLength: 8,
+          })}
         />
-        {errors.password && <span>This field is required</span>}
+        {errors.password && <span> Password with a minimum length of 8 characters is required!</span>}
       </label>
 
       {/* Confirm Password Field */}
@@ -75,9 +87,19 @@ export default function SignupForm() {
           className="grow"
           placeholder="Confirm Password"
           name="confirmPassword"
-          {...register("confirmPassword", { required: true })}
+          {...register("confirmPassword", {
+            required: "Please confirm password!",
+            validate: {
+              matchesPreviousPassword: (value) => {
+                const { password } = getValues();
+                return password === value || "Passwords should match!";
+              },
+            },
+          })}
         />
-        {errors.confirmPassword && <span>This field is required</span>}
+        {errors.confirmPassword && (
+          <p style={{ color: "black" }}>{errors.confirmPassword.message}</p>
+        )}
       </label>
 
       {/* Submit Button */}

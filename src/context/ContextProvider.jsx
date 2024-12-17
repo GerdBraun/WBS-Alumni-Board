@@ -10,6 +10,29 @@ function ContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const signup = async (formData) => {
+    const { firstName, lastName, email, password } = formData;
+    const payload = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+    
+     try {
+       await axios
+         .post(`${import.meta.env.VITE_API_SERVER}/auth/signup`, payload)
+        .catch((error) => {
+           console.error(error);
+           toast.warning(JSON.stringify(error.response.data.error));
+         });
+         toast.info("Sign up was successful");
+         navigate("/login")
+     } catch (error) {
+       console.log("something went wrong: " + error);
+     }
+  };
+
   const login = async (payload) => {
     if (appUser) {
       navigate(-1);
@@ -40,6 +63,7 @@ function ContextProvider({ children }) {
     if (appUser) {
       toast.info("logging out");
       setAppUser(null);
+      setToken(null);
       localStorage.removeItem("token");
       localStorage.removeItem("appUser");
     }
@@ -53,6 +77,8 @@ function ContextProvider({ children }) {
         setLoading,
         setAppUser,
         login,
+        logout,
+        signup,
       }}
     >
       {children}
