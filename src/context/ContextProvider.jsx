@@ -6,6 +6,7 @@ import axios from "axios";
 
 function ContextProvider({ children }) {
   const [appUser, setAppUser] = useState(null); // logged-in user
+  const [token,setToken] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ function ContextProvider({ children }) {
           );
         });
       setAppUser(user);
+      setToken(token);
       localStorage.setItem("token", token);
       localStorage.setItem("appUser", JSON.stringify(user));
       toast.info("log in was successful");
@@ -33,51 +35,15 @@ function ContextProvider({ children }) {
     }
   };
 
-  const getProjects = async (id) => {
-    setLoading(true);
-    const idString = id ? `/${id}` : "";
-    try {
-      const { data } = await axios
-        .get(`${import.meta.env.VITE_API_SERVER}/projects${idString}`)
-        .catch((error) => {
-          console.error(error);
-          toast.warning(error.response.data.error);
-        });
-      return data;
-    } catch (error) {
-      toast.error("Something went wrong: " + error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getCommentsByModelAndId = async (payload) => {
-    const { model, id } = payload;
-    setLoading(true);
-    try {
-      const { data } = await axios
-        .get(`${import.meta.env.VITE_API_SERVER}/comments/${model}/${id}`)
-        .catch((error) => {
-          console.error(error);
-          toast.warning(error.response.data.error);
-        });
-      return data;
-    } catch (error) {
-      toast.error("Something went wrong: " + error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <AppContext.Provider
       value={{
         appUser,
         loading,
+        token,
+        setLoading,
         setAppUser,
         login,
-        getProjects,
-        getCommentsByModelAndId,
       }}
     >
       {children}
