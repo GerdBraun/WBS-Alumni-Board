@@ -30,11 +30,11 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to="/">Home</Link>
+                <NavLink to="/">Home</NavLink>
               </li>
               {appUser && (
                 <li>
-                  <Link to="/welcome">Welcome</Link>
+                  <NavLink to="/welcome">Welcome</NavLink>
                 </li>
               )}
               <li>
@@ -104,11 +104,11 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link to="/">Home</Link>
+              <NavLink to="/">Home</NavLink>
             </li>
             {appUser && (
               <li>
-                <Link to="/welcome">Welcome</Link>
+                <NavLink to="/welcome">Welcome</NavLink>
               </li>
             )}
             <li>
