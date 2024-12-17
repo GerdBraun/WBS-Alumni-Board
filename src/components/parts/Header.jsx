@@ -32,9 +32,11 @@ const Header = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/welcome">Welcome</Link>
-              </li>
+              {appUser && (
+                <li>
+                  <Link to="/welcome">Welcome</Link>
+                </li>
+              )}
               <li>
                 <a>Projects</a>
                 <ul className="p-2">
@@ -104,9 +106,11 @@ const Header = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/welcome">Welcome</Link>
-            </li>
+            {appUser && (
+              <li>
+                <Link to="/welcome">Welcome</Link>
+              </li>
+            )}
             <li>
               <details>
                 <summary>Projects</summary>

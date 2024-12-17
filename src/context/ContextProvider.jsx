@@ -29,7 +29,7 @@ function ContextProvider({ children }) {
       localStorage.setItem("token", token);
       localStorage.setItem("appUser", JSON.stringify(user));
       toast.info("log in was successful");
-      navigate("/");
+      navigate("/welcome");
     } catch (error) {
       toast.error("Something went wrong: " + error);
     }
