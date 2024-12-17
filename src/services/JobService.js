@@ -6,3 +6,9 @@ export const fetchJobs = async () => {
   const response = await axios.get(API_URL);
   return response.data;
 };
+
+//For job details page
+export const fetchJobById = async (id) => {
+  const response = await axios.get(`${API_URL}/${id}`);
+  return response.data;
+};
