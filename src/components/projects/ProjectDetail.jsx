@@ -65,9 +65,9 @@ const ProjectDetail = () => {
             <p>
               {project.Skills &&
                 project.Skills.map((skill) => (
-                  <span key={skill.id} className="badge badge-outline mr-2">
+                  <Link to={`/skills/${skill.id}`} key={skill.id} className="badge badge-outline mr-2">
                     {skill.name}
-                  </span>
+                  </Link>
                 ))}
             </p>
             <div className="card-actions justify-end">
