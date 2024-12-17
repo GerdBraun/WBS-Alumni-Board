@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { useApp } from "../../context/AppContext";
 import ProjectCard from "./ProjectCard";
+import { fetchDataByModelAndId } from "../../utility/fetchData";
 
 const ProjectList = () => {
   const [projects, setProjects] = useState(null);
-  const { getProjects, loading } = useApp();
+  const { token, loading, setLoading } = useApp();
 
   useEffect(() => {
     loader();
   }, []);
 
   const loader = async () => {
-    const data = await getProjects();
+    const props = {
+        model:"projects",
+        setLoading:setLoading,
+        token:token,
+    }
+    const data = await fetchDataByModelAndId(props);
     setProjects(data.results);
   };
 
