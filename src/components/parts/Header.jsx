@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 
 const Header = () => {
   const { appUser, logout } = useApp();
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <div className="navbar bg-base-100  fixed ">
         <div className="navbar-start">
           <div className="dropdown">
@@ -32,22 +32,68 @@ const Header = () => {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <a>Parent</a>
+                <a>Projects</a>
                 <ul className="p-2">
                   <li>
-                    <a>Submenu 1</a>
+                    <NavLink to="/projects">list</NavLink>
                   </li>
                   <li>
-                    <a>Submenu 2</a>
+                    <NavLink to="/projects/add">add</NavLink>
                   </li>
                 </ul>
               </li>
               <li>
-                <a>Item 3</a>
+                <a>Jobs</a>
+                <ul className="p-2">
+                  <li>
+                    <NavLink to="/jobs">list</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/jobs/add">add</NavLink>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a>Companies</a>
+                <ul className="p-2">
+                  <li>
+                    <NavLink to="/companies">list</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/companies/add">add</NavLink>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a>User</a>
+                <ul className="p-2">
+                  <li>
+                    <NavLink to="/signup" className="text-nowrap">
+                      sign up
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/login" className="text-nowrap">
+                      log in
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/users" className="text-nowrap">
+                      list
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/users/add" className="text-nowrap">
+                      add
+                    </NavLink>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">WBS Alumni Board</a>
+          <Link to="/" className="btn btn-ghost text-xl">
+            FULLSTACK.team
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -56,19 +102,69 @@ const Header = () => {
             </li>
             <li>
               <details>
-                <summary>Parent</summary>
+                <summary>Projects</summary>
                 <ul className="p-2">
                   <li>
-                    <a>Submenu 1</a>
+                    <NavLink to="/projects">list</NavLink>
                   </li>
                   <li>
-                    <a>Submenu 2</a>
+                    <NavLink to="/projects/add">add</NavLink>
                   </li>
                 </ul>
               </details>
             </li>
             <li>
-              <a>Item 3</a>
+              <details>
+                <summary>Jobs</summary>
+                <ul className="p-2">
+                  <li>
+                    <NavLink to="/jobs">list</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/jobs/add">add</NavLink>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details>
+                <summary>Companies</summary>
+                <ul className="p-2">
+                  <li>
+                    <NavLink to="/companies">list</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/companies/add">add</NavLink>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details>
+                <summary>User</summary>
+                <ul className="p-2">
+                  <li>
+                    <NavLink to="/signup" className="text-nowrap">
+                      sign up
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/login" className="text-nowrap">
+                      log in
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/users" className="text-nowrap">
+                      list
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/users/add" className="text-nowrap">
+                      add
+                    </NavLink>
+                  </li>
+                </ul>
+              </details>
             </li>
           </ul>
         </div>
@@ -91,7 +187,7 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-28 p-2 shadow"
             >
               <li>
-                <Link to="/signUp">Sign Up</Link>
+                <NavLink to="/signup">Sign Up</NavLink>
               </li>
               <li>
                 {!appUser ? (
