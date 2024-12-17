@@ -5,16 +5,19 @@ import CommentCard from "../comments/CommentCard";
 import {
   fetchDataByModelAndId,
   getCommentsByModelAndId,
+  getMatches,
 } from "../../utility/fetchData";
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
   const [comments, setComments] = useState(null);
+  const [matches, setMatches] = useState(null);
   const { token, loading, setLoading } = useApp();
   useEffect(() => {
     loader(id);
     commentsLoader(id);
+    matchesLoader(id);
   }, [id]);
 
   const loader = async () => {
@@ -24,25 +27,31 @@ const ProjectDetail = () => {
       token: token,
       setLoading: setLoading,
     };
-
     const data = await fetchDataByModelAndId(props);
     setProject(data);
   };
 
   const commentsLoader = async () => {
-    // const data = await getCommentsByModelAndId({ model: "projects", id });
-
     const props = {
       model: "projects",
       id: id,
       token: token,
       setLoading: setLoading,
     };
-
     const data = await getCommentsByModelAndId(props);
-    console.log(data)
-
     setComments(data.results);
+  };
+
+  const matchesLoader = async () => {
+    const props = {
+      getModel: "users",
+      fromModel: "projects",
+      fromId: id,
+      token: token,
+      setLoading: setLoading,
+    };
+    const data = await getMatches(props);
+    setMatches(data.results);
   };
 
   return (
@@ -67,6 +76,15 @@ const ProjectDetail = () => {
                 project.Skills.map((skill) => (
                   <Link to={`/skills/${skill.id}`} key={skill.id} className="badge badge-outline mr-2">
                     {skill.name}
+                  </Link>
+                ))}
+            </p>
+            <h3 className="font-bold">Matching users:</h3>
+            <p>
+              {matches &&
+                matches.map((user) => (
+                  <Link to={`/users/${user.id}`} key={user.id} className="badge badge-outline mr-2">
+                    {user.firstName} {user.lastName}
                   </Link>
                 ))}
             </p>
