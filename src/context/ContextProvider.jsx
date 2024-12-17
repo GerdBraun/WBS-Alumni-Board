@@ -6,6 +6,8 @@ import axios from "axios";
 
 function ContextProvider({ children }) {
   const [appUser, setAppUser] = useState(null); // logged-in user
+  const [token,setToken] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const login = async (payload) => {
@@ -23,6 +25,7 @@ function ContextProvider({ children }) {
           );
         });
       setAppUser(user);
+      setToken(token);
       localStorage.setItem("token", token);
       localStorage.setItem("appUser", JSON.stringify(user));
       toast.info("log in was successful");
@@ -33,7 +36,16 @@ function ContextProvider({ children }) {
   };
 
   return (
-    <AppContext.Provider value={{ appUser, setAppUser, login }}>
+    <AppContext.Provider
+      value={{
+        appUser,
+        loading,
+        token,
+        setLoading,
+        setAppUser,
+        login,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
