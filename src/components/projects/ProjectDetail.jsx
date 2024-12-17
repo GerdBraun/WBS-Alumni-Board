@@ -2,24 +2,46 @@ import { useEffect, useState } from "react";
 import { useApp } from "../../context/AppContext";
 import { Link, useParams } from "react-router-dom";
 import CommentCard from "../comments/CommentCard";
+import {
+  fetchDataByModelAndId,
+  getCommentsByModelAndId,
+} from "../../utility/fetchData";
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
   const [comments, setComments] = useState(null);
-  const { getProjects, getCommentsByModelAndId,loading } = useApp();
+  const { token, loading, setLoading } = useApp();
   useEffect(() => {
     loader(id);
     commentsLoader(id);
   }, [id]);
 
   const loader = async () => {
-    const data = await getProjects(id);
+    const props = {
+      model: "projects",
+      id: id,
+      token: token,
+      setLoading: setLoading,
+    };
+
+    const data = await fetchDataByModelAndId(props);
     setProject(data);
   };
 
   const commentsLoader = async () => {
-    const data = await getCommentsByModelAndId({ model: "projects", id });
+    // const data = await getCommentsByModelAndId({ model: "projects", id });
+
+    const props = {
+      model: "projects",
+      id: id,
+      token: token,
+      setLoading: setLoading,
+    };
+
+    const data = await getCommentsByModelAndId(props);
+    console.log(data)
+
     setComments(data.results);
   };
 
