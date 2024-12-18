@@ -62,6 +62,17 @@ const Header = () => {
                 </ul>
               </li>
               <li>
+                <a>Q&A</a>
+                <ul className="p-2">
+                  <li>
+                    <NavLink to="/qa">list</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/qa/add">add</NavLink>
+                  </li>
+                </ul>
+              </li>
+              <li>
                 <a>Companies</a>
                 <ul className="p-2">
                   <li>
@@ -138,6 +149,19 @@ const Header = () => {
                   </li>
                   <li>
                     <NavLink to="/jobs/add">add</NavLink>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details>
+                <summary>Q&A</summary>
+                <ul className="p-2">
+                  <li>
+                    <NavLink to="/qa">list</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/qa/add">add</NavLink>
                   </li>
                 </ul>
               </details>
