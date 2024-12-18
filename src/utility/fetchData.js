@@ -57,3 +57,32 @@ export const getCommentsByModelAndId = async (props) => {
     setLoading(false);
   }
 };
+
+/**
+ * gets matches between users /  jobs / projects
+ * @param {Object} props { getModel, fromModel, fromId, token, setLoading }
+ * @returns 
+ */
+export const getMatches = async (props) => {
+  const { getModel, fromModel, fromId, token, setLoading } = props;
+  const url = `${import.meta.env.VITE_API_SERVER}/match/${getModel}/${fromModel}/${fromId}`;
+  setLoading(true);
+  try {
+    const { data } = await axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    return data;
+  } catch (error) {
+    console.error("Something went wrong: " + error);
+  } finally {
+    setLoading(false);
+  }
+};

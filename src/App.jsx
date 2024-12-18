@@ -13,12 +13,14 @@ import ProjectDetail from "./components/projects/ProjectDetail";
 import ErrorPage from "./components/general/ErrorPage";
 import JobListPage from "./components/jobs/JobListPage";
 import JobDetailsPage from "./components/jobs/JobDetailsPage";
+import WelcomePage from "./components/general/WelcomePage";
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/projects">

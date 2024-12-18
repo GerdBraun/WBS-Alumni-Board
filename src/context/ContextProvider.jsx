@@ -53,9 +53,9 @@ function ContextProvider({ children }) {
       localStorage.setItem("token", token);
       localStorage.setItem("appUser", JSON.stringify(user));
       toast.info("log in was successful");
-      navigate("/");
-    } catch (err) {
-      console.log("something went wrong: " + err);
+      navigate("/welcome");
+    } catch (error) {
+      toast.error("Something went wrong: " + error);
     }
   };
 
