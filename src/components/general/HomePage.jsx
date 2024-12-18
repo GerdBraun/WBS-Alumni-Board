@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchJobs } from "../../services/JobService";
 import { Link } from "react-router-dom";
+import Stats from "./Stats";
 
 const HomePage = () => {
   const [jobs, setJobs] = useState([]);
@@ -9,8 +10,8 @@ const HomePage = () => {
   useEffect(() => {
     const getJobs = async () => {
       const data = await fetchJobs();
-      console.log(data); 
-      setJobs(data.results || []); 
+      console.log(data);
+      setJobs(data.results || []);
     };
     getJobs();
   }, []);
@@ -22,14 +23,15 @@ const HomePage = () => {
         className="hero bg-base-200 min-h-96 w-full"
         style={{
           backgroundImage: "url(website-programming-code-picjumbo-com.jpg)",
-          
         }}
       >
         <div className="hero-overlay bg-opacity-80"></div>
         <div className="hero-content text-center p-8">
           <div className="max-w-md">
             <h1 className="text-5xl font-bold">
-              Welcome to the<br />FULLSTACK.team
+              Welcome to the
+              <br />
+              FULLSTACK.team
             </h1>
             <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
@@ -67,9 +69,17 @@ const HomePage = () => {
               </div>
             ))
           ) : (
-            <p className="text-gray-500 text-center">No jobs available at the moment.</p>
+            <p className="text-gray-500 text-center">
+              No jobs available at the moment.
+            </p>
           )}
         </div>
+      </div>
+
+      {/* stats */}
+      <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4 text-center">Log in and you will see</h1>
+      <Stats />
       </div>
     </div>
   );
