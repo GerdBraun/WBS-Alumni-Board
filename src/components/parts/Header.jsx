@@ -2,8 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 
 const Header = () => {
-  const { appUser } = useApp();
-
+  const { appUser, logout } = useApp();
   return (
     <div className="relative z-10">
       <div className="navbar bg-base-100  fixed ">
@@ -73,7 +72,7 @@ const Header = () => {
               <li>
                 <a>User</a>
                 <ul className="p-2">
-                  <li>
+                  {/* <li>
                     <NavLink to="/signup" className="text-nowrap">
                       sign up
                     </NavLink>
@@ -82,7 +81,7 @@ const Header = () => {
                     <NavLink to="/login" className="text-nowrap">
                       log in
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li>
                     <NavLink to="/users" className="text-nowrap">
                       list
@@ -155,16 +154,6 @@ const Header = () => {
                 <summary>User</summary>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/signup" className="text-nowrap">
-                      sign up
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/login" className="text-nowrap">
-                      log in
-                    </NavLink>
-                  </li>
-                  <li>
                     <NavLink to="/users" className="text-nowrap">
                       list
                     </NavLink>
@@ -180,6 +169,21 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end">
+          {!appUser ? (
+            <NavLink to="/signup" className="btn">
+              Sign Up
+            </NavLink>
+          ) : (
+            console.log("user is logged in")
+          )}
+
+          {!appUser ? (
+            <NavLink to="/login" className="btn">
+              Login
+            </NavLink>
+          ) : (
+            <button onClick={logout} className="btn">log out</button>
+          )}
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -187,23 +191,11 @@ const Header = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+                
+                {appUser && <img alt="placeholder profile image" src={appUser.avatar} />}
+                {!appUser && <img alt="placeholder profile image" src="profile.png" />}
               </div>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-28 p-2 shadow"
-            >
-              <li>
-                <NavLink to="/signup">Sign Up</NavLink>
-              </li>
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
