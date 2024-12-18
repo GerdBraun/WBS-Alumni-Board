@@ -28,35 +28,69 @@ const Stats = () => {
           <div className="stats shadow w-full text-center">
             <div className="stat">
               <div className="stat-title">Users</div>
-              <div className="stat-value">{stats.users}</div>
-              <div className="stat-desc">with {stats.skills} skills</div>
+              <div className="stat-value">{stats.users.toLocaleString()}</div>
+              <div className="stat-desc">
+                with {stats.skills.toLocaleString()} skills
+                <br />
+                that's{" "}
+                {(stats.skills / stats.users).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}{" "}
+                skills per user
+              </div>
             </div>
           </div>
           <div className="stats shadow w-full text-center">
             <div className="stat">
               <div className="stat-title">Pojects</div>
-              <div className="stat-value">{stats.projects}</div>
+              <div className="stat-value">
+                {stats.projects.toLocaleString()}
+              </div>
               <div className="stat-desc">
-                with {stats.commentsOnProjects} comments
+                with {stats.commentsOnProjects.toLocaleString()} comments
+                <br />
+                that's{" "}
+                {(stats.commentsOnProjects / stats.projects).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}{" "}
+                comments per project
               </div>
             </div>
           </div>
           <div className="stats shadow w-full text-center">
             <div className="stat">
               <div className="stat-title">Job offers</div>
-              <div className="stat-value">{stats.jobs}</div>
+              <div className="stat-value">{stats.jobs.toLocaleString()}</div>
               <div className="stat-desc">
-                with {stats.commentsOnJobs} comments
+                with {stats.commentsOnJobs.toLocaleString()} comments
+                <br />
+                that's{" "}
+                {(stats.commentsOnJobs / stats.jobs).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}{" "}
+                comments per job
               </div>
             </div>
           </div>
           <div className="stats shadow w-full text-center">
             <div className="stat">
               <div className="stat-title">Questions</div>
-              <div className="stat-value">{stats.questions}</div>
-              <div className="stat-desc">
-                with {stats.answersToQuestions} answers
+              <div className="stat-value">
+                {stats.questions.toLocaleString()}
               </div>
+              <div className="stat-desc">
+                with {stats.answersToQuestions.toLocaleString()} answers
+                <br />
+                that's{" "}
+                {(stats.answersToQuestions / stats.questions).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}{" "}
+                answers per question
+             </div>
             </div>
           </div>
         </>
