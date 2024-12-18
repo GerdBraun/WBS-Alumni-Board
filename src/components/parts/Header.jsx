@@ -160,21 +160,20 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           {!appUser ? (
-            <a className="btn">
-              {" "}
-              <NavLink to="/signup">Sign Up</NavLink>
-            </a>
+            <NavLink to="/signup" className="btn">
+              Sign Up
+            </NavLink>
           ) : (
             console.log("user is logged in")
           )}
 
-          <a className="btn">
-            {!appUser ? (
-              <Link to="/login">Login</Link>
-            ) : (
-              <button onClick={logout}>log out</button>
-            )}
-          </a>
+          {!appUser ? (
+            <NavLink to="/login" className="btn">
+              Login
+            </NavLink>
+          ) : (
+            <button onClick={logout} className="btn">log out</button>
+          )}
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -182,7 +181,9 @@ const Header = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="placeholder profile image" src="profile.png" />
+                
+                {appUser && <img alt="placeholder profile image" src={appUser.avatar} />}
+                {!appUser && <img alt="placeholder profile image" src="profile.png" />}
               </div>
             </div>
           </div>

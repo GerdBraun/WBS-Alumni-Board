@@ -18,19 +18,19 @@ function ContextProvider({ children }) {
       email: email,
       password: password,
     };
-    
-     try {
-       await axios
-         .post(`${import.meta.env.VITE_API_SERVER}/auth/signup`, payload)
+
+    try {
+      await axios
+        .post(`${import.meta.env.VITE_API_SERVER}/auth/signup`, payload)
         .catch((error) => {
-           console.error(error);
-           toast.warning(JSON.stringify(error.response.data.error));
-         });
-         toast.info("Sign up was successful");
-         navigate("/login")
-     } catch (error) {
-       console.log("something went wrong: " + error);
-     }
+          console.error(error);
+          toast.warning(JSON.stringify(error.response.data.error));
+        });
+      toast.info("Sign up was successful");
+      navigate("/login");
+    } catch (error) {
+      console.log("something went wrong: " + error);
+    }
   };
 
   const login = async (payload) => {
