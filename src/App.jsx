@@ -14,6 +14,7 @@ import ErrorPage from "./components/general/ErrorPage";
 import JobListPage from "./components/jobs/JobListPage";
 import JobDetailsPage from "./components/jobs/JobDetailsPage";
 import WelcomePage from "./components/general/WelcomePage";
+import SkillsList from "./components/skills/SkillsList";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -46,6 +47,9 @@ const App = () => {
           <Route path=":id" element={<>UserDetail</>} />
           <Route path="add" element={<>UserAdd</>} />
           <Route path="edit/:id" element={<>UserEdit</>} />
+        </Route>
+        <Route path="/skills">
+        <Route index element={<SkillsList />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </Route>

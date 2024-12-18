@@ -37,6 +37,9 @@ const Header = () => {
                 </li>
               )}
               <li>
+                <NavLink to="/skills">Skills</NavLink>
+              </li>
+              <li>
                 <a>Projects</a>
                 <ul className="p-2">
                   <li>
@@ -111,6 +114,9 @@ const Header = () => {
               </li>
             )}
             <li>
+              <NavLink to="/skills">Skills</NavLink>
+            </li>
+            <li>
               <details>
                 <summary>Projects</summary>
                 <ul className="p-2">
@@ -182,7 +188,9 @@ const Header = () => {
               Login
             </NavLink>
           ) : (
-            <button onClick={logout} className="btn">log out</button>
+            <button onClick={logout} className="btn">
+              log out
+            </button>
           )}
           <div className="dropdown dropdown-end">
             <div
@@ -191,9 +199,12 @@ const Header = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                
-                {appUser && <img alt="placeholder profile image" src={appUser.avatar} />}
-                {!appUser && <img alt="placeholder profile image" src="profile.png" />}
+                {appUser && (
+                  <img alt="placeholder profile image" src={appUser.avatar} />
+                )}
+                {!appUser && (
+                  <img alt="placeholder profile image" src="profile.png" />
+                )}
               </div>
             </div>
           </div>
