@@ -11,6 +11,8 @@ import LoginForm from "./components/authentication/LoginForm";
 import ProjectList from "./components/projects/ProjectList";
 import ProjectDetail from "./components/projects/ProjectDetail";
 import ErrorPage from "./components/general/ErrorPage";
+import JobListPage from "./components/jobs/JobListPage";
+import JobDetailsPage from "./components/jobs/JobDetailsPage";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -26,8 +28,8 @@ const App = () => {
           <Route path="edit/:id" element={<>ProjectEdit</>} />
         </Route>
         <Route path="/jobs">
-          <Route index element={<>JobList</>} />
-          <Route path=":id" element={<>JobDetail</>} />
+          <Route index element={<JobListPage/>} />
+          <Route path=":id" element={<JobDetailsPage/>} />
           <Route path="add" element={<>JobAdd</>} />
           <Route path="edit/:id" element={<>JobEdit</>} />
         </Route>
