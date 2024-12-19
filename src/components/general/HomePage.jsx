@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { fetchJobs } from "../../services/JobService";
+import  { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
 import Stats from "./Stats";
+import { fetchJobs } from "../services/Jobservice";
 
 const HomePage = () => {
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState([]); 
 
   // Fetch job previews
   useEffect(() => {
