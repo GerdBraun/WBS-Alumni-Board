@@ -1,39 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {
-  fetchJobById,
-  fetchJobComments,
-  fetchMatchingUsersForJob,
-} from "../../services/JobService";
 import CommentCard from "../comments/CommentCard";
-
+import {
+  fetchDataByModelAndId,
+  getCommentsByModelAndId,
+  getMatches,
+} from "../../utility/fetchData";
+import { useApp } from "../../context/AppContext";
 
 const JobDetailsPage = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [job, setJob] = useState(null);
   const [comments, setComments] = useState([]);
   const [matchingUsers, setMatchingUsers] = useState([]);
+  const { token, loading, setLoading } = useApp();
 
-
-  // Fetch job details, comments, and matching users
   useEffect(() => {
-    const loadJobData = async () => {
-      try {
-        const jobDetails = await fetchJobById(id);
-        setJob(jobDetails);
+    const loadJobDetails = async () => {
+      const props = {
+        model: "jobs",
+        id: id,
+        token: token,
+        setLoading: setLoading,
+      };
 
-        const jobComments = await fetchJobComments(id);
-        setComments(jobComments);
+      const jobDetails = await fetchDataByModelAndId(props);
+      console.log("Fetched Job Data:", jobDetails);
+      setJob(jobDetails);
 
-        const users = await fetchMatchingUsersForJob(id);
-        setMatchingUsers(users);
-      } catch (error) {
-        console.error("Error loading job data:", error);
-      }
+      const commentsProps = {
+        model: "jobs",
+        id: id,
+        token: token,
+        setLoading: setLoading,
+      };
+
+      const commentsData = await getCommentsByModelAndId(commentsProps);
+      setComments(commentsData?.results || []);
+
+      const matchesProps = {
+        getModel: "users",
+        fromModel: "jobs",
+        fromId: id,
+        token: token,
+        setLoading: setLoading,
+      };
+
+      const users = await getMatches(matchesProps);
+      setMatchingUsers(users?.results || []);
     };
 
-    loadJobData();
-  }, [id]);
+    loadJobDetails();
+  }, [id, token, setLoading]);
 
   if (!job) return <p className="text-center my-8">Loading...</p>;
 
@@ -47,8 +65,8 @@ const JobDetailsPage = () => {
           {/* Posted By */}
           <p className="mb-2">
             posted by&nbsp;
-            <Link to={`/users/${job.User.id}`} className="link">
-              {job.User.firstName} {job.User.lastName}
+            <Link to={`/users/${job.User?.id}`} className="link">
+              {job.User?.firstName} {job.User?.lastName}
             </Link>
           </p>
 
@@ -124,7 +142,6 @@ const JobDetailsPage = () => {
             {new Date(job.updatedAt).toLocaleDateString()}
           </p>
 
-          
           {/* Apply and Back Buttons */}
           <div className="card-actions justify-between mt-4">
             <a
