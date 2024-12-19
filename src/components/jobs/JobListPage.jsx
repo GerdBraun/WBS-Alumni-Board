@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { fetchJobs } from "../../services/JobService";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchDataByModelAndId } from "../../utility/fetchData";
+import { useApp } from "../../context/AppContext";
 
 const JobListPage = () => {
   const [jobs, setJobs] = useState([]);
+  const { token, loading, setLoading } = useApp();
 
   useEffect(() => {
-    const getJobs = async () => {
-      const data = await fetchJobs();
-      setJobs(data.results);
+    const loadJobs = async () => {
+      const props = {
+        model: "jobs",
+        setLoading: setLoading,
+        token: token,
+      };
+      const data = await fetchDataByModelAndId(props);
+      setJobs(data?.results || []);
     };
-    getJobs();
-  }, []);
+    loadJobs();
+  }, [token, setLoading]);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className={`container mx-auto p-4 ${loading ? "hidden" : ""}`}>
       <h1 className="text-2xl font-bold mb-4">Job Listings</h1>
       {jobs.map((job) => (
         <div key={job.id} className="collapse bg-gray-100 rounded-lg mb-4">
