@@ -68,6 +68,25 @@ function ContextProvider({ children }) {
       localStorage.removeItem("appUser");
     }
   };
+
+  const addCompany = async (formData) => {
+    const { name, file } = formData;
+    console.log(file[0]);
+    const data = { name: name, file: file[0] };
+    try {
+      const response = await axios
+        .post("http://localhost:3000/api/company/", data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .catch((error) => console.error("hey there", error));
+      console.log("hello", response);
+    } catch (error) {
+      console.error("Error uploading the file", error);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -79,6 +98,7 @@ function ContextProvider({ children }) {
         login,
         logout,
         signup,
+        addCompany,
       }}
     >
       {children}

@@ -15,6 +15,7 @@ import JobListPage from "./components/jobs/JobListPage";
 import JobDetailsPage from "./components/jobs/JobDetailsPage";
 import WelcomePage from "./components/general/WelcomePage";
 import SkillsList from "./components/skills/SkillsList";
+import CompanyAdd from "./components/companies/CompanyAdd";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -31,15 +32,15 @@ const App = () => {
           <Route path="edit/:id" element={<>ProjectEdit</>} />
         </Route>
         <Route path="/jobs">
-          <Route index element={<JobListPage/>} />
-          <Route path=":id" element={<JobDetailsPage/>} />
+          <Route index element={<JobListPage />} />
+          <Route path=":id" element={<JobDetailsPage />} />
           <Route path="add" element={<>JobAdd</>} />
           <Route path="edit/:id" element={<>JobEdit</>} />
         </Route>
         <Route path="/companies">
           <Route index element={<>CompanyList</>} />
           <Route path=":id" element={<>CompanyDetail</>} />
-          <Route path="add" element={<>CompanyAdd</>} />
+          <Route path="add" element={<CompanyAdd />} />
           <Route path="edit/:id" element={<>CompanyEdit</>} />
         </Route>
         <Route path="/users">
@@ -49,7 +50,7 @@ const App = () => {
           <Route path="edit/:id" element={<>UserEdit</>} />
         </Route>
         <Route path="/skills">
-        <Route index element={<SkillsList />} />
+          <Route index element={<SkillsList />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </Route>
