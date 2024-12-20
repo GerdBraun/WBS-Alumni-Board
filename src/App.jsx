@@ -13,10 +13,12 @@ import ProjectDetail from "./components/projects/ProjectDetail";
 import ErrorPage from "./components/general/ErrorPage";
 import JobListPage from "./components/jobs/JobListPage";
 import JobDetailsPage from "./components/jobs/JobDetailsPage";
+import AddJobForm from "./components/jobs/AddJobForm";
 import WelcomePage from "./components/general/WelcomePage";
 import SkillsList from "./components/skills/SkillsList";
 import QAList from "./components/qa/QAList";
 import QADetails from "./components/qa/QADetails";
+
 
 const App = () => {
   const router = createBrowserRouter(
@@ -35,7 +37,7 @@ const App = () => {
         <Route path="/jobs">
           <Route index element={<JobListPage />} />
           <Route path=":id" element={<JobDetailsPage />} />
-          <Route path="add" element={<>JobAdd</>} />
+          <Route path="add" element={<AddJobForm/>} />
           <Route path="edit/:id" element={<>JobEdit</>} />
         </Route>
         <Route path="/companies">
