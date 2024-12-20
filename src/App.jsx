@@ -15,6 +15,7 @@ import JobListPage from "./components/jobs/JobListPage";
 import JobDetailsPage from "./components/jobs/JobDetailsPage";
 import WelcomePage from "./components/general/WelcomePage";
 import SkillsList from "./components/skills/SkillsList";
+import CompanyAdd from "./components/companies/CompanyAdd";
 import QAList from "./components/qa/QAList";
 import QADetails from "./components/qa/QADetails";
 import ContactPage from "./components/general/ContactPage";
@@ -47,7 +48,7 @@ const App = () => {
         <Route path="/companies">
           <Route index element={<>CompanyList</>} />
           <Route path=":id" element={<>CompanyDetail</>} />
-          <Route path="add" element={<>CompanyAdd</>} />
+          <Route path="add" element={<CompanyAdd />} />
           <Route path="edit/:id" element={<>CompanyEdit</>} />
         </Route>
         <Route path="/users">
