@@ -75,7 +75,7 @@ function ContextProvider({ children }) {
     const data = { name: name, file: file[0] };
     try {
       await axios
-        .post("http://localhost:3000/api/company/", data, {
+        .post(`${import.meta.env.VITE_API_SERVER}/company/`, data, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
