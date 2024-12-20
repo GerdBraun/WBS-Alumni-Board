@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
+import { Link } from "react-router-dom";
 
 
 export default function LoginForm() {
@@ -44,19 +45,18 @@ export default function LoginForm() {
           placeholder="Enter Password"
           name="password"
           {...register("password", { required: true })}
-        />{" "}
+        />
         {/* errors will return when field validation fails  */}
         {errors.password && <span>This field is required</span>}
       </label>
 
       {/* Forgot Password Link */}
       <div className="flex justify-end mb-4">
-        <a
-          href="/forgot-password"
+        <Link to="/recover-password"
           className="text-blue-500 hover:underline text-sm"
         >
           Forgot your Password?
-        </a>
+        </Link>
       </div>
 
       {/* Submit Button */}

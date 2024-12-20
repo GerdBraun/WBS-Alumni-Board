@@ -6,9 +6,11 @@ import axios from "axios";
  * @returns fetched JSON data
  */
 export const fetchDataByModelAndId = async (props) => {
+  console.log(props);
   const { model, id, token, setLoading } = props;
   const idString = id ? `/${id}` : "";
   const url = `${import.meta.env.VITE_API_SERVER}/${model}${idString}`;
+  setLoading(true);
   try {
     const { data } = await axios
       .get(url, {

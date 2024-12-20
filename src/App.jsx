@@ -16,6 +16,11 @@ import JobDetailsPage from "./components/jobs/JobDetailsPage";
 import WelcomePage from "./components/general/WelcomePage";
 import SkillsList from "./components/skills/SkillsList";
 import CompanyAdd from "./components/companies/CompanyAdd";
+import QAList from "./components/qa/QAList";
+import QADetails from "./components/qa/QADetails";
+import ContactPage from "./components/general/ContactPage";
+import PasswordReset from "./components/authentication/PasswordReset";
+import PasswordRecovery from "./components/authentication/PasswordRecovery";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -25,6 +30,9 @@ const App = () => {
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/recover-password" element={<PasswordRecovery />} />
+        <Route path="/reset-password" element={<PasswordReset />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/projects">
           <Route index element={<ProjectList />} />
           <Route path=":id" element={<ProjectDetail />} />
@@ -48,6 +56,12 @@ const App = () => {
           <Route path=":id" element={<>UserDetail</>} />
           <Route path="add" element={<>UserAdd</>} />
           <Route path="edit/:id" element={<>UserEdit</>} />
+        </Route>
+        <Route path="/qa">
+          <Route index element={<QAList />} />
+          <Route path=":id" element={<QADetails />} />
+          <Route path="add" element={<>Q&A Add</>} />
+          <Route path="edit/:id" element={<>Q&A Edit</>} />
         </Route>
         <Route path="/skills">
           <Route index element={<SkillsList />} />
