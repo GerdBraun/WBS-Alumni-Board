@@ -55,7 +55,7 @@ function ContextProvider({ children }) {
       toast.info("log in was successful");
       navigate("/welcome");
     } catch (error) {
-      toast.error("Something went wrong: " + error);
+      console.log("something went wrong: " + error);
     }
   };
 
@@ -71,19 +71,23 @@ function ContextProvider({ children }) {
 
   const addCompany = async (formData) => {
     const { name, file } = formData;
-    console.log(file[0]);
+    //console.log(file[0]);
     const data = { name: name, file: file[0] };
     try {
-      const response = await axios
+      await axios
         .post("http://localhost:3000/api/company/", data, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
-        .catch((error) => console.error("hey there", error));
-      console.log("hello", response);
+        .catch((error) => {
+          console.error(error);
+        });
+
+      toast.info("company data was saved successfully");
+      navigate("/");
     } catch (error) {
-      console.error("Error uploading the file", error);
+      console.error(error);
     }
   };
 

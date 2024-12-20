@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
 
- function CompanyAdd () {
+function CompanyAdd() {
   const {
     register,
     handleSubmit,
@@ -43,13 +43,14 @@ import { useApp } from "../../context/AppContext";
 
         {/* Password Field */}
         <label>
-          Company Logo
+          <span className="label-text">Company Logo (optional)</span>
+
           {/* register your input into the hook by invoking the "register" function */}
           <input
             type="file"
             name="file"
             accept="image/png, image/jpeg"
-            className="file-input file-input-bordered file-input-md w-full max-w-md mb-4 "
+            className="file-input file-input-bordered file-input-md min-w-full mb-4 "
             {...register("file", { required: false })}
           />
         </label>
@@ -58,10 +59,8 @@ import { useApp } from "../../context/AppContext";
           Save
         </button>
       </form>
-      <img alt="Uploaded"  src="profile.png" />
-      {/* <img src={} alt="Uploaded" height={300} /> */}
     </>
   );
-};
+}
 
 export default CompanyAdd;
