@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 function PasswordReset() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,7 +13,7 @@ function PasswordReset() {
 
   useEffect(() => {
     if (!token) {
-      setMessage("Invalid or expired reset token.");
+      toast.error("Invalid or expired reset token.");
     }
   }, [token]);
 
@@ -30,11 +29,11 @@ function PasswordReset() {
         `${import.meta.env.VITE_API_SERVER}/auth/reset-password`,
         { token, password }
       );
-      setMessage("Password reset successfully!");
       toast.success("Password reset successfully!");
       navigate("/login"); // Redirect to login page
     } catch (error) {
       toast.error("Error resetting password. Please try again.");
+      console.error(error);
     }
   };
 

@@ -15,6 +15,7 @@ function PasswordRecovery() {
       toast.info("Password reset link sent! Check your email.");
     } catch (error) {
       toast.error("Error sending email. Please try again.");
+      console.error(error);
     }
   };
 
