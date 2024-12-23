@@ -69,6 +69,28 @@ function ContextProvider({ children }) {
     }
   };
 
+    const createJob = async (jobData) => {
+      const payload = { ...jobData };
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_SERVER}/jobs`,
+          payload,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, 
+            },
+          }
+        );
+        toast.success("Job created successfully!");
+        return response.data;
+      } catch (error) {
+        console.error("Error creating job:", error);
+        toast.error("Failed to create job. Please try again.");
+      }
+    };
+    
+  
+
   const addCompany = async (formData) => {
     const { name, file } = formData;
     //console.log(file[0]);
@@ -102,6 +124,7 @@ function ContextProvider({ children }) {
         login,
         logout,
         signup,
+        createJob,
         addCompany,
       }}
     >
