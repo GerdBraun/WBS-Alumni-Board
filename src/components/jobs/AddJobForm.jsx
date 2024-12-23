@@ -3,12 +3,21 @@ import { useApp } from "../../context/AppContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function AddJobForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors },reset } = useForm();
   const { createJob, appUser, token } = useApp();
   const [companies, setCompanies] = useState([]);
-
+  const navigate = useNavigate();
+  // Redirect to login if the user is not logged in
+  useEffect(() => {
+    if (!appUser) {
+      toast.error("Please log in to add a job!");
+      navigate("/login"); 
+    }
+  }, [appUser, navigate]);
+  
   // Fetch companies on mount
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -33,6 +42,8 @@ export default function AddJobForm() {
       await createJob(data); // Create the job
       console.log("Job successfully created:", data);
       toast.success("Job created successfully!"); 
+      reset(); 
+      navigate("/jobs"); 
     } catch (error) {
       console.error("Failed to create job:", error); // 
       toast.error("Failed to create job. Please try again."); 
