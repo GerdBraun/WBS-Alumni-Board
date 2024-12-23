@@ -55,7 +55,7 @@ function ContextProvider({ children }) {
       toast.info("log in was successful");
       navigate("/welcome");
     } catch (error) {
-      toast.error("Something went wrong: " + error);
+      console.log("something went wrong: " + error);
     }
   };
 
@@ -68,6 +68,29 @@ function ContextProvider({ children }) {
       localStorage.removeItem("appUser");
     }
   };
+
+  const addCompany = async (formData) => {
+    const { name, file } = formData;
+    //console.log(file[0]);
+    const data = { name: name, file: file[0] };
+    try {
+      await axios
+        .post(`${import.meta.env.VITE_API_SERVER}/company/`, data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      toast.info("company data was saved successfully");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -79,6 +102,7 @@ function ContextProvider({ children }) {
         login,
         logout,
         signup,
+        addCompany,
       }}
     >
       {children}

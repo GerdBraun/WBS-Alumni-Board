@@ -22,7 +22,7 @@ const ContactPage = () => {
       navigate("/");
     } catch (error) {
       console.error(error);
-      toast.success("Ooops, something went wrong");
+      toast.error("Ooops, something went wrong");
     }
   };
   return (

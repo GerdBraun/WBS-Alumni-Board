@@ -7,6 +7,7 @@ import {
   getMatches,
 } from "../../utility/fetchData";
 import { useApp } from "../../context/AppContext";
+import CommentAddForm from "../comments/CommentAddForm";
 
 const JobDetailsPage = () => {
   const { id } = useParams();
@@ -28,15 +29,16 @@ const JobDetailsPage = () => {
       console.log("Fetched Job Data:", jobDetails);
       setJob(jobDetails);
 
-      const commentsProps = {
-        model: "jobs",
-        id: id,
-        token: token,
-        setLoading: setLoading,
-      };
+      // const commentsProps = {
+      //   model: "jobs",
+      //   id: id,
+      //   token: token,
+      //   setLoading: setLoading,
+      // };
 
-      const commentsData = await getCommentsByModelAndId(commentsProps);
-      setComments(commentsData?.results || []);
+      // const commentsData = await getCommentsByModelAndId(commentsProps);
+      // setComments(commentsData?.results || []);
+      commentsLoader();
 
       const matchesProps = {
         getModel: "users",
@@ -52,6 +54,18 @@ const JobDetailsPage = () => {
 
     loadJobDetails();
   }, [id, token, setLoading]);
+
+  const commentsLoader = async () => {
+    const props = {
+      model: "jobs",
+      id: id,
+      token: token,
+      setLoading: setLoading,
+    };
+    const data = await getCommentsByModelAndId(props);
+    setComments(data.results);
+  };
+
 
   if (!job) return <p className="text-center my-8">Loading...</p>;
 
@@ -133,6 +147,8 @@ const JobDetailsPage = () => {
           ) : (
             <p className="text-gray-500">No comments yet.</p>
           )}
+
+          <CommentAddForm model="jobs" id={id} reload={commentsLoader} />
 
           {/* Created and Updated Dates */}
           <p className="text-gray-500 text-sm mt-4">
