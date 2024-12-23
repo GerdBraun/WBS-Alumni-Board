@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useApp } from "../../context/AppContext";
 import { Link, useParams } from "react-router-dom";
 import CommentCard from "../comments/CommentCard";
+import CommentAddForm from "../comments/CommentAddForm";
 import {
   fetchDataByModelAndId,
   getCommentsByModelAndId,
@@ -102,6 +103,7 @@ const ProjectDetail = () => {
                   </li>
                 ))}
             </ul>
+            <CommentAddForm model="projects" id={id} reload={commentsLoader} />
           </div>
         </div>
       )}

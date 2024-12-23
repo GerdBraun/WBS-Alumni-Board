@@ -1,8 +1,9 @@
 import  { useEffect, useState } from "react";
-import { fetchJobs } from "../../services/JobService";
+ 
 import { Link } from "react-router-dom";
 import Stats from "./Stats";
 import { useApp } from "../../context/AppContext";
+import { fetchJobs } from "../../utility/jobService.js";
 
 const HomePage = () => {
   const [jobs, setJobs] = useState([]);

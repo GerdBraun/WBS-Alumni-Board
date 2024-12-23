@@ -6,6 +6,7 @@ import {
   getCommentsByModelAndId,
 } from "../../utility/fetchData";
 import CommentCard from "../comments/CommentCard";
+import CommentAddForm from "../comments/CommentAddForm";
 
 const QADetails = () => {
   const { id } = useParams();
@@ -14,8 +15,8 @@ const QADetails = () => {
   const { token, loading, setLoading } = useApp();
 
   useEffect(() => {
-    loader(id);
-    commentsLoader(id);
+    loader();
+    commentsLoader();
   }, [id]);
 
   const loader = async () => {
@@ -59,7 +60,8 @@ const QADetails = () => {
                 </li>
               ))}
           </ul>
-        </>
+          <CommentAddForm model="questions" id={id} reload={commentsLoader} />
+          </>
       )}
     </div>
   );

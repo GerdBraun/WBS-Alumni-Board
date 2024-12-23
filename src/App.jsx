@@ -16,8 +16,12 @@ import JobDetailsPage from "./components/jobs/JobDetailsPage";
 import AddJobForm from "./components/jobs/AddJobForm";
 import WelcomePage from "./components/general/WelcomePage";
 import SkillsList from "./components/skills/SkillsList";
+import CompanyAdd from "./components/companies/CompanyAdd";
 import QAList from "./components/qa/QAList";
 import QADetails from "./components/qa/QADetails";
+import ContactPage from "./components/general/ContactPage";
+import PasswordReset from "./components/authentication/PasswordReset";
+import PasswordRecovery from "./components/authentication/PasswordRecovery";
 
 
 const App = () => {
@@ -28,6 +32,9 @@ const App = () => {
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/recover-password" element={<PasswordRecovery />} />
+        <Route path="/reset-password" element={<PasswordReset />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/projects">
           <Route index element={<ProjectList />} />
           <Route path=":id" element={<ProjectDetail />} />
@@ -43,7 +50,7 @@ const App = () => {
         <Route path="/companies">
           <Route index element={<>CompanyList</>} />
           <Route path=":id" element={<>CompanyDetail</>} />
-          <Route path="add" element={<>CompanyAdd</>} />
+          <Route path="add" element={<CompanyAdd />} />
           <Route path="edit/:id" element={<>CompanyEdit</>} />
         </Route>
         <Route path="/users">
