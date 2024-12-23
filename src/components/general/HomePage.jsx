@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { fetchJobs } from "../../services/JobService";
 import { Link } from "react-router-dom";
 import Stats from "./Stats";
+import { useApp } from "../../context/AppContext";
 
 const HomePage = () => {
   const [jobs, setJobs] = useState([]);
+  const { appUser } = useApp();// for getting logged in user
 
   // Fetch job previews
   useEffect(() => {
@@ -61,10 +63,10 @@ const HomePage = () => {
                   {job.description.slice(0, 50)}...
                 </p>
                 <Link
-                  to="/login"
+                  to={appUser ? `/jobs/${job.id}` : "/login"} // Conditional link
                   className="text-blue-500 hover:underline mt-2 inline-block"
                 >
-                  Log in to view more
+                  {appUser ? "View More" : "Log in to view more"}
                 </Link>
               </div>
             ))
