@@ -22,7 +22,7 @@ import QADetails from "./components/qa/QADetails";
 import ContactPage from "./components/general/ContactPage";
 import PasswordReset from "./components/authentication/PasswordReset";
 import PasswordRecovery from "./components/authentication/PasswordRecovery";
-
+import UserList from "./components/users/UserList";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -54,7 +54,7 @@ const App = () => {
           <Route path="edit/:id" element={<>CompanyEdit</>} />
         </Route>
         <Route path="/users">
-          <Route index element={<>UserList</>} />
+          <Route index element={<UserList/>} />
           <Route path=":id" element={<>UserDetail</>} />
           <Route path="add" element={<>UserAdd</>} />
           <Route path="edit/:id" element={<>UserEdit</>} />
