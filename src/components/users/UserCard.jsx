@@ -17,7 +17,7 @@ const UserCard = ({ aUser }) => {
         </div><div>
             <Link
               to="/contact"
-              className="link link-hover text-blue-700  underline ml-16 font-thin text-base "
+              className="link link-hover text-blue-700  underline ml-20 font-thin text-base "
             >
               Request to contact
             </Link>
@@ -25,7 +25,7 @@ const UserCard = ({ aUser }) => {
         <div className="collapse-content">
           <p className="text-sm ml-12">
             works at:{" "}
-            <span className="text-sm font-medium">{aUser?.Company?.name}</span>
+            <span className="text-sm font-medium">{aUser?.Company?.name||"undefined"}</span>
           </p>
         </div>
       </div>

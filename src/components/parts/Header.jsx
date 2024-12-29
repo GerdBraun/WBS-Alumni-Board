@@ -86,16 +86,6 @@ const Header = () => {
               <li>
                 <a>User</a>
                 <ul className="p-2">
-                  {/* <li>
-                    <NavLink to="/signup" className="text-nowrap">
-                      sign up
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/login" className="text-nowrap">
-                      log in
-                    </NavLink>
-                  </li> */}
                   <li>
                     <NavLink to="/users" className="text-nowrap">
                       list
@@ -200,7 +190,7 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           {!appUser ? (
-            <NavLink to="/signup" className="btn">
+            <NavLink to="/signup" className="btn ">
               Sign Up
             </NavLink>
           ) : (
@@ -208,7 +198,7 @@ const Header = () => {
           )}
 
           {!appUser ? (
-            <NavLink to="/login" className="btn">
+            <NavLink to="/login" className="btn m-1">
               Login
             </NavLink>
           ) : (
@@ -216,21 +206,34 @@ const Header = () => {
               log out
             </button>
           )}
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end  ml-3">
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="btn btn-ghost btn-circle avatar m-3"
             >
               <div className="w-10 rounded-full">
                 {appUser && (
-                  <img alt="placeholder profile image" src={appUser.avatar} />
+                  <img alt="placeholder profile image" src={appUser?.avatar||"profile.png"} />
                 )}
                 {!appUser && (
                   <img alt="placeholder profile image" src="profile.png" />
                 )}
               </div>
             </div>
+            {appUser && (
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-1 w-20 p-2 shadow"
+              >
+                <li>
+                  <a className="justify-between">Profile</a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

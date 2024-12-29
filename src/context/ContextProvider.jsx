@@ -66,30 +66,29 @@ function ContextProvider({ children }) {
       setToken(null);
       localStorage.removeItem("token");
       localStorage.removeItem("appUser");
+      navigate("/");
     }
   };
 
-    const createJob = async (jobData) => {
-      const payload = { ...jobData };
-      try {
-        const response = await axios.post(
-          `${import.meta.env.VITE_API_SERVER}/jobs`,
-          payload,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, 
-            },
-          }
-        );
-        toast.success("Job created successfully!");
-        return response.data;
-      } catch (error) {
-        console.error("Error creating job:", error);
-        toast.error("Failed to create job. Please try again.");
-      }
-    };
-    
-  
+  const createJob = async (jobData) => {
+    const payload = { ...jobData };
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_SERVER}/jobs`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Job created successfully!");
+      return response.data;
+    } catch (error) {
+      console.error("Error creating job:", error);
+      toast.error("Failed to create job. Please try again.");
+    }
+  };
 
   const addCompany = async (formData) => {
     const { name, file } = formData;
