@@ -214,7 +214,10 @@ const Header = () => {
             >
               <div className="w-10 rounded-full">
                 {appUser && (
-                  <img alt="placeholder profile image" src={appUser?.avatar||"profile.png"} />
+                  <img
+                    alt="placeholder profile image"
+                    src={appUser?.avatar || "profile.png"}
+                  />
                 )}
                 {!appUser && (
                   <img alt="placeholder profile image" src="profile.png" />
@@ -227,7 +230,11 @@ const Header = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-1 w-20 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">Profile</a>
+                  <a className="justify-between">
+                    <NavLink to={`/users/${appUser?.id}`} className="text-nowrap">
+                      Profile
+                    </NavLink>
+                  </a>
                 </li>
                 <li>
                   <a>Settings</a>
