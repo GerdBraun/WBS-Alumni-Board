@@ -25,7 +25,7 @@ import PasswordRecovery from "./components/authentication/PasswordRecovery";
 import UserList from "./components/users/UserList";
 import UserDetail from "./components/users/UserDetail";
 
-import { useEffect } from "react";
+//import { useEffect } from "react";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -75,7 +75,7 @@ const App = () => {
       </Route>
     )
   );
-  useEffect(() => localStorage.clear(), []);
+ // useEffect(() => localStorage.clear(), []);
 
   return (
     <div>

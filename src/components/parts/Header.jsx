@@ -7,7 +7,7 @@ const Header = () => {
     <div className="relative z-10">
       <div className="navbar bg-base-100  fixed ">
         <div className="navbar-start">
-          <div className="dropdown">
+          <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -104,8 +104,8 @@ const Header = () => {
             FULLSTACK.team
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+        <div  tabIndex={0} role="button" className=" navbar-center hidden lg:flex">
+          <ul  className="menu menu-horizontal px-1">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -231,7 +231,10 @@ const Header = () => {
               >
                 <li>
                   <a className="justify-between">
-                    <NavLink to={`/users/${appUser?.id}`} className="text-nowrap">
+                    <NavLink
+                      to={`/users/${appUser?.id}`}
+                      className="text-nowrap"
+                    >
                       Profile
                     </NavLink>
                   </a>
