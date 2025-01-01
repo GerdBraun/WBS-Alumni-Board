@@ -23,7 +23,9 @@ import ContactPage from "./components/general/ContactPage";
 import PasswordReset from "./components/authentication/PasswordReset";
 import PasswordRecovery from "./components/authentication/PasswordRecovery";
 import UserList from "./components/users/UserList";
-import UserDetail from "./components/users/UserDetail"
+import UserDetail from "./components/users/UserDetail";
+
+import { useEffect } from "react";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -45,7 +47,7 @@ const App = () => {
         <Route path="/jobs">
           <Route index element={<JobListPage />} />
           <Route path=":id" element={<JobDetailsPage />} />
-          <Route path="add" element={<AddJobForm/>} />
+          <Route path="add" element={<AddJobForm />} />
           <Route path="edit/:id" element={<>JobEdit</>} />
         </Route>
         <Route path="/companies">
@@ -55,8 +57,8 @@ const App = () => {
           <Route path="edit/:id" element={<>CompanyEdit</>} />
         </Route>
         <Route path="/users">
-          <Route index element={<UserList/>} />
-          <Route path=":id" element={<UserDetail/>} />
+          <Route index element={<UserList />} />
+          <Route path=":id" element={<UserDetail />} />
           <Route path="add" element={<>UserAdd</>} />
           <Route path="edit/:id" element={<>UserEdit</>} />
         </Route>
@@ -73,6 +75,8 @@ const App = () => {
       </Route>
     )
   );
+  useEffect(() => localStorage.clear(), []);
+
   return (
     <div>
       <RouterProvider router={router} />
