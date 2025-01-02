@@ -22,6 +22,7 @@ import QADetails from "./components/qa/QADetails";
 import ContactPage from "./components/general/ContactPage";
 import PasswordReset from "./components/authentication/PasswordReset";
 import PasswordRecovery from "./components/authentication/PasswordRecovery";
+import EditJobForm from "./components/jobs/EditJobForm";
 
 
 const App = () => {
@@ -45,7 +46,7 @@ const App = () => {
           <Route index element={<JobListPage />} />
           <Route path=":id" element={<JobDetailsPage />} />
           <Route path="add" element={<AddJobForm/>} />
-          <Route path="edit/:id" element={<AddJobForm/>} />
+          <Route path="edit/:id" element={<EditJobForm/>} />
         </Route>
         <Route path="/companies">
           <Route index element={<>CompanyList</>} />
