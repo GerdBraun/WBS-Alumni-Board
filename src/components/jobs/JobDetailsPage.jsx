@@ -168,7 +168,7 @@ const JobDetailsPage = () => {
             {new Date(job.updatedAt).toLocaleDateString()}
           </p>
 
-          {/* Apply and Back Buttons */}
+          {/* Apply, Edit and Back Buttons */}
           <div className="card-actions justify-between mt-4">
             <a
               href={job.link}
@@ -180,7 +180,7 @@ const JobDetailsPage = () => {
             </a>
             {canEdit && (
               <button
-                className="btn btn-secondary"
+                className="btn btn-primary"
                 onClick={() => navigate(`/jobs/edit/${job.id}`)}
               >
                 Edit Job
