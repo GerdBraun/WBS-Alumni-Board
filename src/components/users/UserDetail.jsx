@@ -53,20 +53,25 @@ const UserDetail = () => {
                 {" " + aUser?.Company?.name || "undefined"}
               </span>
             </h3>
-            <h3 className="font-bold">Skills:{" "}{aUser.Skills &&
-              aUser.Skills.map((skill) => (
-                <Link
-                  to={`/skills/${skill.id}`}
-                  key={skill.id}
-                  className="badge badge-outline mr-2 font-normal"
-                >
-                  {skill.name}
-                </Link>
-              ))}</h3>
-            {" "}
+            <h3 className="font-bold">
+              Skills:{" "}
+              {aUser.Skills.length !== 0 ? (
+                aUser.Skills.map((skill) => (
+                  <Link
+                    to={`/skills/${skill.id}`}
+                    key={skill.id}
+                    className="badge badge-outline mr-2 font-normal"
+                  >
+                    {skill.name}
+                  </Link>
+                ))
+              ) : (
+                <span className="font-normal">undefined</span>
+              )}
+            </h3>{" "}
             {/* only show from here if has  posted projects and or jobs */}
             <h3 className="font-bold">Projects posted:</h3>
-            {aUser.Projects &&
+            {aUser.Projects.length !== 0 ? (
               aUser.Projects.map((project) => (
                 <Link
                   to={`/projects/${project.id}`}
@@ -75,14 +80,24 @@ const UserDetail = () => {
                 >
                   {project.title}
                 </Link>
-              ))}
+              ))
+            ) : (
+              <span className="font-normal">undefined</span>
+            )}
             <h3 className="font-bold">Jobs posted:</h3>
-            {aUser.Jobs &&
+            {aUser.Jobs.length !== 0 ? (
               aUser.Jobs.map((job) => (
-                <Link to={`/jobs/${job.id}`} key={job.id} className="Link underline text-blue-800">
+                <Link
+                  to={`/jobs/${job.id}`}
+                  key={job.id}
+                  className="Link underline text-blue-800"
+                >
                   {job.title}
                 </Link>
-              ))}
+              ))
+            ) : (
+              <span className="font-normal">undefined</span>
+            )}
           </div>
         </div>
       )}

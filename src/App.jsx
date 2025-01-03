@@ -24,6 +24,7 @@ import PasswordReset from "./components/authentication/PasswordReset";
 import PasswordRecovery from "./components/authentication/PasswordRecovery";
 import UserList from "./components/users/UserList";
 import UserDetail from "./components/users/UserDetail";
+import UserEdit from "./components/users/UserEdit";
 
 //import { useEffect } from "react";
 
@@ -60,7 +61,7 @@ const App = () => {
           <Route index element={<UserList />} />
           <Route path=":id" element={<UserDetail />} />
           <Route path="add" element={<>UserAdd</>} />
-          <Route path="edit/:id" element={<>UserEdit</>} />
+          <Route path="edit/:id" element={<UserEdit/>} />
         </Route>
         <Route path="/qa">
           <Route index element={<QAList />} />
