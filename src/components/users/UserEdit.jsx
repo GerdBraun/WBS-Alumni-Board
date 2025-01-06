@@ -18,7 +18,7 @@ const UserEdit = () => {
       firstName: appUser.firstName,
       lastName: appUser.lastName,
       email: appUser.email,
-      avatar: appUser?.avatar || "undefined",
+      avatar: appUser?.avatar || "-",
       ifEdit: false,
     },
   });
@@ -75,7 +75,7 @@ const UserEdit = () => {
               <h3 className="font-bold">
                 Works at:
                 <span className="font-normal">
-                  {" " + appUser?.Company?.name || "undefined"}
+                  {" " + appUser?.Company?.name || "-"}
                 </span>
               </h3>
               <h3 className="font-bold">
@@ -91,7 +91,7 @@ const UserEdit = () => {
                     </Link>
                   ))
                 ) : (
-                  <span className="font-normal">undefined</span>
+                  <span className="font-normal">-</span>
                 )}
               </h3>
 
@@ -107,7 +107,7 @@ const UserEdit = () => {
                   </Link>
                 ))
               ) : (
-                <span className="font-normal">undefined</span>
+                <span className="font-normal">-</span>
               )} */}
               <h3 className="font-bold">Jobs posted:</h3>
               {appUser.Jobs.length !== 0 ? (
@@ -121,7 +121,7 @@ const UserEdit = () => {
                   </Link>
                 ))
               ) : (
-                <span className="font-normal">undefined</span>
+                <span className="font-normal">-</span>
               )}
             </div>
           </div>
@@ -185,7 +185,7 @@ const UserEdit = () => {
               name="file"
               accept="image/png, image/jpeg"
               className="file-input file-input-bordered file-input-md min-w-full mb-4 "
-              //placeholder={appUser?.avatar || "undefined"}
+              //placeholder={appUser?.avatar || "-"}
               {...register("avatar", { required: false })}
             />
           </label>

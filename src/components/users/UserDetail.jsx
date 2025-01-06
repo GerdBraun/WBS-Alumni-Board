@@ -50,7 +50,7 @@ const UserDetail = () => {
             <h3 className="font-bold">
               Works at:
               <span className="font-normal">
-                {" " + aUser?.Company?.name || "undefined"}
+                {" " + aUser?.Company?.name || "-"}
               </span>
             </h3>
             <h3 className="font-bold">
@@ -66,7 +66,7 @@ const UserDetail = () => {
                   </Link>
                 ))
               ) : (
-                <span className="font-normal">undefined</span>
+                <span className="font-normal">-</span>
               )}
             </h3>{" "}
             {/* only show from here if has  posted projects and or jobs */}
@@ -82,7 +82,7 @@ const UserDetail = () => {
                 </Link>
               ))
             ) : (
-              <span className="font-normal">undefined</span>
+              <span className="font-normal">-</span>
             )}
             <h3 className="font-bold">Jobs posted:</h3>
             {aUser.Jobs.length !== 0 ? (
@@ -96,7 +96,7 @@ const UserDetail = () => {
                 </Link>
               ))
             ) : (
-              <span className="font-normal">undefined</span>
+              <span className="font-normal">-</span>
             )}
           </div>
         </div>
