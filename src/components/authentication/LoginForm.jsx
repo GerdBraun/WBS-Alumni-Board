@@ -50,8 +50,14 @@ export default function LoginForm() {
         {errors.password && <span>This field is required</span>}
       </label>
 
-      {/* Forgot Password Link */}
-      <div className="flex justify-end mb-4">
+      {/* Signup and Forgot Password Link */}
+      <div className="flex justify-between items-center mb-4">
+        <Link to="/signup"
+          className="text-blue-500 hover:underline text-sm"
+        >
+          Sign Up
+        </Link>
+
         <Link to="/recover-password"
           className="text-blue-500 hover:underline text-sm"
         >
