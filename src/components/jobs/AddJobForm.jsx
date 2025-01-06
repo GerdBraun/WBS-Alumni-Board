@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { fetchCompanies } from "../../utility/fetchCompanies";
 
 export default function AddJobForm({ job }) {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
-  const { createJob, updateJob, deleteJob, appUser, token } = useApp();
+  const { createJob, updateJob, deleteJob, appUser, token, setLoading } = useApp();
   const [companies, setCompanies] = useState([]);
   const navigate = useNavigate();
 
@@ -19,22 +20,17 @@ export default function AddJobForm({ job }) {
     }
   }, [appUser, navigate]);
 
-  // Fetch companies on mount
+  // Loading companies  from utility
   useEffect(() => {
-    const fetchCompanies = async () => {
+    const loadCompanies = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/companys`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setCompanies(response.data.results || []);
+        const companiesList = await fetchCompanies(token, setLoading);
+        setCompanies(companiesList);
       } catch (error) {
-        console.error("Error fetching companies:", error);
-        toast.error("Failed to fetch companies. Please try again.");
+        toast.error(error.message);
       }
     };
-    fetchCompanies();
+    loadCompanies();
   }, [token]);
 
   // Populate the form fields if a job is being edited
