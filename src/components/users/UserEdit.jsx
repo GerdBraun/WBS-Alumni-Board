@@ -96,7 +96,7 @@ const UserEdit = () => {
               </h3>
 
               <h3 className="font-bold">Projects posted:</h3>
-              {/* {appUser.Projects.length !== 0 ? (
+               {appUser.Projects.length !== 0 ? (
                 appUser.Projects.map((project) => (
                   <Link
                     to={`/projects/${project.id}`}
@@ -108,7 +108,7 @@ const UserEdit = () => {
                 ))
               ) : (
                 <span className="font-normal">-</span>
-              )} */}
+              )} 
               <h3 className="font-bold">Jobs posted:</h3>
               {appUser.Jobs.length !== 0 ? (
                 appUser.Jobs.map((job) => (
