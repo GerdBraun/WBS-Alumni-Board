@@ -156,7 +156,7 @@ export default function AddJobForm({ job }) {
         >
           <option value="">Select a Company</option>
           {companies.map((company) => (
-            <option key={company.id} value={company.id} selected={company.id === job.Company.id}>
+            <option key={company.id} value={company.id} selected={job && company.id === job.Company.id}>
               {company.name}
             </option>
           ))}
