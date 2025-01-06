@@ -88,6 +88,35 @@ function ContextProvider({ children }) {
         toast.error("Failed to create job. Please try again.");
       }
     };
+
+    const updateJob = async (id, jobData) => {
+      try {
+        const response = await axios.put(
+          `${import.meta.env.VITE_API_SERVER}/jobs/${id}`,
+          jobData,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        toast.success("Job updated successfully!");
+        return response.data;
+      } catch (error) {
+        console.error("Error updating job:", error);
+        toast.error("Failed to update job. Please try again.");
+      }
+    };
+  
+    const deleteJob = async (id) => {
+      try {
+        await axios.delete(`${import.meta.env.VITE_API_SERVER}/jobs/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        toast.success("Job deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting job:", error);
+        toast.error("Failed to delete job. Please try again.");
+      }
+    };
     
   
 
@@ -125,6 +154,8 @@ function ContextProvider({ children }) {
         logout,
         signup,
         createJob,
+        updateJob,
+        deleteJob,
         addCompany,
       }}
     >
