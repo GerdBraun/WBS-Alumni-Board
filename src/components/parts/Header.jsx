@@ -1,8 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
+import { OpenCloseMenu } from "../../utility/handelNavbar";
 
 const Header = () => {
   const { appUser, logout } = useApp();
+
+  //The js code to close all <details> elements except the one that was clicked
+  OpenCloseMenu();
+
   return (
     <div className="relative z-10">
       <div className="navbar bg-base-100  fixed ">
@@ -29,24 +34,59 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink
+                  to="/"
+                  className={(isActive) =>
+                    "nav-link" + (!isActive ? " unselected" : "")
+                  }
+                >
+                  Home{" "}
+                </NavLink>
               </li>
               {appUser && (
                 <li>
-                  <NavLink to="/welcome">Welcome</NavLink>
+                  <NavLink
+                    to="/welcome"
+                    className={(isActive) =>
+                      "nav-link" + (!isActive ? " unselected" : "")
+                    }
+                  >
+                    Welcome
+                  </NavLink>
                 </li>
               )}
               <li>
-                <NavLink to="/skills">Skills</NavLink>
+                <NavLink
+                  to="/skills"
+                  className={(isActive) =>
+                    "nav-link" + (!isActive ? " unselected" : "")
+                  }
+                >
+                  Skills
+                </NavLink>
               </li>
               <li>
                 <a>Projects</a>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/projects">list</NavLink>
+                    <NavLink
+                      to="/projects"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      list
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/projects/add">add</NavLink>
+                    <NavLink
+                      to="/projects/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      add
+                    </NavLink>
                   </li>
                 </ul>
               </li>
@@ -54,10 +94,24 @@ const Header = () => {
                 <a>Jobs</a>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/jobs">list</NavLink>
+                    <NavLink
+                      to="/jobs"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      list
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/jobs/add">add</NavLink>
+                    <NavLink
+                      to="/jobs/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      add
+                    </NavLink>
                   </li>
                 </ul>
               </li>
@@ -65,10 +119,24 @@ const Header = () => {
                 <a>Q&A</a>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/qa">list</NavLink>
+                    <NavLink
+                      to="/qa"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      list
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/qa/add">add</NavLink>
+                    <NavLink
+                      to="/qa/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      add
+                    </NavLink>
                   </li>
                 </ul>
               </li>
@@ -76,33 +144,47 @@ const Header = () => {
                 <a>Companies</a>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/companies">list</NavLink>
+                    <NavLink
+                      to="/companies"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      list
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/companies/add">add</NavLink>
+                    <NavLink
+                      to="/companies/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      add
+                    </NavLink>
                   </li>
                 </ul>
               </li>
               <li>
                 <a>User</a>
                 <ul className="p-2">
-                  {/* <li>
-                    <NavLink to="/signup" className="text-nowrap">
-                      sign up
-                    </NavLink>
-                  </li>
                   <li>
-                    <NavLink to="/login" className="text-nowrap">
-                      log in
-                    </NavLink>
-                  </li> */}
-                  <li>
-                    <NavLink to="/users" className="text-nowrap">
+                    <NavLink
+                      to="/users"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
                       list
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/users/add" className="text-nowrap">
+                    <NavLink
+                      to="/users/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
                       add
                     </NavLink>
                   </li>
@@ -114,28 +196,67 @@ const Header = () => {
             FULLSTACK.team
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div
+          tabIndex={0}
+          role="button"
+          className=" navbar-center hidden lg:flex"
+        >
           <ul className="menu menu-horizontal px-1">
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink
+                to="/"
+                className={(isActive) =>
+                  "nav-link" + (!isActive ? " unselected" : "")
+                }
+              >
+                Home
+              </NavLink>
             </li>
             {appUser && (
               <li>
-                <NavLink to="/welcome">Welcome</NavLink>
+                <NavLink
+                  to="/welcome"
+                  className={(isActive) =>
+                    "nav-link" + (!isActive ? " unselected" : "")
+                  }
+                >
+                  Welcome
+                </NavLink>
               </li>
             )}
             <li>
-              <NavLink to="/skills">Skills</NavLink>
+              <NavLink
+                to="/skills"
+                className={(isActive) =>
+                  "nav-link" + (!isActive ? " unselected" : "")
+                }
+              >
+                Skills
+              </NavLink>
             </li>
             <li>
               <details>
                 <summary>Projects</summary>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/projects">list</NavLink>
+                    <NavLink
+                      to="/projects"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      list
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/projects/add">add</NavLink>
+                    <NavLink
+                      to="/projects/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      add
+                    </NavLink>
                   </li>
                 </ul>
               </details>
@@ -145,10 +266,24 @@ const Header = () => {
                 <summary>Jobs</summary>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/jobs">list</NavLink>
+                    <NavLink
+                      to="/jobs"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      list
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/jobs/add">add</NavLink>
+                    <NavLink
+                      to="/jobs/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      add
+                    </NavLink>
                   </li>
                 </ul>
               </details>
@@ -158,10 +293,24 @@ const Header = () => {
                 <summary>Q&A</summary>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/qa">list</NavLink>
+                    <NavLink
+                      to="/qa"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      list
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/qa/add">add</NavLink>
+                    <NavLink
+                      to="/qa/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      add
+                    </NavLink>
                   </li>
                 </ul>
               </details>
@@ -171,10 +320,24 @@ const Header = () => {
                 <summary>Companies</summary>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/companies">list</NavLink>
+                    <NavLink
+                      to="/companies"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      list
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/companies/add">add</NavLink>
+                    <NavLink
+                      to="/companies/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      add
+                    </NavLink>
                   </li>
                 </ul>
               </details>
@@ -184,12 +347,22 @@ const Header = () => {
                 <summary>User</summary>
                 <ul className="p-2">
                   <li>
-                    <NavLink to="/users" className="text-nowrap">
+                    <NavLink
+                      to="/users"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
                       list
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/users/add" className="text-nowrap">
+                    <NavLink
+                      to="/users/add"
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
                       add
                     </NavLink>
                   </li>
@@ -200,7 +373,7 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           {!appUser ? (
-            <NavLink to="/signup" className="btn">
+            <NavLink to="/signup" className="btn ">
               Sign Up
             </NavLink>
           ) : (
@@ -208,7 +381,7 @@ const Header = () => {
           )}
 
           {!appUser ? (
-            <NavLink to="/login" className="btn">
+            <NavLink to="/login" className="btn m-1">
               Login
             </NavLink>
           ) : (
@@ -216,21 +389,46 @@ const Header = () => {
               log out
             </button>
           )}
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end  ml-3">
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className="btn btn-ghost btn-circle avatar m-3"
             >
               <div className="w-10 rounded-full">
                 {appUser && (
-                  <img alt="placeholder profile image" src={appUser.avatar} />
+                  <img
+                    alt="placeholder profile image"
+                    src={appUser?.avatar || "profile.png"}
+                  />
                 )}
                 {!appUser && (
                   <img alt="placeholder profile image" src="profile.png" />
                 )}
               </div>
             </div>
+            {appUser && (
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-1 w-20 p-2 shadow"
+              >
+                <li>
+                  <a className="justify-between">
+                    <NavLink
+                      to={`/users/edit/${appUser?.id}`}
+                      className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                      }
+                    >
+                      Profile
+                    </NavLink>
+                  </a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

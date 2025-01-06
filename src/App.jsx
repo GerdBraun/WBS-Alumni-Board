@@ -22,8 +22,12 @@ import QADetails from "./components/qa/QADetails";
 import ContactPage from "./components/general/ContactPage";
 import PasswordReset from "./components/authentication/PasswordReset";
 import PasswordRecovery from "./components/authentication/PasswordRecovery";
+import UserList from "./components/users/UserList";
+import UserDetail from "./components/users/UserDetail";
+import UserEdit from "./components/users/UserEdit";
 import EditJobForm from "./components/jobs/EditJobForm";
 
+//import { useEffect } from "react";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -55,10 +59,10 @@ const App = () => {
           <Route path="edit/:id" element={<>CompanyEdit</>} />
         </Route>
         <Route path="/users">
-          <Route index element={<>UserList</>} />
-          <Route path=":id" element={<>UserDetail</>} />
+          <Route index element={<UserList />} />
+          <Route path=":id" element={<UserDetail />} />
           <Route path="add" element={<>UserAdd</>} />
-          <Route path="edit/:id" element={<>UserEdit</>} />
+          <Route path="edit/:id" element={<UserEdit/>} />
         </Route>
         <Route path="/qa">
           <Route index element={<QAList />} />
@@ -73,6 +77,8 @@ const App = () => {
       </Route>
     )
   );
+ // useEffect(() => localStorage.clear(), []);
+
   return (
     <div>
       <RouterProvider router={router} />

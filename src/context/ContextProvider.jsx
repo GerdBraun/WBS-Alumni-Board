@@ -66,6 +66,7 @@ function ContextProvider({ children }) {
       setToken(null);
       localStorage.removeItem("token");
       localStorage.removeItem("appUser");
+      navigate("/");
     }
   };
 
