@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import  { useEffect, useState } from "react";
+import { Link, useParams,useNavigate } from "react-router-dom";
 import CommentCard from "../comments/CommentCard";
 import {
   fetchDataByModelAndId,
@@ -11,10 +11,11 @@ import CommentAddForm from "../comments/CommentAddForm";
 
 const JobDetailsPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [comments, setComments] = useState([]);
   const [matchingUsers, setMatchingUsers] = useState([]);
-  const { token, loading, setLoading } = useApp();
+  const { token, loading, setLoading, appUser } = useApp();
 
   useEffect(() => {
     const loadJobDetails = async () => {
@@ -68,6 +69,15 @@ const JobDetailsPage = () => {
 
 
   if (!job) return <p className="text-center my-8">Loading...</p>;
+    // Determine if the user can edit the job
+  const isOwner = job.ownerId === appUser?.id;
+  const isAdminOrModerator =
+    appUser?.role === "admin" || appUser?.role === "moderator";
+    console.log("Job Owner ID:", job.ownerId);
+    console.log("App User ID:", appUser?.id);
+
+  const canEdit = isOwner || isAdminOrModerator;
+
 
   return (
     <div className="max-w-screen-lg mx-auto p-4 my-8">
@@ -158,7 +168,7 @@ const JobDetailsPage = () => {
             {new Date(job.updatedAt).toLocaleDateString()}
           </p>
 
-          {/* Apply and Back Buttons */}
+          {/* Apply, Edit and Back Buttons */}
           <div className="card-actions justify-between mt-4">
             <a
               href={job.link}
@@ -168,6 +178,15 @@ const JobDetailsPage = () => {
             >
               Apply Here
             </a>
+            {canEdit && (
+              <button
+                className="btn btn-primary"
+                onClick={() => navigate(`/jobs/edit/${job.id}`)}
+              >
+                Edit Job
+              </button>
+            )}
+
             <Link to={-1} className="btn btn-primary">
               Back
             </Link>

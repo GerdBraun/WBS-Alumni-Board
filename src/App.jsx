@@ -25,6 +25,7 @@ import PasswordRecovery from "./components/authentication/PasswordRecovery";
 import UserList from "./components/users/UserList";
 import UserDetail from "./components/users/UserDetail";
 import UserEdit from "./components/users/UserEdit";
+import EditJobForm from "./components/jobs/EditJobForm";
 
 //import { useEffect } from "react";
 
@@ -48,8 +49,8 @@ const App = () => {
         <Route path="/jobs">
           <Route index element={<JobListPage />} />
           <Route path=":id" element={<JobDetailsPage />} />
-          <Route path="add" element={<AddJobForm />} />
-          <Route path="edit/:id" element={<>JobEdit</>} />
+          <Route path="add" element={<AddJobForm/>} />
+          <Route path="edit/:id" element={<EditJobForm/>} />
         </Route>
         <Route path="/companies">
           <Route index element={<>CompanyList</>} />
