@@ -123,7 +123,7 @@ function ContextProvider({ children }) {
 
   const addCompany = async (formData) => {
     const { name, file } = formData;
-    //console.log(file[0]);
+    //console.log({formData});
     const data = { name: name, file: file[0] };
     try {
       await axios
