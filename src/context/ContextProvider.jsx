@@ -143,6 +143,55 @@ function ContextProvider({ children }) {
     }
   };
 
+  const createProject = async (projectData) => {
+    const payload = { ...projectData };
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_SERVER}/projects`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Project created successfully!");
+      return response.data;
+    } catch (error) {
+      console.error("Error creating project:", error);
+      toast.error("Failed to create project. Please try again.");
+    }
+  };
+
+  const updateProject = async (id, projectData) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_SERVER}/projects/${id}`,
+        projectData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      toast.success("Project updated successfully!");
+      return response.data;
+    } catch (error) {
+      console.error("Error updating project:", error);
+      toast.error("Failed to update project. Please try again.");
+    }
+  };
+
+  const deleteProject = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_SERVER}/projects/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.success("Project deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      toast.error("Failed to delete project. Please try again.");
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -158,6 +207,9 @@ function ContextProvider({ children }) {
         updateJob,
         deleteJob,
         addCompany,
+        createProject,
+        updateProject,
+        deleteProject,
       }}
     >
       {children}

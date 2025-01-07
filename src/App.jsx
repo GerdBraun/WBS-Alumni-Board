@@ -26,6 +26,8 @@ import UserList from "./components/users/UserList";
 import UserDetail from "./components/users/UserDetail";
 import UserEdit from "./components/users/UserEdit";
 import EditJobForm from "./components/jobs/EditJobForm";
+import AddProjectForm from "./components/projects/AddProjectForm";
+import EditProjectForm from "./components/projects/EditProjectForm";
 
 //import { useEffect } from "react";
 
@@ -43,8 +45,8 @@ const App = () => {
         <Route path="/projects">
           <Route index element={<ProjectList />} />
           <Route path=":id" element={<ProjectDetail />} />
-          <Route path="add" element={<>ProjectAdd</>} />
-          <Route path="edit/:id" element={<>ProjectEdit</>} />
+          <Route path="add" element={<AddProjectForm/>} />
+          <Route path="edit/:id" element={<EditProjectForm/>} />
         </Route>
         <Route path="/jobs">
           <Route index element={<JobListPage />} />

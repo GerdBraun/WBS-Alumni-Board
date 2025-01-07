@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useApp } from "../../context/AppContext";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import CommentCard from "../comments/CommentCard";
 import CommentAddForm from "../comments/CommentAddForm";
 import {
@@ -14,7 +14,9 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const [comments, setComments] = useState(null);
   const [matches, setMatches] = useState(null);
-  const { token, loading, setLoading } = useApp();
+  const { token, loading, setLoading ,appUser} = useApp();
+  const navigate = useNavigate();
+
   useEffect(() => {
     loader(id);
     commentsLoader(id);
@@ -54,6 +56,14 @@ const ProjectDetail = () => {
     const data = await getMatches(props);
     setMatches(data.results);
   };
+  if (!project) return <p className="text-center my-8">Loading...</p>;
+
+  // Determine if the user can edit the project
+  const isOwner = project.ownerId === appUser?.id;
+  const isAdminOrModerator =
+    appUser?.role === "admin" || appUser?.role === "moderator";
+  const canEdit = isOwner || isAdminOrModerator;
+
 
   return (
     <div
@@ -89,7 +99,15 @@ const ProjectDetail = () => {
                   </Link>
                 ))}
             </p>
-            <div className="card-actions justify-end">
+            <div className="card-actions justify-between mt-4">
+            {canEdit && (
+              <button
+                className="btn btn-primary"
+                onClick={() => navigate(`/projects/edit/${project.id}`)}
+              >
+                Edit Project
+              </button>
+            )}
               <Link to={-1} className="btn btn-primary">
                 Back
               </Link>
