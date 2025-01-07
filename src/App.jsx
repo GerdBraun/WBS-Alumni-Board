@@ -26,6 +26,9 @@ import UserList from "./components/users/UserList";
 import UserDetail from "./components/users/UserDetail";
 import UserEdit from "./components/users/UserEdit";
 import EditJobForm from "./components/jobs/EditJobForm";
+import SettingsPage from "./components/general/SettingsPage";
+import { PrivacyPolicyPage } from "./components/general/PrivacyPolicyPage";
+import TermsAndConditionsPage from "./components/general/TermsAndConditionsPage";
 
 //import { useEffect } from "react";
 
@@ -40,6 +43,9 @@ const App = () => {
         <Route path="/recover-password" element={<PasswordRecovery />} />
         <Route path="/reset-password" element={<PasswordReset />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/terms" element={<TermsAndConditionsPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/projects">
           <Route index element={<ProjectList />} />
           <Route path=":id" element={<ProjectDetail />} />
