@@ -49,7 +49,7 @@ const UserEdit = () => {
       className={`max-w-screen-lg mx-auto p-4 my-8 ${loading ? "hidden" : ""}`}
     >
       {" "}
-      <h2 className="text-2xl font-bold mb-4 text-center">Your Profile</h2>
+      
       <div className=" font-normal mb-4 text-center ">
         <label>
           <input type="checkbox" {...register("ifEdit")} />
@@ -59,6 +59,7 @@ const UserEdit = () => {
       {!ifEdit && (
         <>
           <div className="card bg-base-100 w-full shadow-xl">
+          <h2 className="text-2xl font-bold mb-4 text-center">Your Profile</h2>
             <figure className="w-56 h-auto">
               <img
                 src={appUser?.avatar || "/profile.png"}
@@ -73,9 +74,9 @@ const UserEdit = () => {
                 Role:<span className="font-normal">{" " + appUser?.role}</span>
               </h3>
               <h3 className="font-bold">
-                Works at:
+                Works at:{" "}
                 <span className="font-normal">
-                  {" " + appUser?.Company?.name || "-"}
+                  {appUser?.Company?.name || "-"}
                 </span>
               </h3>
               <h3 className="font-bold">
@@ -127,7 +128,8 @@ const UserEdit = () => {
           </div>
         </>
       )}
-      {ifEdit && (
+      {ifEdit && (<>
+        <h2 className="text-2xl font-bold mb-4 text-center">Edit Your Profile</h2>
         <form
           className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
           method="post"
@@ -179,7 +181,7 @@ const UserEdit = () => {
 
           {/* Avatar Field */}
           <label className="input ">
-            Choose a profile picture (optional):
+            Upload a new profile picture:
             <input
               type="file"
               name="file"
@@ -213,7 +215,7 @@ const UserEdit = () => {
             Save Changes
           </button>
         </form>
-      )}
+        </> )}
       <br></br>
       <Link to={-1} className="btn btn-primary">
         Back

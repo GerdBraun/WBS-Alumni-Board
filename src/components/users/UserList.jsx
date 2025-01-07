@@ -16,12 +16,12 @@ const UserList = () => {
     const data = await fetchDataByModelAndId(props);
 
     setUsersData(data?.results || []);
-    console.log(data.results);
+   // console.log("user list page data: ",data.results,{token});
     //console.log(usersData);
   };
   useEffect(() => {
     loadUsersData();
-  }, []);
+  }, [token]);
 
   return (
     <ul className={`container mx-auto p-4 ${loading ? "hidden" : ""}`}>

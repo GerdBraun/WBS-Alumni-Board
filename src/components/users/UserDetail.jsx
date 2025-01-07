@@ -48,9 +48,9 @@ const UserDetail = () => {
               Role:<span className="font-normal">{" " + aUser?.role}</span>
             </h3>
             <h3 className="font-bold">
-              Works at:
+              Works at:{" "}
               <span className="font-normal">
-                {" " + aUser?.Company?.name || "-"}
+                {aUser?.Company?.name || "-"}
               </span>
             </h3>
             <h3 className="font-bold">

@@ -413,16 +413,14 @@ const Header = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-1 w-20 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">
-                    <NavLink
-                      to={`/users/edit/${appUser?.id}`}
-                      className={(isActive) =>
-                        "nav-link" + (!isActive ? " unselected" : "")
-                      }
-                    >
-                      Profile
-                    </NavLink>
-                  </a>
+                  <NavLink
+                    to={`/users/edit/${appUser?.id}`}
+                    className={(isActive) =>
+                      "nav-link" + (!isActive ? " unselected" : "")
+                    }
+                  >
+                    Profile
+                  </NavLink>
                 </li>
                 <li>
                   <a>Settings</a>
