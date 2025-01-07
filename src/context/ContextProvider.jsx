@@ -149,6 +149,7 @@ function ContextProvider({ children }) {
         appUser,
         loading,
         token,
+        setToken,
         setLoading,
         setAppUser,
         login,

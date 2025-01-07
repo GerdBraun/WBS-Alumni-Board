@@ -33,10 +33,11 @@ const WelcomePage = () => {
   };
 
   useEffect(() => {
+    if (!appUser) return;
     jobMatchesLoader();
     projectMatchesLoader();
     console.log("appUser",appUser)
-  }, []);
+  }, [appUser]);
 
   return (
     <div
