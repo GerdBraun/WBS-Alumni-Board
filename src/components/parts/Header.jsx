@@ -413,7 +413,6 @@ const Header = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-1 w-20 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">
                     <NavLink
                       to={`/users/edit/${appUser?.id}`}
                       className={(isActive) =>
@@ -422,11 +421,10 @@ const Header = () => {
                     >
                       Profile
                     </NavLink>
-                  </a>
                 </li>
-                <li>
-                  <a>Settings</a>
-                </li>
+                <NavLink to="/settings" className="nav-link">
+                  Settings
+                </NavLink>
               </ul>
             )}
           </div>
