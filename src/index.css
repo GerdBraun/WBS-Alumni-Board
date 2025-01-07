@@ -54,3 +54,7 @@
     animation-direction: alternate;
     background: linear-gradient(10deg, #a1d9b4 20%, #32988a 40%, #000e3c 70%);
   }
+
+  html[data-theme='dark'] .auroral-northern {
+    background: linear-gradient(10deg, #000e3c 20%, #32988a 40%, #a1d9b4 70%);
+  }
