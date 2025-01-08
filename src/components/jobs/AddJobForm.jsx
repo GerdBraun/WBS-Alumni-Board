@@ -147,12 +147,12 @@ export default function AddJobForm({ job }) {
         <select
           className="select select-bordered w-full"
           {...register("companyId", { required: true })}
-          //value={job?.companyId || ""}
+          defaultValue={job?.companyId || ""}
           //onChange={(e) => reset({ ...job, companyId: e.target.value })}
         >
           <option value="">Select a Company</option>
           {companies.map((company) => (
-            <option key={company.id} value={company.id} selected={job && company.id === job.Company.id}>
+            <option key={company.id} value={company.id}>
               {company.name}
             </option>
           ))}

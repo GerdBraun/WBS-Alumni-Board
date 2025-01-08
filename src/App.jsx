@@ -24,6 +24,7 @@ import PasswordReset from "./components/authentication/PasswordReset";
 import PasswordRecovery from "./components/authentication/PasswordRecovery";
 import UserList from "./components/users/UserList";
 import UserDetail from "./components/users/UserDetail";
+import UserProfile from "./components/users/UserProfile";
 import UserEdit from "./components/users/UserEdit";
 import EditJobForm from "./components/jobs/EditJobForm";
 import SettingsPage from "./components/general/SettingsPage";
@@ -68,6 +69,7 @@ const App = () => {
           <Route index element={<UserList />} />
           <Route path=":id" element={<UserDetail />} />
           <Route path="add" element={<>UserAdd</>} />
+          <Route path="profile/:id" element={<UserProfile/>} />
           <Route path="edit/:id" element={<UserEdit/>} />
         </Route>
         <Route path="/qa">

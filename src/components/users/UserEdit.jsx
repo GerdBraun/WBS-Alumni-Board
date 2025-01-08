@@ -1,22 +1,23 @@
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
 import { useState, useEffect } from "react";
 import { fetchDataByModelAndId } from "../../utility/fetchData";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-//import { useNavigate } from "react-router-dom";
-import { fetchCompanies } from "../../utility/fetchCompanies";
+import Select from "react-select";
+import { Navigate } from "react-router-dom";
 
 const UserEdit = () => {
   const { appUser, loading, token, setLoading, setAppUser } = useApp();
-  //const navigate = useNavigate();
 
+  //setting up react form hook attributes and default values
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
+    control,
+    //watch,
     // reset,
   } = useForm({
     defaultValues: {
@@ -24,30 +25,62 @@ const UserEdit = () => {
       lastName: appUser.lastName,
       email: appUser.email,
       companyId: appUser.Company?.id,
-      //avatar: appUser.avatar,
       ifEdit: false,
     },
   });
-  const [companies, setCompanies] = useState([null]);
-  const ifEdit = watch("ifEdit");
-  //testing form out put
-  // const onSubmit = (data) => console.log(data);
 
-  // Loading companies  from utility
+  const { fields, append, remove } = useFieldArray({
+    control: control,
+    name: "skills",
+  });
+
+  const [companies, setCompanies] = useState([]);
+  const [skillsList, setSkills] = useState([]);
+  // const ifEdit = watch("ifEdit");
+  //testing form out put
+  const onSubmit = (data) => console.log("watch it: ", data);
+
+  // Loading companies and skills from utility
   useEffect(() => {
-    const loadCompanies = async () => {
-      try {
-        const companiesList = await fetchCompanies(token, setLoading);
-        setCompanies(companiesList);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    };
     loadCompanies();
-  }, [token]);
- // console.log({ companies });
+    loadSkills();
+  }, []);
+  //
+  const loadCompanies = async () => {
+    const props = {
+      model: "companys",
+      token: token,
+      setLoading: setLoading,
+    };
+    const data = await fetchDataByModelAndId(props);
+    console.log("my companies: ", data.results); // Log the data to the console
+    setCompanies(data.results); //update the appUser
+  };
+
+  console.log({ companies });
+  //fetch skills data from utility
+
+  const loadSkills = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_SERVER}/skills`
+      );
+      console.log("all skills: ", data.results); // Log the data to the console
+      setSkills(data.results) // Log the data to the console
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.log("something went wrong: " + error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  console.log({ skillsList });
+  //edit user function that sends the data to the server and then updates the appUser to reflect the updates and then finally navigates back to the previous page
   const editUser = async (formData) => {
-    //const { firstName, lastName, email, companyId } = formData;
     const { firstName, lastName, email, companyId, file } = formData;
     console.log({ formData });
     const data = {
@@ -71,7 +104,7 @@ const UserEdit = () => {
         });
 
       toast.info("user data was saved successfully");
-      //navigate("/");
+      Navigate(-1); //go back to previous page
     } catch (error) {
       console.error(error);
     }
@@ -88,7 +121,9 @@ const UserEdit = () => {
 
       setAppUser(data); //update the appUser
     };
+
     loader();
+    Navigate(-1); //go back to previous page
   };
 
   return (
@@ -96,192 +131,133 @@ const UserEdit = () => {
       className={`max-w-screen-lg mx-auto p-4 my-8 ${loading ? "hidden" : ""}`}
     >
       {" "}
-      <div className=" font-normal mb-4 text-center ">
-        <label>
-          <input type="checkbox" {...register("ifEdit")} />
-          &#128393; Please Select to Edit your Profile
-        </label>
-      </div>
-      {!ifEdit && (
-        <>
-          <div className="card bg-base-100 w-full shadow-xl">
-            <h2 className="text-2xl font-bold mb-4 text-center">
-              Your Profile
-            </h2>
-            <figure className="w-56 h-auto">
-              <img
-                src={appUser?.avatar || "/profile.png"}
-                alt={appUser.firstName}
-              />
-            </figure>
-            <div className="card-body ">
-              <h2 className="card-title text-xl font-bold">
-                {appUser.firstName + " " + appUser.lastName}
-              </h2>
-              <h3 className="font-bold">
-                Role:<span className="font-normal">{" " + appUser?.role}</span>
-              </h3>
-              <h3 className="font-bold">
-                Works at:{" "}
-                <span className="font-normal">
-                  {appUser?.Company?.name || "-"}
-                </span>
-              </h3>
-              <h3 className="font-bold">
-                Email: <span className="font-normal">{appUser?.email}</span>
-              </h3>
-              <h3 className="font-bold">
-                Skills:{" "}
-                {appUser.Skills.length !== 0 ? (
-                  appUser.Skills.map((skill) => (
-                    <Link
-                      to={`/skills/${skill.id}`}
-                      key={skill.id}
-                      className="badge badge-outline mr-2 font-normal"
-                    >
-                      {skill.name}
-                    </Link>
-                  ))
-                ) : (
-                  <span className="font-normal">-</span>
-                )}
-              </h3>
+      <div className="card bg-base-100 w-full shadow-xl">
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Edit Your Profile
+        </h2>
+        <form
+          className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+          method="post"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {/* First Name Field */}
+          <label className="input input-bordered flex items-center gap-2 mb-4">
+            First Name:
+            <input
+              type="text"
+              name="firstName"
+              className="grow"
+              placeholder={appUser.firstName}
+              {...register("firstName", { required: true })}
+            />
+            {errors.firstName && (
+              <span className="text-error">This field is required</span>
+            )}
+          </label>
 
-              <h3 className="font-bold">Projects posted:</h3>
-              {appUser.Projects.length !== 0 ? (
-                appUser.Projects.map((project) => (
-                  <Link
-                    to={`/projects/${project.id}`}
-                    key={project.id}
-                    className="Link underline text-blue-800"
-                  >
-                    {project.title}
-                  </Link>
-                ))
-              ) : (
-                <span className="font-normal">-</span>
-              )}
-              <h3 className="font-bold">Jobs posted:</h3>
-              {appUser.Jobs.length !== 0 ? (
-                appUser.Jobs.map((job) => (
-                  <Link
-                    to={`/jobs/${job.id}`}
-                    key={job.id}
-                    className="Link underline text-blue-800"
-                  >
-                    {job.title}
-                  </Link>
-                ))
-              ) : (
-                <span className="font-normal">-</span>
-              )}
-            </div>
-          </div>
-        </>
-      )}
-      {ifEdit && (
-        <>
-          <h2 className="text-2xl font-bold mb-4 text-center">
-            Edit Your Profile
-          </h2>
-          <form
-            className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
-            method="post"
-            encType="multipart/form-data"
-            onSubmit={handleSubmit(editUser)}
-          >
-            {/* First Name Field */}
-            <label className="input input-bordered flex items-center gap-2 mb-4">
-              First Name:
-              <input
-                type="text"
-                name="firstName"
-                className="grow"
-                placeholder={appUser.firstName}
-                {...register("firstName", { required: true })}
-              />
-              {errors.firstName && (
-                <span className="text-error">This field is required</span>
-              )}
-            </label>
+          {/* Last Name Field */}
+          <label className="input input-bordered flex items-center gap-2 mb-4">
+            Last Name:
+            <input
+              type="text"
+              name="lastName"
+              className="grow"
+              placeholder={appUser.lastName}
+              {...register("lastName", { required: true })}
+            />
+            {errors.lastName && (
+              <span className="text-error">This field is required</span>
+            )}
+          </label>
 
-            {/* Last Name Field */}
-            <label className="input input-bordered flex items-center gap-2 mb-4">
-              Last Name:
-              <input
-                type="text"
-                name="lastName"
-                className="grow"
-                placeholder={appUser.lastName}
-                {...register("lastName", { required: true })}
-              />
-              {errors.lastName && (
-                <span className="text-error">This field is required</span>
-              )}
-            </label>
+          {/* Email Field */}
 
-            {/* Email Field */}
+          <label className="input input-bordered flex items-center gap-2 mb-4">
+            Email:
+            <input
+              type="text"
+              name="email"
+              className="grow"
+              placeholder={appUser.email}
+              {...register("email", { required: true })}
+            />
+            {errors.email && (
+              <span className="text-error">This field is required</span>
+            )}
+          </label>
 
-            <label className="input input-bordered flex items-center gap-2 mb-4">
-              Email:
-              <input
-                type="text"
-                name="email"
-                className="grow"
-                placeholder={appUser.email}
-                {...register("email", { required: true })}
-              />
-              {errors.email && (
-                <span className="text-error">This field is required</span>
-              )}
-            </label>
+          {/* Avatar Field */}
+          <label className="input ">
+            Upload a new profile picture:
+            <input
+              type="file"
+              name="file"
+              accept="image/png, image/jpeg"
+              className="file-input file-input-bordered file-input-md min-w-full mb-4 "
+              {...register("file", { required: false })}
+            />
+          </label>
 
-            {/* Avatar Field */}
-             <label className="input ">
-              Upload a new profile picture:
-              <input
-                type="file"
-                name="file"
-                accept="image/png, image/jpeg"
-                className="file-input file-input-bordered file-input-md min-w-full mb-4 "
-                {...register("file", { required: false })}
-              />
-            </label> 
-
-            {/*  {/* Company ID Field */}
-            <label className="block mb-4">
-              <span className="block text-sm font-medium mb-2">Company</span>
-              <select
-                className="select select-bordered w-full"
-                {...register("companyId", { required: true })}
-              >
-                <option value="">Select a Company</option>
-                {companies.map((company) => (
+          {/* Company ID Field */}
+          <label className="block mb-4">
+            <span className="block text-sm font-medium mb-2">Company</span>
+            <select
+              className="select select-bordered w-full"
+              {...register("companyId", { required: false })}
+            >
+              <option value="">Select a Company</option>
+              {companies.length > 0 &&
+                companies.map((company) => (
                   <option
-                    key={company.id}
-                    value={company.id}
-                    selected={company.id === appUser.Company?.id}
+                    key={company?.id}
+                    value={company?.id}
+                    selected={company?.id === appUser.Company?.id || ""}
                   >
                     {company.name}
                   </option>
                 ))}
-              </select>
-              {errors.companyId && (
-                <span className="text-error">This field is required</span>
-              )}
-            </label>
+            </select>
+            {errors.companyId && (
+              <span className="text-error">This field is required</span>
+            )}
+            {/* {companies && (<ul>{companies.map((aCompany)=>(<li key={aCompany.id}>{aCompany.name}</li>))}</ul>)} */}
+          </label>
+          <label className="block mb-4">
+            <span className="block text-sm font-medium mb-2">Skills</span>
+            <Select
+              defaultValue={
+                appUser.Skills.length !== 0 &&
+                appUser.Skills.map((skill) => ({
+                  value: skill.id,
+                  label: skill.name,
+                }))
+              }
+              isMulti
+              name="skills"
+              className="basic-multi-select"
+              classNamePrefix="select"
+              options={skillsList.map((skill) => ({
+                value: skill.id,
+                label: skill.name,
+              }))}
+              onChange={(e) => console.log("skills selected: ",e)}//{{ ...register(`skills.value.skill}`) }} //{(e) => console.log("skills selected: ",e)}
+            />
+          </label>
+          <br></br>
 
-            {/* Submit Button */}
-            <button type="submit" className="btn btn-primary w-full">
-              Save Changes
-            </button>
-          </form>
-        </>
-      )}
-      <br></br>
-      <Link to={-1} className="btn btn-primary">
-        Back
-      </Link>
+          {/* Submit Button */}
+          <button type="submit" className="btn btn-primary w-full">
+            Save Changes
+          </button>
+        </form>
+        {/* <> {skillsList && (<ul>{skillsList.map((aSkill) => (<li key={aSkill.id}>{aSkill.name}</li>))}</ul>)}</> 
+        {companies && (<ul>{companies.map((aCompany)=>(<li key={aCompany.id}>{aCompany.name}</li>))}</ul>)} */}
+        <br></br>
+        <Link to={-1} className="btn btn-primary">
+          Back
+        </Link>
+      </div>
     </div>
   );
 };
