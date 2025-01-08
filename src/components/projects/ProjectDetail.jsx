@@ -79,6 +79,24 @@ const ProjectDetail = () => {
                 {project.User.firstName} {project.User.lastName}
               </Link>
             </p>
+            <h3 className="font-bold">Dates:</h3>
+            <p>
+              {project.dateFrom ? (
+                <>
+                  <strong>Start Date: </strong> {new Date(project.dateFrom).toLocaleDateString()}
+                  <br />
+                </>
+              ) : (
+                <span>Start Date: Not specified</span>
+              )}
+              {project.dateTo ? (
+                <>
+                  <strong>End Date: </strong> {new Date(project.dateTo).toLocaleDateString()}
+                </>
+              ) : (
+                <span>End Date: Not specified</span>
+              )}
+            </p>
             <h3 className="font-bold">Description:</h3>
             <p>{project.description}</p>
             <h3 className="font-bold">Skills:</h3>
