@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useApp } from "../../context/AppContext";
 import { fetchDataByModelAndId } from "../../utility/fetchData";
 import QACard from "./QACard";
+import { Link } from 'react-router-dom';
 
 const QAList = () => {
   const [questions, setQuestions] = useState(null);
@@ -23,6 +24,11 @@ const QAList = () => {
 
   return (
     <div className={`container mx-auto p-4 ${loading ? "hidden" : ""}`}>
+      <div className="mb-4">
+        <Link to="/qa/add" className="btn btn-primary">
+          Ask a Question
+        </Link>
+      </div>
       <ul>
         {questions &&
           questions.map((question) => (

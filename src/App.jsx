@@ -31,7 +31,7 @@ import { PrivacyPolicyPage } from "./components/general/PrivacyPolicyPage";
 import TermsAndConditionsPage from "./components/general/TermsAndConditionsPage";
 import AddProjectForm from "./components/projects/AddProjectForm";
 import EditProjectForm from "./components/projects/EditProjectForm";
-
+import QAForm from "./components/qa/QAForm";
 //import { useEffect } from "react";
 
 const App = () => {
@@ -75,7 +75,7 @@ const App = () => {
         <Route path="/qa">
           <Route index element={<QAList />} />
           <Route path=":id" element={<QADetails />} />
-          <Route path="add" element={<>Q&A Add</>} />
+          <Route path="add" element={<QAForm />} />
           <Route path="edit/:id" element={<>Q&A Edit</>} />
         </Route>
         <Route path="/skills">
