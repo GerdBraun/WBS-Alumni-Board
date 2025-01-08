@@ -12,7 +12,7 @@ const HomePage = () => {
   // Fetch job previews
   useEffect(() => {
     const getJobs = async () => {
-      const data = await fetchJobs();
+      const data = await fetchJobs(2);
       console.log(data);
       setJobs(data.results || []);
     };
@@ -31,15 +31,15 @@ const HomePage = () => {
         <div className="hero-overlay bg-opacity-80"></div>
         <div className="hero-content text-center p-8">
           <div className="max-w-md">
-            <h1 className="text-5xl font-bold">
+            <h1 className="text-5xl font-bold text-white">
               Welcome to the
               <br />
               FULLSTACK.team
             </h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+            <p className="py-6 text-white">
+              The place for all devs (and others) to keep in touch!
+              <br />
+              Projects, jobs, skills - everything at your fingertips.
             </p>
             <Link to="/login" className="btn btn-primary">
               Get Started
