@@ -43,7 +43,7 @@ const QADetails = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container max-w-screen-lg mx-auto p-4">
       {question && (
         <>
           {/* question Title */}

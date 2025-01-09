@@ -4,12 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+
 function ContextProvider({ children }) {
   const [appUser, setAppUser] = useState(null); // logged-in user
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  /**
+   * Signs up a new user.
+   * @param {Object} formData - The form data.
+   * @param {string} formData.firstName - The first name of the user.
+   * @param {string} formData.lastName - The last name of the user.
+   * @param {string} formData.email - The email of the user.
+   * @param {string} formData.password - The password of the user.
+   */
   const signup = async (formData) => {
     const { firstName, lastName, email, password } = formData;
     const payload = {
@@ -33,6 +42,12 @@ function ContextProvider({ children }) {
     }
   };
 
+  /**
+   * Logs in a user.
+   * @param {Object} payload - The login payload.
+   * @param {string} payload.email - The email of the user.
+   * @param {string} payload.password - The password of the user.
+   */
   const login = async (payload) => {
     if (appUser) {
       navigate(-1);
@@ -59,6 +74,9 @@ function ContextProvider({ children }) {
     }
   };
 
+  /**
+   * Logs out the current user.
+   */
   const logout = () => {
     if (appUser) {
       toast.info("logging out");
@@ -70,79 +88,110 @@ function ContextProvider({ children }) {
     }
   };
 
-    const createJob = async (jobData) => {
-      const payload = { ...jobData };
-      try {
-        const response = await axios.post(
-          `${import.meta.env.VITE_API_SERVER}/jobs`,
-          payload,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, 
-            },
-          }
-        );
-        toast.success("Job created successfully!");
-        return response.data;
-      } catch (error) {
-        console.error("Error creating job:", error);
-        toast.error("Failed to create job. Please try again.");
-      }
-    };
+  /**
+   * Creates a new job.
+   * @param {Object} jobData - The job data.
+   * @returns {Promise<Object>} The created job data.
+   */
+  const createJob = async (jobData) => {
+    const payload = { ...jobData };
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_SERVER}/jobs`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Job created successfully!");
+      return response.data;
+    } catch (error) {
+      console.error("Error creating job:", error);
+      toast.error("Failed to create job. Please try again.");
+    }
+  };
 
-    const updateJob = async (id, jobData) => {
-      try {
-        const response = await axios.put(
-          `${import.meta.env.VITE_API_SERVER}/jobs/${id}`,
-          jobData,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        toast.success("Job updated successfully!");
-        return response.data;
-      } catch (error) {
-        console.error("Error updating job:", error);
-        toast.error("Failed to update job. Please try again.");
-      }
-    };
-  
-    const deleteJob = async (id) => {
-      try {
-        await axios.delete(`${import.meta.env.VITE_API_SERVER}/jobs/${id}`, {
+  /**
+   * Updates an existing job.
+   * @param {string} id - The job ID.
+   * @param {Object} jobData - The job data.
+   * @returns {Promise<Object>} The updated job data.
+   */
+  const updateJob = async (id, jobData) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_SERVER}/jobs/${id}`,
+        jobData,
+        {
           headers: { Authorization: `Bearer ${token}` },
-        });
-        toast.success("Job deleted successfully!");
-      } catch (error) {
-        console.error("Error deleting job:", error);
-        toast.error("Failed to delete job. Please try again.");
-      }
-    };
-    
-  
+        }
+      );
+      toast.success("Job updated successfully!");
+      return response.data;
+    } catch (error) {
+      console.error("Error updating job:", error);
+      toast.error("Failed to update job. Please try again.");
+    }
+  };
 
+  /**
+   * Deletes an existing job.
+   * @param {string} id - The job ID.
+   */
+  const deleteJob = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_SERVER}/jobs/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.success("Job deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting job:", error);
+      toast.error("Failed to delete job. Please try again.");
+    }
+  };
+
+  /**
+   * Adds a new company.
+   * @param {Object} formData - The form data.
+   * @param {string} formData.name - The name of the company.
+   * @param {FileList} formData.file - The file associated with the company.
+   * @param {Function} navigate - The navigate function.
+   */
   const addCompany = async (formData) => {
     const { name, file } = formData;
     //console.log(file[0]);
     const data = { name: name, file: file[0] };
     try {
-      await axios
-        .post(`${import.meta.env.VITE_API_SERVER}/company/`, data, {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_SERVER}/company/`,
+        data,
+        {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+        }
+      );
+      // .catch((error) => {
+      //   console.error(error);
+      //   toast.error(error.response.data.error);
+      // });
 
       toast.info("company data was saved successfully");
       navigate("/");
     } catch (error) {
       console.error(error);
+      toast.error(error.response.data.error);
     }
   };
 
+  /**
+   * Creates a new project.
+   * @param {Object} projectData - The project data.
+   * @param {string} token - The authorization token.
+   * @returns {Promise<Object>} The created project data.
+   */
   const createProject = async (projectData) => {
     const payload = { ...projectData };
     try {

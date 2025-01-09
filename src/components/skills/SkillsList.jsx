@@ -22,7 +22,7 @@ const SkillsList = () => {
   };
 
   return (
-    <div className={`container mx-auto p-4 ${loading ? "hidden" : ""}`}>
+    <div className={`container max-w-screen-lg mx-auto p-4 ${loading ? "hidden" : ""}`}>
       <ul>
         {skills &&
           skills.map((skill) => (
