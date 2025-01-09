@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import {
   fetchDataByModelAndId,
@@ -12,8 +12,8 @@ const QADetails = () => {
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
   const [comments, setComments] = useState(null);
-  const { token, loading, setLoading } = useApp();
-
+  const { token, loading, setLoading ,appUser} = useApp();
+  const navigate = useNavigate();
   useEffect(() => {
     loader();
     commentsLoader();
@@ -41,6 +41,14 @@ const QADetails = () => {
     const data = await getCommentsByModelAndId(props);
     setComments(data.results);
   };
+  if (!question) return <p>Loading...</p>;
+
+  // Determine if the user can edit the question
+  const isOwner = question.ownerId === appUser?.id;
+  const isAdminOrModerator =
+    appUser?.role === "admin" || appUser?.role === "moderator";
+  const canEdit = isOwner || isAdminOrModerator;
+
 
   return (
     <div className="container mx-auto p-4">
@@ -61,7 +69,22 @@ const QADetails = () => {
               ))}
           </ul>
           <CommentAddForm model="questions" id={id} reload={commentsLoader} />
-          </>
+          
+          {/* Edit and Back Buttons */}
+          <div className="flex justify-between mb-4">
+            {canEdit && (
+              <button
+                className="btn btn-primary"
+                onClick={() => navigate(`/qa/edit/${question.id}`)}
+              >
+                Edit Question
+              </button>
+            )}
+            <Link to="/qa" className="btn btn-primary">
+              Back to Questions
+            </Link>
+          </div>
+        </>
       )}
     </div>
   );
