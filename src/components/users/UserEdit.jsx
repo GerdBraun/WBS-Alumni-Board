@@ -192,8 +192,8 @@ const UserEdit = () => {
               </label>
 
               {/* Avatar Field */}
-              <label className="input ">
-                Upload a new profile picture:
+              <label >
+              <span className="block text-sm font-medium mb-2">Upload a new profile picture:</span>
                 <input
                   type="file"
                   name="file"
@@ -208,7 +208,7 @@ const UserEdit = () => {
                 <span className="block text-sm font-medium mb-2">Company</span>
                 <select
                   className="select select-bordered w-full"
-                  defaultValue={user.Company.id || ""}
+                  defaultValue={user.Company?.id || ""}
                   {...register("companyId", { required: false })}
                 >
                   <option value="">Select a Company</option>
