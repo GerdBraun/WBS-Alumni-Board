@@ -241,7 +241,7 @@ const UserEdit = () => {
                 value: skill.id,
                 label: skill.name,
               }))}
-              onChange={(e) => console.log("skills selected: ",e)}//{{ ...register(`skills.value.skill}`) }} //{(e) => console.log("skills selected: ",e)}
+              onChange={(e) => console.log("skills selected: ",e.taregt)}//{{ ...register(`skills.value.skill}`) }} //{(e) => console.log("skills selected: ",e)}
             />
           </label>
           <br></br>
