@@ -1,12 +1,28 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { fetchDataByModelAndId } from "../../utility/fetchData";
+import Select from "react-select";
 
 export default function AddProjectForm({ project }) {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
-  const { createProject, updateProject, deleteProject, appUser, token, setLoading } = useApp();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    control,
+  } = useForm();
+  const {
+    createProject,
+    updateProject,
+    deleteProject,
+    appUser,
+    token,
+    setLoading,
+  } = useApp();
+  const [skills, setSkills] = useState([]);
   const navigate = useNavigate();
 
   // Redirect to login if the user is not logged in
@@ -23,6 +39,25 @@ export default function AddProjectForm({ project }) {
       reset(project); // Populate form fields with project details
     }
   }, [project, reset]);
+
+  useEffect(() => {
+    loadSkills();
+  }, []);
+
+  const loadSkills = async () => {
+    const props = {
+      model: "skills",
+      setLoading: setLoading,
+      token: token,
+    };
+    const data = await fetchDataByModelAndId(props);
+    const options = data.results.map((skill) => ({
+      value: skill.id,
+      label: skill.name,
+    }));
+    console.log(options);
+    setSkills(options);
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -61,7 +96,8 @@ export default function AddProjectForm({ project }) {
 
   // Check if the user is the owner or an admin/moderator
   const isOwner = project?.ownerId === appUser?.id;
-  const isAdminOrModerator = appUser?.role === "admin" || appUser?.role === "moderator";
+  const isAdminOrModerator =
+    appUser?.role === "admin" || appUser?.role === "moderator";
 
   return (
     <form
@@ -81,7 +117,9 @@ export default function AddProjectForm({ project }) {
           placeholder="Enter Project Title"
           {...register("title", { required: true })}
         />
-        {errors.title && <span className="text-error">This field is required</span>}
+        {errors.title && (
+          <span className="text-error">This field is required</span>
+        )}
       </label>
 
       {/* Description Field */}
@@ -93,8 +131,29 @@ export default function AddProjectForm({ project }) {
           rows={3}
           {...register("description", { required: true })}
         />
-        {errors.description && <span className="text-error">This field is required</span>}
+        {errors.description && (
+          <span className="text-error">This field is required</span>
+        )}
       </label>
+
+      {/* skills */}
+      <label className="block mb-4">
+      <Controller
+        control={control}
+        defaultValue={project?.Skills && project.Skills.map((c) => c.id)}
+        name="skills"
+        render={({ field: { onChange, value, ref } }) => (
+          <Select
+            inputRef={ref}
+            value={value && skills.filter((c) => value.includes(c.value))}
+            onChange={(val) => onChange(val.map((c) => c.value))}
+            options={skills}
+            placeholder="Select Skills..."
+            isMulti
+          />
+        )}
+      />
+    </label>
 
       {/* Date From Field */}
       <label className="input input-bordered flex items-center gap-2 mb-4">
