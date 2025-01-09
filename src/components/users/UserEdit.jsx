@@ -1,12 +1,11 @@
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
 import { useState, useEffect } from "react";
 import { fetchDataByModelAndId } from "../../utility/fetchData";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import axios from "axios";
 import Select from "react-select";
-import { Navigate } from "react-router-dom";
+//import { Navigate } from "react-router-dom";
 
 const UserEdit = () => {
   const { appUser, loading, token, setLoading, setAppUser } = useApp();
@@ -16,9 +15,7 @@ const UserEdit = () => {
     register,
     handleSubmit,
     formState: { errors },
-    control,
-    //watch,
-    // reset,
+    control,   
   } = useForm({
     defaultValues: {
       firstName: appUser.firstName,
@@ -29,16 +26,11 @@ const UserEdit = () => {
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
-    control: control,
-    name: "skills",
-  });
-
   const [companies, setCompanies] = useState([]);
   const [skillsList, setSkills] = useState([]);
   // const ifEdit = watch("ifEdit");
   //testing form out put
-  const onSubmit = (data) => console.log("watch it: ", data);
+  // const onSubmit = (data) => console.log("watch it: ", data);
 
   // Loading companies and skills from utility
   useEffect(() => {
@@ -53,11 +45,11 @@ const UserEdit = () => {
       setLoading: setLoading,
     };
     const data = await fetchDataByModelAndId(props);
-    console.log("my companies: ", data.results); // Log the data to the console
+    // console.log("my companies: ", data.results); // Log the data to the console
     setCompanies(data.results); //update the appUser
   };
 
-  console.log({ companies });
+  //console.log({ companies });
   //fetch skills data from utility
 
   const loadSkills = async () => {
@@ -78,10 +70,10 @@ const UserEdit = () => {
     }
   };
 
-  console.log({ skillsList });
+  //console.log({ skillsList });
   //edit user function that sends the data to the server and then updates the appUser to reflect the updates and then finally navigates back to the previous page
   const editUser = async (formData) => {
-    const { firstName, lastName, email, companyId, file } = formData;
+    const { firstName, lastName, email, companyId, file, skills } = formData;
     console.log({ formData });
     const data = {
       firstName: firstName,
@@ -89,8 +81,9 @@ const UserEdit = () => {
       email: email,
       companyId: companyId,
       file: file[0],
+      skills: skills.map((skill) => skill.value),
     };
-    console.log({ data }, "user id: ", appUser?.id);
+    // console.log({ data }, "user id: ", appUser?.id);
     try {
       await axios
         .put(`${import.meta.env.VITE_API_SERVER}/users/${appUser?.id}`, data, {
@@ -103,27 +96,29 @@ const UserEdit = () => {
           console.error(error);
         });
 
-      toast.info("user data was saved successfully");
-      Navigate(-1); //go back to previous page
+      //toast.info("user data was saved successfully");
+      //Navigate(-1); //go back to previous page
     } catch (error) {
       console.error(error);
     }
 
     //refetch user data and update the appUser
-    const loader = async () => {
+    const refreshUserloader = async () => {
       const props = {
         model: "users",
         id: appUser?.id,
         token: token,
         setLoading: setLoading,
       };
-      const data = await fetchDataByModelAndId(props);
-
-      setAppUser(data); //update the appUser
+      const refreshUserData = await fetchDataByModelAndId(props);
+      console.log("my user: ", refreshUserData); // Log the data to the console
+      setAppUser(refreshUserData); //update the appUser
+      localStorage.setItem("appUser", JSON.stringify(refreshUserData));
     };
 
-    loader();
-    Navigate(-1); //go back to previous page
+    refreshUserloader();
+    //Navigate(-2); //go back to previous page
+    //console.log({formData});
   };
 
   return (
@@ -139,7 +134,7 @@ const UserEdit = () => {
           className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
           method="post"
           encType="multipart/form-data"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(editUser)}
         >
           {/* First Name Field */}
           <label className="input input-bordered flex items-center gap-2 mb-4">
@@ -225,23 +220,37 @@ const UserEdit = () => {
           </label>
           <label className="block mb-4">
             <span className="block text-sm font-medium mb-2">Skills</span>
-            <Select
-              defaultValue={
-                appUser.Skills.length !== 0 &&
-                appUser.Skills.map((skill) => ({
-                  value: skill.id,
-                  label: skill.name,
-                }))
-              }
-              isMulti
+            <Controller
               name="skills"
-              className="basic-multi-select"
-              classNamePrefix="select"
-              options={skillsList.map((skill) => ({
-                value: skill.id,
-                label: skill.name,
-              }))}
-              onChange={(e) => console.log("skills selected: ",e.taregt)}//{{ ...register(`skills.value.skill}`) }} //{(e) => console.log("skills selected: ",e)}
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  defaultValue={
+                    appUser.Skills.length !== 0 &&
+                    appUser.Skills.map((skill) => ({
+                      value: skill.id,
+                      label: skill.name,
+                    }))
+                  }
+                  isMulti
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                  options={skillsList.map((skill) => ({
+                    value: skill.id,
+                    label: skill.name,
+                  }))}
+                  // onChange={(selectedOptions) => field.onChange(selectedOptions)}
+
+                  onChange={(selectedOptions) => {
+                    field.onChange(selectedOptions);
+                    const selectedValues = selectedOptions.map(
+                      (option) => option.value
+                    );
+                    console.log("Selected values: ", selectedValues);
+                  }}
+                />
+              )}
             />
           </label>
           <br></br>
