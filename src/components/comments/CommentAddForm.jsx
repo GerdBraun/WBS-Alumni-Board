@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { addComment } from "../../utility/saveData.js";
 
 const CommentAddForm = ({ model, id, reload }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const { loading, setLoading, appUser, token } = useApp();
@@ -24,7 +24,8 @@ const CommentAddForm = ({ model, id, reload }) => {
     try {
       const res = await addComment(props);
       console.log(res);
-      toast.success("Comment successfully added");
+      toast.success("Comment added successfully");
+      reset(); // Clear the textarea content
       reload();
     } catch (error) {
       console.error(error);
