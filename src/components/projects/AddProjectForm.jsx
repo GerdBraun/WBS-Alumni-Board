@@ -138,22 +138,22 @@ export default function AddProjectForm({ project }) {
 
       {/* skills */}
       <label className="block mb-4">
-      <Controller
-        control={control}
-        defaultValue={project?.Skills && project.Skills.map((c) => c.id)}
-        name="skills"
-        render={({ field: { onChange, value, ref } }) => (
-          <Select
-            inputRef={ref}
-            value={value && skills.filter((c) => value.includes(c.value))}
-            onChange={(val) => onChange(val.map((c) => c.value))}
-            options={skills}
-            placeholder="Select Skills..."
-            isMulti
-          />
-        )}
-      />
-    </label>
+        <Controller
+          control={control}
+          defaultValue={project?.Skills && project.Skills.map((c) => c.id)}
+          name="skills"
+          render={({ field: { onChange, value, ref } }) => (
+            <Select
+              inputRef={ref}
+              value={value && skills.filter((c) => value.includes(c.value))}
+              onChange={(val) => onChange(val.map((c) => c.value))}
+              options={skills}
+              placeholder="Select Skills..."
+              isMulti
+            />
+          )}
+        />
+      </label>
 
       {/* Date From Field */}
       <label className="input input-bordered flex items-center gap-2 mb-4">

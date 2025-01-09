@@ -52,7 +52,7 @@ function ContextProvider({ children }) {
       setToken(token);
       localStorage.setItem("token", token);
       localStorage.setItem("appUser", JSON.stringify(user));
-      toast.info("log in was successful");
+      toast.success("log in was successful");
       navigate("/welcome");
     } catch (error) {
       console.log("something went wrong: " + error);
