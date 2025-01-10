@@ -16,15 +16,19 @@ const UserList = () => {
     const data = await fetchDataByModelAndId(props);
 
     setUsersData(data?.results || []);
-   // console.log("user list page data: ",data.results,{token});
+    // console.log("user list page data: ",data.results,{token});
     //console.log(usersData);
   };
   useEffect(() => {
-    loadUsersData();
+    if (token) loadUsersData();
   }, [token]);
 
   return (
-    <ul className={`container max-w-screen-lg mx-auto p-4 ${loading ? "hidden" : ""}`}>
+    <ul
+      className={`container max-w-screen-lg mx-auto p-4 ${
+        loading ? "hidden" : ""
+      }`}
+    >
       {appUser && (
         <>
           <h1 className="text-2xl font-bold mb-4">Users Listing</h1>
