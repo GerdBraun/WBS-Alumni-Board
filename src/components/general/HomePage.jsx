@@ -23,7 +23,7 @@ const HomePage = () => {
     <div>
       {/* Hero Section */}
       <div
-        className="hero rounded-xl min-h-96 max-w-screen-lg mx-auto"
+        className="hero rounded-xl min-h-96 max-w-screen-lg mx-auto shadow-xl"
         style={{
           // backgroundImage: "url(website-programming-code-picjumbo-com.jpg)",
         }}
@@ -56,11 +56,11 @@ const HomePage = () => {
             jobs.map((job) => (
               <div
                 key={job.id}
-                className="card bg-white shadow-md p-4 rounded-lg"
+                className="card bg-base-100 shadow-md p-4 rounded-lg"
               >
                 <h2 className="text-xl font-bold">{job.title}</h2>
-                <p>{job.location}</p>
-                <p className="text-gray-600 mt-2">
+                <p>Location: {job.location || "-"}</p>
+                <p className="mt-2">
                   {job.description.slice(0, 50)}...
                 </p>
                 <Link
