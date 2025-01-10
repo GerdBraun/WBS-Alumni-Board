@@ -32,6 +32,9 @@ import { PrivacyPolicyPage } from "./components/general/PrivacyPolicyPage";
 import TermsAndConditionsPage from "./components/general/TermsAndConditionsPage";
 import AddProjectForm from "./components/projects/AddProjectForm";
 import EditProjectForm from "./components/projects/EditProjectForm";
+import CompanyList from "./components/companies/CompanyList";
+import CompanyDetail from "./components/companies/CompanyDetail";
+import CompanyEdit from "./components/companies/CompanyEdit";
 
 //import { useEffect } from "react";
 
@@ -62,10 +65,10 @@ const App = () => {
           <Route path="edit/:id" element={<EditJobForm/>} />
         </Route>
         <Route path="/companies">
-          <Route index element={<>CompanyList</>} />
-          <Route path=":id" element={<>CompanyDetail</>} />
+          <Route index element={<CompanyList />} />
+          <Route path=":id" element={<CompanyDetail />} />
           <Route path="add" element={<CompanyAdd />} />
-          <Route path="edit/:id" element={<>CompanyEdit</>} />
+          <Route path="edit/:id" element={<CompanyEdit />} />
         </Route>
         <Route path="/users">
           <Route index element={<UserList />} />

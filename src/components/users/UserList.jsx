@@ -24,7 +24,7 @@ const UserList = () => {
   }, [token]);
 
   return (
-    <ul className={`container mx-auto p-4 ${loading ? "hidden" : ""}`}>
+    <ul className={`container max-w-screen-lg mx-auto p-4 ${loading ? "hidden" : ""}`}>
       {appUser && (
         <>
           <h1 className="text-2xl font-bold mb-4">Users Listing</h1>
