@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import { OpenCloseMenu } from "../../utility/handelNavbar";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => {
   const { appUser, logout } = useApp();
@@ -371,6 +372,11 @@ const Header = () => {
             </li>
           </ul>
         </div>
+
+{/* TODO: remove this for production */}
+        <ThemeSwitcher />
+
+
         <div className="navbar-end">
           {!appUser ? (
             <NavLink to="/signup" className="btn ">
