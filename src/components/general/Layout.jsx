@@ -10,14 +10,18 @@ const Layout = () => {
   return (
     <ContextProvider>
       <LocalStorageLoader />
-      <Header />
-      <div className="container mx-auto">
-        <main className="pt-24">
-          <Outlet />
-        </main>
-      </div>
-      <Footer />
-      <ToastContainer />
+<div className="flex flex-col justify-between min-h-screen">
+        <div>
+          <Header />
+          <div className="container mx-auto">
+            <main className="pt-24">
+              <Outlet />
+            </main>
+          </div>
+        </div>
+        <Footer />
+  
+</div>      <ToastContainer />
     </ContextProvider>
   );
 };

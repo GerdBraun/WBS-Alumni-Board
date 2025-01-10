@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  return <div><footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
+  return <footer className="footer footer-center bg-base-100 text-base-content  shadow-xl p-10">
   <nav className="grid grid-flow-col gap-4">
     <a className="link link-hover">About us</a>
     <Link to="/contact" className="link link-hover">Contact</Link>
@@ -48,7 +48,7 @@ const Footer = () => {
   <aside>
     <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
   </aside>
-</footer></div>;
+</footer>;
 };
 
 export default Footer;
