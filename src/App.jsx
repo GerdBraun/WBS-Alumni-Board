@@ -36,7 +36,8 @@ import CompanyList from "./components/companies/CompanyList";
 import CompanyDetail from "./components/companies/CompanyDetail";
 import CompanyEdit from "./components/companies/CompanyEdit";
 import AboutUsPage from "./components/general/AboutUsPage";
-
+import AddQAForm from "./components/qa/AddQAForm";
+import EditQAForm from "./components/qa/EditQAForm";
 //import { useEffect } from "react";
 
 const App = () => {
@@ -82,8 +83,8 @@ const App = () => {
         <Route path="/qa">
           <Route index element={<QAList />} />
           <Route path=":id" element={<QADetails />} />
-          <Route path="add" element={<>Q&A Add</>} />
-          <Route path="edit/:id" element={<>Q&A Edit</>} />
+          <Route path="add" element={<AddQAForm />} />
+          <Route path="edit/:id" element={<EditQAForm/>} />
         </Route>
         <Route path="/skills">
           <Route index element={<SkillsList />} />

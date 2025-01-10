@@ -240,6 +240,51 @@ function ContextProvider({ children }) {
       toast.error("Failed to delete project. Please try again.");
     }
   };
+  const createQA = async (qaData) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_SERVER}/questions`,
+        qaData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      toast.success("Question created successfully!");
+      return response.data;
+    } catch (error) {
+      console.error("Error creating question:", error);
+      toast.error("Failed to create question. Please try again.");
+    }
+  };
+
+  const updateQA = async (id, qaData) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_SERVER}/questions/${id}`,
+        qaData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      toast.success("Question updated successfully!");
+      return response.data;
+    } catch (error) {
+      console.error("Error updating question:", error);
+      toast.error("Failed to update question. Please try again.");
+    }
+  };
+
+  const deleteQA = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_SERVER}/questions/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.success("Question deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting question:", error);
+      toast.error("Failed to delete question. Please try again.");
+    }
+  };
 
   return (
     <AppContext.Provider
@@ -260,6 +305,9 @@ function ContextProvider({ children }) {
         createProject,
         updateProject,
         deleteProject,
+        createQA,
+        updateQA,
+        deleteQA,
       }}
     >
       {children}
