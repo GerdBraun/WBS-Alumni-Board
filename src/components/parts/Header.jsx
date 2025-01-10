@@ -373,11 +373,9 @@ const Header = () => {
           </ul>
         </div>
 
-{/* TODO: remove this for production */}
-        <ThemeSwitcher />
-
-
         <div className="navbar-end">
+          {/* TODO: remove this for production */}
+          <ThemeSwitcher />
           {!appUser ? (
             <NavLink to="/signup" className="btn ">
               Sign Up
