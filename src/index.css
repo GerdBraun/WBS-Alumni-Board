@@ -14,8 +14,16 @@ body {
     background-size: cover;
     min-height: 100vh;
     background-position: center;
+    background-attachment: fixed;
 }
 
 html[data-theme='dark'] body {
     background-image: url(/bg-dark.jpg);
+}
+
+.hero{
+    background-color: rgb(182 15 15 / 75%);
+}
+html[data-theme='dark'] .hero{
+    background-color: rgb(78 21 107 / 75%);
 }

@@ -23,12 +23,12 @@ const HomePage = () => {
     <div>
       {/* Hero Section */}
       <div
-        className="hero bg-base-200 min-h-96 w-full"
+        className="hero rounded-xl min-h-96 w-full"
         style={{
-          backgroundImage: "url(website-programming-code-picjumbo-com.jpg)",
+          // backgroundImage: "url(website-programming-code-picjumbo-com.jpg)",
         }}
       >
-        <div className="hero-overlay bg-opacity-80"></div>
+        {/* <div className="hero-overlay bg-opacity-60 rounded-xl"></div> */}
         <div className="hero-content text-center p-8">
           <div className="max-w-md">
             <h1 className="text-5xl font-bold text-white">
