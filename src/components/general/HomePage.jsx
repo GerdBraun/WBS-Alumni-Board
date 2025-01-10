@@ -23,12 +23,12 @@ const HomePage = () => {
     <div>
       {/* Hero Section */}
       <div
-        className="hero bg-base-200 min-h-96 w-full"
+        className="hero rounded-xl min-h-96 max-w-screen-lg mx-auto shadow-xl"
         style={{
-          backgroundImage: "url(website-programming-code-picjumbo-com.jpg)",
+          // backgroundImage: "url(website-programming-code-picjumbo-com.jpg)",
         }}
       >
-        <div className="hero-overlay bg-opacity-80"></div>
+        {/* <div className="hero-overlay bg-opacity-60 rounded-xl"></div> */}
         <div className="hero-content text-center p-8">
           <div className="max-w-md">
             <h1 className="text-5xl font-bold text-white">
@@ -49,18 +49,18 @@ const HomePage = () => {
       </div>
 
       {/* Job Previews Section */}
-      <div className="container mx-auto p-4">
+      <div className="container max-w-screen-lg mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4 text-center">Job Previews</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {jobs.length > 0 ? (
             jobs.map((job) => (
               <div
                 key={job.id}
-                className="card bg-white shadow-md p-4 rounded-lg"
+                className="card bg-base-100 shadow-md p-4 rounded-lg"
               >
                 <h2 className="text-xl font-bold">{job.title}</h2>
-                <p>{job.location}</p>
-                <p className="text-gray-600 mt-2">
+                <p>Location: {job.location || "-"}</p>
+                <p className="mt-2">
                   {job.description.slice(0, 50)}...
                 </p>
                 <Link
@@ -80,7 +80,7 @@ const HomePage = () => {
       </div>
 
       {/* stats */}
-      <div className="container mx-auto p-4">
+      <div className="container max-w-screen-lg mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Log in and you will see</h1>
       <Stats />
       </div>

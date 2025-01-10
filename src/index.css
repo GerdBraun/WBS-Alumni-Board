@@ -1,3 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* #root > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+} */
+
+
+body {
+    background-image: url(/bg-light.jpg);
+    background-size: cover;
+    min-height: 100vh;
+    background-position: center;
+    background-attachment: fixed;
+
+    font-family: 'Open Sans', sans-serif;
+}
+
+html[data-theme='dark'] body {
+    background-image: url(/bg-dark.jpg);
+}
+
+.hero{
+    background-color: rgb(182 15 15 / 75%);
+}
+html[data-theme='dark'] .hero{
+    background-color: rgb(78 21 107 / 75%);
+}

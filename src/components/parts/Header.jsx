@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import { OpenCloseMenu } from "../../utility/handelNavbar";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => {
   const { appUser, logout } = useApp();
@@ -10,7 +11,7 @@ const Header = () => {
 
   return (
     <div className="relative z-10">
-      <div className="navbar bg-base-100  fixed ">
+      <div className="navbar bg-base-100  fixed  shadow-xl">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -371,7 +372,10 @@ const Header = () => {
             </li>
           </ul>
         </div>
+
         <div className="navbar-end">
+          {/* TODO: remove this for production */}
+          <ThemeSwitcher />
           {!appUser ? (
             <NavLink to="/signup" className="btn ">
               Sign Up
