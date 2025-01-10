@@ -108,6 +108,7 @@ const UserDetail = () => {
         </div>
       )}
       <br></br>
+      <div className="card-actions justify-between mt-4">
       {canEdit && (
         <Link to={`/users/edit/${id}`} className="btn btn-primary">
           Edit
@@ -117,6 +118,8 @@ const UserDetail = () => {
         Back
       </Link>
     </div>
+    </div>
+
   );
 };
 
