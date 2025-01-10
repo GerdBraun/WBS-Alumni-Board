@@ -38,13 +38,13 @@ const UserEdit = () => {
     setUser(data);
 
     reset({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        companyId: data.Company?.id,
-        skills: data.Skills.map((skill) =>skill.id) || [],
-      }),
-    console.log(data);
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      companyId: data.Company?.id,
+      skills: data.Skills.map((skill) => skill.id) || [],
+    }),
+      console.log(data);
   };
 
   /**
@@ -88,11 +88,6 @@ const UserEdit = () => {
   } = useForm();
 
   const saveUser = async (formData) => {
-
-    console.log(formData);
-    //return;
-
-
     const { firstName, lastName, email, companyId, file, skills } = formData;
     console.log({ formData });
     const data = {
@@ -105,7 +100,7 @@ const UserEdit = () => {
     };
     // console.log({ data }, "user id: ", appUser?.id);
     try {
-      await axios
+      const res = await axios
         .put(`${import.meta.env.VITE_API_SERVER}/users/${appUser?.id}`, data, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -115,14 +110,18 @@ const UserEdit = () => {
         .catch((error) => {
           console.error(error);
         });
+      if (id == appUser.id) {
+        setAppUser(res.data);
+        console.log('new appUser data',res.data);
+      }
 
       toast.success("user data was saved successfully");
       navigate(-1); //go back to previous page
     } catch (error) {
       console.error(error);
     }
-
   };
+
 
   return (
     <>
@@ -153,7 +152,7 @@ const UserEdit = () => {
                   type="text"
                   name="firstName"
                   className="grow"
-                   placeholder="please enter your first name"
+                  placeholder="please enter your first name"
                   {...register("firstName", { required: true })}
                 />
                 {errors.firstName && (
@@ -192,8 +191,10 @@ const UserEdit = () => {
               </label>
 
               {/* Avatar Field */}
-              <label >
-              <span className="block text-sm font-medium mb-2">Upload a new profile picture:</span>
+              <label>
+                <span className="block text-sm font-medium mb-2">
+                  Upload a new profile picture:
+                </span>
                 <input
                   type="file"
                   name="file"
