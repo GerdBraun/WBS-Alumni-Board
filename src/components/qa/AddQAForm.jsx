@@ -22,6 +22,10 @@ export default function AddQAForm({ question }) {
     }
   }, [question, reset]);
 
+  const isOwner = question?.ownerId === appUser?.id;
+  const isAdminOrModerator =
+    appUser?.role === "admin" || appUser?.role === "moderator";
+
   const onSubmit = async (data) => {
     try {
       //data.ownerId = appUser?.id;
@@ -31,9 +35,14 @@ export default function AddQAForm({ question }) {
         ownerId: appUser?.id,
       };
       if (question) {
+        if (isOwner || isAdminOrModerator) {
         console.log("Updating question with data:", payload);
         await updateQA(question.id, payload);
       } else {
+        toast.error("You are not authorized to edit this question.");
+        return;
+      }
+    } else {
         await createQA(payload);
       }
       reset();
@@ -43,6 +52,7 @@ export default function AddQAForm({ question }) {
     }
   };
   const handleDelete = async () => {
+    
     if (window.confirm("Are you sure you want to delete this question?")) {
       try {
         await deleteQA(question.id);
@@ -94,7 +104,7 @@ export default function AddQAForm({ question }) {
       </button>
 
       {/* Delete Button */}
-      {question && (
+      {question && (isOwner || isAdminOrModerator) && (
         <button
           type="button"
           className="btn btn-primary w-full"
