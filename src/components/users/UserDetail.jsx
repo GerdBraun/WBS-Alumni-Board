@@ -6,11 +6,12 @@ import { fetchDataByModelAndId } from "../../utility/fetchData";
 const UserDetail = () => {
   const { token, appUser, loading, setLoading } = useApp();
   const [aUser, setAUser] = useState(null);
+  const [canEdit, setCanEdit] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
-    loader();
-  }, [id]);
+    if (id && token) loader();
+  }, [id, token]);
 
   const loader = async () => {
     const props = {
@@ -23,6 +24,13 @@ const UserDetail = () => {
 
     setAUser(data);
     console.log("hi there user: ", { data });
+
+    // Determine if the user can edit the company
+    const isOwner = id == appUser?.id;
+    const isAdminOrModerator =
+      appUser?.role === "admin" || appUser?.role === "moderator";
+
+    setCanEdit(isOwner || isAdminOrModerator)
   };
   return (
     <div
@@ -48,10 +56,8 @@ const UserDetail = () => {
               Role:<span className="font-normal">{" " + aUser?.role}</span>
             </h3>
             <h3 className="font-bold">
-              Works at:
-              <span className="font-normal">
-                {" " + aUser?.Company?.name || "-"}
-              </span>
+              Works at:{" "}
+              <span className="font-normal">{aUser?.Company?.name || "-"}</span>
             </h3>
             <h3 className="font-bold">
               Skills:{" "}
@@ -102,6 +108,11 @@ const UserDetail = () => {
         </div>
       )}
       <br></br>
+      {canEdit && (
+        <Link to={`/users/edit/${id}`} className="btn btn-primary">
+          Edit
+        </Link>
+      )}
       <Link to={-1} className="btn btn-primary">
         Back
       </Link>

@@ -413,14 +413,14 @@ const Header = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-1 w-20 p-2 shadow"
               >
                 <li>
-                    <NavLink
-                      to={`/users/edit/${appUser?.id}`}
-                      className={(isActive) =>
-                        "nav-link" + (!isActive ? " unselected" : "")
-                      }
-                    >
-                      Profile
-                    </NavLink>
+                  <NavLink
+                    to={`/users/profile/${appUser?.id}`}
+                    className={(isActive) =>
+                      "nav-link" + (!isActive ? " unselected" : "")
+                    }
+                  >
+                    Profile
+                  </NavLink>
                 </li>
                 <NavLink to="/settings" className="nav-link">
                   Settings

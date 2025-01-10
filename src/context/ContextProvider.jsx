@@ -67,7 +67,7 @@ function ContextProvider({ children }) {
       setToken(token);
       localStorage.setItem("token", token);
       localStorage.setItem("appUser", JSON.stringify(user));
-      toast.info("log in was successful");
+      toast.success("log in was successful");
       navigate("/welcome");
     } catch (error) {
       console.log("something went wrong: " + error);
@@ -161,7 +161,7 @@ function ContextProvider({ children }) {
    */
   const addCompany = async (formData) => {
     const { name, file } = formData;
-    //console.log(file[0]);
+    //console.log({formData});
     const data = { name: name, file: file[0] };
     try {
       const response = await axios.post(

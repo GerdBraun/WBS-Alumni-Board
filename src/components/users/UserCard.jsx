@@ -15,9 +15,9 @@ const UserCard = ({ aUser }) => {
       </div>
       <div className="collapse-content">
         <p className="text-sm ml-12">
-          works at:
+          works at:{" "}
           <span className="text-sm font-medium">
-            {" "+aUser?.Company?.name || "-"}
+            {aUser?.Company?.name || "-"}
           </span>
         </p>
         <Link to={`/users/${aUser?.id}`} className="btn btn-primary mt-3 ml-11">
