@@ -35,6 +35,7 @@ import EditProjectForm from "./components/projects/EditProjectForm";
 import CompanyList from "./components/companies/CompanyList";
 import CompanyDetail from "./components/companies/CompanyDetail";
 import CompanyEdit from "./components/companies/CompanyEdit";
+import AboutUsPage from "./components/general/AboutUsPage";
 
 //import { useEffect } from "react";
 
@@ -48,8 +49,9 @@ const App = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/recover-password" element={<PasswordRecovery />} />
         <Route path="/reset-password" element={<PasswordReset />} />
-        <Route path="/contact" element={<ContactPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/terms" element={<TermsAndConditionsPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/projects">

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 const TermsAndConditionsPage = () => {
   return (
     <div className="max-w-screen-lg mx-auto p-4">
-      <h1>Terms and Conditions</h1>
       <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
 
       <p>Effective Date:  {new Date().getFullYear()}</p>
