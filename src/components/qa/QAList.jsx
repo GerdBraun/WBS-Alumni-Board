@@ -29,6 +29,7 @@ const QAList = () => {
           Ask a Question
         </Link>
       </div>
+    <div className={`container max-w-screen-lg mx-auto p-4 ${loading ? "hidden" : ""}`}>
       <ul>
         {questions &&
           questions.map((question) => (
@@ -38,6 +39,7 @@ const QAList = () => {
           ))}
       </ul>
     </div>
+  </div>
   );
 };
 

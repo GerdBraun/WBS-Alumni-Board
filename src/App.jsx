@@ -24,6 +24,7 @@ import PasswordReset from "./components/authentication/PasswordReset";
 import PasswordRecovery from "./components/authentication/PasswordRecovery";
 import UserList from "./components/users/UserList";
 import UserDetail from "./components/users/UserDetail";
+import UserProfile from "./components/users/UserProfile";
 import UserEdit from "./components/users/UserEdit";
 import EditJobForm from "./components/jobs/EditJobForm";
 import SettingsPage from "./components/general/SettingsPage";
@@ -31,6 +32,9 @@ import { PrivacyPolicyPage } from "./components/general/PrivacyPolicyPage";
 import TermsAndConditionsPage from "./components/general/TermsAndConditionsPage";
 import AddProjectForm from "./components/projects/AddProjectForm";
 import EditProjectForm from "./components/projects/EditProjectForm";
+import CompanyList from "./components/companies/CompanyList";
+import CompanyDetail from "./components/companies/CompanyDetail";
+import CompanyEdit from "./components/companies/CompanyEdit";
 import AddQAForm from "./components/qa/AddQAForm";
 import EditQAForm from "./components/qa/EditQAForm";
 //import { useEffect } from "react";
@@ -62,15 +66,16 @@ const App = () => {
           <Route path="edit/:id" element={<EditJobForm/>} />
         </Route>
         <Route path="/companies">
-          <Route index element={<>CompanyList</>} />
-          <Route path=":id" element={<>CompanyDetail</>} />
+          <Route index element={<CompanyList />} />
+          <Route path=":id" element={<CompanyDetail />} />
           <Route path="add" element={<CompanyAdd />} />
-          <Route path="edit/:id" element={<>CompanyEdit</>} />
+          <Route path="edit/:id" element={<CompanyEdit />} />
         </Route>
         <Route path="/users">
           <Route index element={<UserList />} />
           <Route path=":id" element={<UserDetail />} />
           <Route path="add" element={<>UserAdd</>} />
+          <Route path="profile/:id" element={<UserProfile/>} />
           <Route path="edit/:id" element={<UserEdit/>} />
         </Route>
         <Route path="/qa">

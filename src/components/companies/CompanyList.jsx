@@ -1,28 +1,25 @@
-import UserCard from "./UserCard";
 import { useApp } from "../../context/AppContext";
 import { fetchDataByModelAndId } from "../../utility/fetchData";
 import { useEffect, useState } from "react";
+import CompanyCard from "./CompanyCard";
 
-const UserList = () => {
-  const [usersData, setUsersData] = useState([null]);
+const CompanyList = () => {
+  const [companies, setCompanies] = useState([]);
   const { appUser, token, loading, setLoading } = useApp();
-
-  const loadUsersData = async () => {
+  const loadCompaniesData = async () => {
     const props = {
-      model: "users",
+      model: "companys",
       setLoading: setLoading,
       token: token,
     };
     const data = await fetchDataByModelAndId(props);
 
-    setUsersData(data?.results || []);
-    // console.log("user list page data: ",data.results,{token});
-    //console.log(usersData);
+    setCompanies(data?.results || []);
+    console.log(data.results);
   };
   useEffect(() => {
-    if (token) loadUsersData();
-  }, [token]);
-
+    loadCompaniesData();
+  }, []);
   return (
     <ul
       className={`container max-w-screen-lg mx-auto p-4 ${
@@ -31,23 +28,22 @@ const UserList = () => {
     >
       {appUser && (
         <>
-          <h1 className="text-2xl font-bold mb-4">Users Listing</h1>
+          <h1 className="text-2xl font-bold mb-4">Companies Listing</h1>
         </>
       )}
       {!appUser && (
         <>
           <h1 className="text-2xl font-bold mb-4">
-            Please log in to see users
+            Please log in to see companies
           </h1>
         </>
       )}
-      {usersData?.map((aUser) => (
-        <li key={aUser?.id} className="mb-4">
-          <UserCard aUser={aUser} />
-        </li>
-      ))}
+      {companies &&
+        companies?.map((company) => (
+          <CompanyCard key={company?.id} company={company} />
+        ))}
     </ul>
   );
 };
 
-export default UserList;
+export default CompanyList;
