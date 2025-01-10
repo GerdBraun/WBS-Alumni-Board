@@ -23,7 +23,7 @@ const HomePage = () => {
     <div>
       {/* Hero Section */}
       <div
-        className="hero rounded-xl min-h-96 w-full"
+        className="hero rounded-xl min-h-96 max-w-screen-lg mx-auto"
         style={{
           // backgroundImage: "url(website-programming-code-picjumbo-com.jpg)",
         }}
@@ -49,7 +49,7 @@ const HomePage = () => {
       </div>
 
       {/* Job Previews Section */}
-      <div className="container mx-auto p-4">
+      <div className="container max-w-screen-lg mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4 text-center">Job Previews</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {jobs.length > 0 ? (
@@ -80,7 +80,7 @@ const HomePage = () => {
       </div>
 
       {/* stats */}
-      <div className="container mx-auto p-4">
+      <div className="container max-w-screen-lg mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4 text-center">Log in and you will see</h1>
       <Stats />
       </div>
