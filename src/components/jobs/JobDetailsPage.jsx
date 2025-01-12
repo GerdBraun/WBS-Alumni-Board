@@ -84,6 +84,17 @@ const JobDetailsPage = () => {
       {/* Job Card */}
       <div className="card bg-base-100 w-full shadow-xl">
         <div className="card-body">
+          {/* Company Logo */}
+          
+            <div className="flex justify-center mb-4">
+              <img
+                src={job.Company?.logo || "/logo.png"}
+                alt={job.Company?.name || "Company Logo"}
+                className="object-contain"
+                style={{ maxWidth: "150px", maxHeight: "150px" }}
+              />
+            </div>
+           
           {/* Title */}
           <h2 className="card-title text-3xl font-bold mb-4">{job.title}</h2>
           {/* Posted By */}
