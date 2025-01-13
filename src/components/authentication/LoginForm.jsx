@@ -52,7 +52,7 @@ export default function LoginForm() {
       {/* Signup and Forgot Password Link */}
       <div className="flex justify-between items-center mb-4">
         <p>
-          <span className="text-sm">Don&apos;t have an account yet? </span>{" "}
+          <span className="text-xs">Don&apos;t have an account yet? </span>{" "}
           <Link to="/signup" className="link link-primary link-hover text-xs">
             Sign Up
           </Link>

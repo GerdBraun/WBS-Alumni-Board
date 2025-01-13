@@ -42,9 +42,9 @@ const WelcomePage = () => {
   return (
     <div
       className={`max-w-screen-lg mx-auto p-4 my-8 ${loading ? "hidden" : ""}`}
-    ><h1 className="font-bold text-2xl">Hi {appUser.firstName}{appUser.lastName}!</h1>
+    ><h1 className="font-bold text-2xl">Hi {appUser.firstName} {appUser.lastName}!</h1>
     <br></br>
-      <p className="font-semibold text-xl">Welcome Back &#128526;</p>
+      <p className="font-semibold text-xl">Welcome Back! &#128526;</p>
       <br></br>
       <h3 className="font-semibold">
         We found lots of people you may like to get in touch with:
@@ -54,7 +54,7 @@ const WelcomePage = () => {
       </p>
       <br></br>
       <h3 className="font-semibold">
-        And the following jobs that match your profile:
+        And the following jobs match your profile:
       </h3>
       <ul>
         {jobMatches &&
