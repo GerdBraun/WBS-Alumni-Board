@@ -30,7 +30,7 @@ const UserDetail = () => {
     const isAdminOrModerator =
       appUser?.role === "admin" || appUser?.role === "moderator";
 
-    setCanEdit(isOwner || isAdminOrModerator)
+    setCanEdit(isOwner || isAdminOrModerator);
   };
   return (
     <div
@@ -44,82 +44,92 @@ const UserDetail = () => {
         </>
       )}
       {aUser && (
-        <div className="card bg-base-100 w-full shadow-xl">
-          <figure className="w-56 h-auto">
-            <img src={aUser?.avatar || "/profile.png"} alt={aUser.firstName} />
-          </figure>
-          <div className="card-body ">
-            <h2 className="card-title text-xl font-bold">
-              {aUser.firstName + " " + aUser.lastName}
-            </h2>
-            <h3 className="font-bold">
-              Role:<span className="font-normal">{" " + aUser?.role}</span>
-            </h3>
-            <h3 className="font-bold">
-              Works at:{" "}
-              <span className="font-normal">{aUser?.Company?.name || "-"}</span>
-            </h3>
-            <h3 className="font-bold">
-              Skills:{" "}
-              {aUser.Skills.length !== 0 ? (
-                aUser.Skills.map((skill) => (
+        <>
+          {" "}
+          <h1 className="text-2xl font-bold mb-4">User Details</h1>
+          <div className="card bg-base-100 border w-full shadow-xl">
+            {" "}
+            <div className="card-body ">
+              <figure className="w-56 h-auto">
+                <img
+                  src={aUser?.avatar || "/profile.png"}
+                  alt={aUser.firstName}
+                />
+              </figure>
+              <h2 className="card-title text-xl font-bold">
+                {aUser.firstName + " " + aUser.lastName}
+              </h2>
+              <h3 className="font-bold">
+                Role:<span className="font-normal">{" " + aUser?.role}</span>
+              </h3>
+              <h3 className="font-bold">
+                Works at:{" "}
+                <span className="font-normal">
+                  {aUser?.Company?.name || "-"}
+                </span>
+              </h3>
+              <h3 className="font-bold">
+                Skills:{" "}
+                {aUser.Skills.length !== 0 ? (
+                  aUser.Skills.map((skill) => (
+                    <Link
+                      to={`/skills/${skill.id}`}
+                      key={skill.id}
+                      className="badge badge-outline mr-2 font-normal"
+                    >
+                      {skill.name}
+                    </Link>
+                  ))
+                ) : (
+                  <span className="font-normal">-</span>
+                )}
+              </h3>{" "}
+              {/* only show from here if has  posted projects and or jobs */}
+              <h3 className="font-bold">Projects posted:</h3>
+              {aUser.Projects.length !== 0 ? (
+                aUser.Projects.map((project) => (
                   <Link
-                    to={`/skills/${skill.id}`}
-                    key={skill.id}
-                    className="badge badge-outline mr-2 font-normal"
+                    to={`/projects/${project.id}`}
+                    key={project.id}
+                    className="Link link-primary link-hover"
                   >
-                    {skill.name}
+                    {project.title}
                   </Link>
                 ))
               ) : (
                 <span className="font-normal">-</span>
               )}
-            </h3>{" "}
-            {/* only show from here if has  posted projects and or jobs */}
-            <h3 className="font-bold">Projects posted:</h3>
-            {aUser.Projects.length !== 0 ? (
-              aUser.Projects.map((project) => (
-                <Link
-                  to={`/projects/${project.id}`}
-                  key={project.id}
-                  className="Link link-primary link-hover"
-                >
-                  {project.title}
-                </Link>
-              ))
-            ) : (
-              <span className="font-normal">-</span>
-            )}
-            <h3 className="font-bold">Jobs posted:</h3>
-            {aUser.Jobs.length !== 0 ? (
-              aUser.Jobs.map((job) => (
-                <Link
-                  to={`/jobs/${job.id}`}
-                  key={job.id}
-                  className="Link link-primary link-hover"
-                >
-                  {job.title}
-                </Link>
-              ))
-            ) : (
-              <span className="font-normal">-</span>
-            )}
+              <h3 className="font-bold">Jobs posted:</h3>
+              {aUser.Jobs.length !== 0 ? (
+                aUser.Jobs.map((job) => (
+                  <Link
+                    to={`/jobs/${job.id}`}
+                    key={job.id}
+                    className="Link link-primary link-hover"
+                  >
+                    {job.title}
+                  </Link>
+                ))
+              ) : (
+                <span className="font-normal">-</span>
+              )}
+            </div>
           </div>
-        </div>
+        </>
       )}
       <br></br>
       <div className="card-actions justify-between mt-4">
-      {canEdit && (
-        <Link to={`/users/edit/${id}`} className="btn btn-primary">
-          Edit
+        {" "}
+        <Link to={-1} className="btn btn-primary">
+          Back
         </Link>
-      )}
-      <Link to={-1} className="btn btn-primary">
-        Back
-      </Link>
+        {canEdit && (
+          <Link to={`/users/edit/${id}`} className="btn btn-primary">
+            Edit
+          </Link>
+        )}
+      </div>
     </div>
-    </div>
-
   );
 };
 

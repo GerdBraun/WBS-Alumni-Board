@@ -55,7 +55,7 @@ const QADetails = () => {
       {question && (
         <>
           {/* question Title */}
-          <h1 className="text-3xl font-bold mb-4">{question.title}</h1>
+          <h1 className="text-2xl font-bold mb-4">{question.title}</h1>
 
           {/* question Description */}
           <p className="mt-4 mb-4">{question.description}</p>
@@ -80,6 +80,7 @@ const QADetails = () => {
                 Edit Question
               </button>
             )}
+            
             <Link to="/qa" className="btn btn-primary">
               Back to Questions
             </Link>

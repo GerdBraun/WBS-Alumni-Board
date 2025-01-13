@@ -68,7 +68,7 @@ const ProjectDetail = () => {
   return (
     <div
       className={`max-w-screen-lg mx-auto p-4 my-8 ${loading ? "hidden" : ""}`}
-    >
+    ><h1 className="text-2xl font-bold mb-4">Project Details</h1>
       {project && (
         <div className="card bg-base-100 w-full shadow-xl">
           <div className="card-body">

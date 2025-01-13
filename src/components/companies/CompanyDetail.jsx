@@ -57,8 +57,10 @@ const CompanyDetail = () => {
     <>
       {company && (
         <div className="max-w-screen-lg mx-auto p-4 my-8">
+          <h1 className="text-2xl font-bold mb-4">Company Details</h1>
+
           {/* Company Card */}
-          <div className="card bg-base-100 w-full shadow-xl">
+          <div className="card bg-base-100 w-full border shadow-xl">
             <div className="card-body">
               <figure className="w-56 h-auto">
                 <img

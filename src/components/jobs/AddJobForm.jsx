@@ -81,7 +81,7 @@ export default function AddJobForm({ job }) {
 
   return (
     <form
-      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+      className="max-w-md mx-auto bg-base-100 border p-6 rounded-lg shadow-md"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className="text-2xl font-bold mb-4 text-center">
@@ -146,13 +146,14 @@ export default function AddJobForm({ job }) {
         <span className="block text-sm font-medium mb-2">Company</span>
         <select
           className="select select-bordered w-full"
+          defaultValue={job?.companyId || ""}
           {...register("companyId", { required: true })}
-          value={job?.companyId || ""}
+         // value={job?.companyId || ""}
           //onChange={(e) => reset({ ...job, companyId: e.target.value })}
         >
           <option value="">Select a Company</option>
-          {companies.map((company) => (
-            <option key={company.id} value={company.id}>
+          {companies.length > 0 && companies.map((company) => (
+            <option key={company?.id} value={company?.id}>
               {company.name}
             </option>
           ))}

@@ -130,17 +130,17 @@ const UserEdit = () => {
           className={`max-w-screen-lg mx-auto p-4 my-8 ${
             loading ? "hidden" : ""
           }`}
-        >
-          <div className="card bg-base-100 w-full shadow-xl">
+        > 
+          <div className="">
             <h2 className="text-2xl font-bold mb-4 text-center">
               {user.id === appUser.id ? (
-                <span>Edit Your Profile</span>
+                <span className="">Edit Your Profile</span>
               ) : (
                 <span>Edit {user.firstName}&apos;s Profile</span>
               )}
             </h2>
             <form
-              className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+              className="max-w-md mx-auto bg-base-100 border p-6 rounded-lg shadow-md"
               method="post"
               encType="multipart/form-data"
               onSubmit={handleSubmit(saveUser)}

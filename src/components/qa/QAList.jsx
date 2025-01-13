@@ -23,13 +23,10 @@ const QAList = () => {
   };
 
   return (
-    <div className={`container mx-auto p-4 ${loading ? "hidden" : ""}`}>
-      <div className="mb-4">
-        <Link to="/qa/add" className="btn btn-primary">
-          Ask a Question
-        </Link>
-      </div>
     <div className={`container max-w-screen-lg mx-auto p-4 ${loading ? "hidden" : ""}`}>
+       <h1 className="text-2xl font-bold mb-4">Questions & Answers</h1>
+
+    
       <ul>
         {questions &&
           questions.map((question) => (
@@ -38,8 +35,13 @@ const QAList = () => {
             </li>
           ))}
       </ul>
+      <div className="mb-4">
+        <Link to="/qa/add" className="btn btn-primary">
+          Ask a Question
+        </Link>
+      </div>
     </div>
-  </div>
+ 
   );
 };
 
