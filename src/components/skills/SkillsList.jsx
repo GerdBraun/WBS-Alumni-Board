@@ -52,7 +52,7 @@ const SkillsList = () => {
           <div className="join">
             <Link
               to={`/skills?page=${paginationData.currentPage - 1}`}
-              className="join-item btn"
+              className="join-item btn btn-primary"
               disabled={!paginationData.hasPreviousPage}
             >
               «
@@ -62,7 +62,7 @@ const SkillsList = () => {
             </button>
             <Link
               to={`/skills?page=${paginationData.currentPage + 1}`}
-              className="join-item btn"
+              className="join-item btn btn-primary"
               disabled={!paginationData.hasNextPage}
             >
               »
