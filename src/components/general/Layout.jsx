@@ -10,7 +10,7 @@ const Layout = () => {
   return (
     <ContextProvider>
       <LocalStorageLoader />
-<div className="flex flex-col justify-between min-h-screen">
+      <div className="flex flex-col justify-between min-h-screen">
         <div>
           <Header />
           <div className="container mx-auto">
@@ -20,8 +20,8 @@ const Layout = () => {
           </div>
         </div>
         <Footer />
-  
-</div>      <ToastContainer />
+      </div>{" "}
+      <ToastContainer position="bottom-right"/>
     </ContextProvider>
   );
 };
