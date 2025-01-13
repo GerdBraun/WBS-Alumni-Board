@@ -1,15 +1,18 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { fetchCompanies } from "../../utility/fetchCompanies";
+import { fetchDataByModelAndId } from "../../utility/fetchData";
+import Select from "react-select"; 
 
 export default function AddJobForm({ job }) {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset, control } = useForm();
   const { createJob, updateJob, deleteJob, appUser, token, setLoading } = useApp();
   const [companies, setCompanies] = useState([]);
+  const [skills, setSkills] = useState([]);
   const navigate = useNavigate();
 
   // Redirect to login if the user is not logged in
@@ -40,6 +43,26 @@ export default function AddJobForm({ job }) {
     }
   }, [job, reset]);
 
+    //Loading skills from utility
+    useEffect(() => {
+        loadSkills();
+      }, []);
+    
+      const loadSkills = async () => {
+        const props = {
+          model: "skills",
+          setLoading: setLoading,
+          token: token,
+        };
+        const data = await fetchDataByModelAndId(props);
+        const options = data.results.map((skill) => ({
+          value: skill.id,
+          label: skill.name,
+        }));
+        console.log(options);
+        setSkills(options);
+      };
+    
   const onSubmit = async (data) => {
     try {
       data.ownerId = appUser?.id;
@@ -47,18 +70,18 @@ export default function AddJobForm({ job }) {
       if (job) {
         // Update job if job exists
         await updateJob(job.id, data);
-        toast.success("Job updated successfully!");
+        //toast.success("Job updated successfully!");
       } else {
         // Create new job
         await createJob(data);
-        toast.success("Job created successfully!");
+        //toast.success("Job created successfully!");
       }
 
       reset(); // Clear form fields
       navigate("/jobs");
     } catch (error) {
       console.error("Failed to process job:", error);
-      toast.error("Failed to process job. Please try again.");
+      //toast.error("Failed to process job. Please try again.");
     }
   };
 
@@ -66,11 +89,11 @@ export default function AddJobForm({ job }) {
     if (window.confirm("Are you sure you want to delete this job?")) {
       try {
         await deleteJob(job.id);
-        toast.success("Job deleted successfully!");
+        //toast.success("Job deleted successfully!");
         navigate("/jobs");
       } catch (error) {
         console.error("Failed to delete job:", error);
-        toast.error("Failed to delete job. Please try again.");
+        //toast.error("Failed to delete job. Please try again.");
       }
     }
   };
@@ -112,6 +135,24 @@ export default function AddJobForm({ job }) {
         {errors.description && <span className="text-error">This field is required</span>}
       </label>
 
+      {/* Skills Field */}
+      <label className="block mb-4">
+        <Controller
+          control={control}
+          defaultValue={job?.Skills && job.Skills.map((c) => c.id)}
+          name="skills"
+          render={({ field: { onChange, value, ref } }) => (
+            <Select
+              inputRef={ref}
+              value={value && skills.filter((c) => value.includes(c.value))}
+              onChange={(val) => onChange(val.map((c) => c.value))}
+              options={skills}
+              placeholder="Select Skills..."
+              isMulti
+            />
+          )}
+        />
+      </label>
       {/* Location Field */}
       <label className="input input-bordered flex items-center gap-2 mb-4">
         Location
@@ -147,7 +188,7 @@ export default function AddJobForm({ job }) {
         <select
           className="select select-bordered w-full"
           {...register("companyId", { required: true })}
-          value={job?.companyId || ""}
+          defaultValue={job?.companyId || ""}
           //onChange={(e) => reset({ ...job, companyId: e.target.value })}
         >
           <option value="">Select a Company</option>

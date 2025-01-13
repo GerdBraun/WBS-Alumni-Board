@@ -86,7 +86,7 @@ const JobDetailsPage = () => {
         <div className="card-body">
           {/* Company Logo */}
           
-            <div className="flex justify-center mb-4">
+            <div className="flex items-center gap-6 mb-4">
               <img
                 src={job.Company?.logo || "/logo.png"}
                 alt={job.Company?.name || "Company Logo"}
