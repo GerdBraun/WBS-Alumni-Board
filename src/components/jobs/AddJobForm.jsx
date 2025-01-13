@@ -22,16 +22,17 @@ export default function AddJobForm({ job }) {
 
   // Loading companies  from utility
   useEffect(() => {
-    const loadCompanies = async () => {
-      try {
-        const companiesList = await fetchCompanies(token, setLoading);
-        setCompanies(companiesList);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    };
-    loadCompanies();
+    if(token)  loadCompanies();
   }, [token]);
+
+  const loadCompanies = async () => {
+    try {
+      const companiesList = await fetchCompanies(token, setLoading);
+      setCompanies(companiesList);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   // Populate the form fields if a job is being edited
   useEffect(() => {
