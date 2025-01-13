@@ -42,32 +42,37 @@ const WelcomePage = () => {
   return (
     <div
       className={`max-w-screen-lg mx-auto p-4 my-8 ${loading ? "hidden" : ""}`}
-    >
-      <h3 className="font-bold">
-        We found lots of people you would like to keep in contact with:
+    ><h1 className="font-bold text-2xl">Hi {appUser.firstName}{appUser.lastName}!</h1>
+    <br></br>
+      <p className="font-semibold text-xl">Welcome Back &#128526;</p>
+      <br></br>
+      <h3 className="font-semibold">
+        We found lots of people you may like to get in touch with:
       </h3>
       <p>
-        <Link to="/users">see them all</Link>
+        <Link className="link link-primary link-hover" to="/users">see them all</Link>
       </p>
-      <h3 className="font-bold">
-        We found the following jobs matching your profile:
+      <br></br>
+      <h3 className="font-semibold">
+        And the following jobs that match your profile:
       </h3>
       <ul>
         {jobMatches &&
           jobMatches.map((job) => (
             <li key={job.id}>
-              <Link to={`/jobs/${job.id}`}>{job.title}</Link>
+              <Link className="link link-primary link-hover" to={`/jobs/${job.id}`}>{job.title}</Link>
             </li>
           ))}
       </ul>
-      <h3 className="font-bold">
-        We found the following projects matching your profile:
+      <br></br>
+      <h3 className="font-semibold">
+        You may also like to have a look at these interesting projects, picked especially for you:
       </h3>
       <ul>
         {projectMatches &&
           projectMatches.map((project) => (
             <li key={project.id}>
-              <Link to={`/projects/${project.id}`}>{project.title}</Link>
+              <Link className="link link-primary link-hover" to={`/projects/${project.id}`}>{project.title}</Link>
             </li>
           ))}
       </ul>

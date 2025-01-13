@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 
-
 export default function LoginForm() {
   const {
     register,
@@ -52,14 +51,16 @@ export default function LoginForm() {
 
       {/* Signup and Forgot Password Link */}
       <div className="flex justify-between items-center mb-4">
-        <Link to="/signup"
-          className="text-blue-500 hover:underline text-sm"
-        >
-          Sign Up
-        </Link>
+        <p>
+          <span className="text-sm">Don&apos;t have an account yet? </span>{" "}
+          <Link to="/signup" className="link link-primary link-hover text-xs">
+            Sign Up
+          </Link>
+        </p>
 
-        <Link to="/recover-password"
-          className="text-blue-500 hover:underline text-sm"
+        <Link
+          to="/recover-password"
+          className="link link-primary link-hover text-xs"
         >
           Forgot your Password?
         </Link>

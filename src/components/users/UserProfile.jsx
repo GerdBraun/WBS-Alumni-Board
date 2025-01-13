@@ -64,7 +64,7 @@ const UserProfile = () => {
                   <Link
                     to={`/projects/${project.id}`}
                     key={project.id}
-                    className="Link underline text-blue-800"
+                    className="Link link-primary link-hover"
                   >
                     {project.title}
                   </Link>
@@ -78,7 +78,7 @@ const UserProfile = () => {
                   <Link
                     to={`/jobs/${job.id}`}
                     key={job.id}
-                    className="Link underline text-blue-800"
+                    className="Link link-primary link-hover"
                   >
                     {job.title}
                   </Link>

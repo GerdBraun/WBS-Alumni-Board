@@ -11,7 +11,7 @@ const SkillsCard = ({ skill }) => {  return (
         <ul className="list-disc pl-5 mt-2">
             {skill.Users && skill.Users.map((user) => (
               <li key={user.id} className="text-gray-700">
-                <Link to={`/users/${user.id}`} className="link">{user.firstName} {user.lastName}</Link>
+                <Link to={`/users/${user.id}`} className="link link-primary link-hover">{user.firstName} {user.lastName}</Link>
               </li>
             ))}
           </ul>

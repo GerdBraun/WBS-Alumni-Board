@@ -26,7 +26,7 @@ const UserCard = ({ aUser }) => {
         <span>
           <Link
             to="/contact"
-            className="link link-hover text-blue-700  underline ml-10 font-thin text-base"
+            className="link link-hover ml-11 link-primary text-sm"
           >
             Request to contact
           </Link>

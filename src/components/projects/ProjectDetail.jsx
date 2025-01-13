@@ -75,7 +75,7 @@ const ProjectDetail = () => {
             <h2 className="card-title">{project.title}</h2>
             <p>
               posted by&nbsp;
-              <Link to={`/users/${project.User.id}`} className="link">
+              <Link to={`/users/${project.User.id}`} className="link link-primary link-hover">  
                 {project.User.firstName} {project.User.lastName}
               </Link>
             </p>
@@ -87,14 +87,14 @@ const ProjectDetail = () => {
                   <br />
                 </>
               ) : (
-                <span>Start Date: Not specified</span>
+                <><strong>Start Date:<span className="font-normal"> Not specified</span></strong>< br/></>
               )}
               {project.dateTo ? (
                 <>
                   <strong>End Date: </strong> {new Date(project.dateTo).toLocaleDateString()}
                 </>
               ) : (
-                <span>End Date: Not specified</span>
+                <strong>End Date:<span className="font-normal"> Not specified</span></strong>
               )}
             </p>
             <h3 className="font-bold">Description:</h3>

@@ -89,7 +89,7 @@ const JobDetailsPage = () => {
           {/* Posted By */}
           <p className="mb-2">
             posted by&nbsp;
-            <Link to={`/users/${job.User?.id}`} className="link">
+            <Link to={`/users/${job.User?.id}`} className="link link-primary link-hover">
               {job.User?.firstName} {job.User?.lastName}
             </Link>
           </p>
@@ -117,7 +117,7 @@ const JobDetailsPage = () => {
                   <Link
                     to={`/skills/${skill.id}`}
                     key={skill.id}
-                    className="badge badge-outline"
+                    className="badge badge-outline link link-primary link-hover"
                   >
                     {skill.name}
                   </Link>
@@ -134,7 +134,7 @@ const JobDetailsPage = () => {
                 <Link
                   to={`/users/${user.id}`}
                   key={user.id}
-                  className="badge badge-outline"
+                  className="badge badge-outline link link-primary link-hover"
                 >
                   {user.firstName} {user.lastName}
                 </Link>
