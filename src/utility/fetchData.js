@@ -7,9 +7,10 @@ import axios from "axios";
  */
 export const fetchDataByModelAndId = async (props) => {
   console.log(props);
-  const { model, id, token, setLoading } = props;
+  const { model, id, token, setLoading, offset,limit,page } = props;
   const idString = id ? `/${id}` : "";
-  const url = `${import.meta.env.VITE_API_SERVER}/${model}${idString}`;
+  const pageString = page ? `?page=${page}` : "";
+  const url = `${import.meta.env.VITE_API_SERVER}/${model}${idString}${pageString}`;
   setLoading(true);
   try {
     const { data } = await axios
@@ -22,6 +23,7 @@ export const fetchDataByModelAndId = async (props) => {
       .catch((error) => {
         console.error(error);
       });
+      console.log(data)
     return data;
   } catch (error) {
     console.error(error);
