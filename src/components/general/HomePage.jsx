@@ -41,7 +41,7 @@ const HomePage = () => {
               <br />
               Projects, jobs, skills - everything at your fingertips.
             </p>
-            <Link to="/login" className="btn btn-primary">
+            <Link to={appUser ? "/welcome": "/login"} className="btn btn-primary">
               Get Started
             </Link>
           </div>
