@@ -1,5 +1,5 @@
-import  { useEffect, useState } from "react";
-import { Link, useParams,useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import CommentCard from "../comments/CommentCard";
 import {
   fetchDataByModelAndId,
@@ -8,6 +8,9 @@ import {
 } from "../../utility/fetchData";
 import { useApp } from "../../context/AppContext";
 import CommentAddForm from "../comments/CommentAddForm";
+import Modal from "../parts/Modal";
+import { getMockAiAnswers } from "../../utility/handleAI";
+import { toast } from "react-toastify";
 
 const JobDetailsPage = () => {
   const { id } = useParams();
@@ -16,6 +19,7 @@ const JobDetailsPage = () => {
   const [comments, setComments] = useState([]);
   const [matchingUsers, setMatchingUsers] = useState([]);
   const { token, loading, setLoading, appUser } = useApp();
+  const [aiAnswer, setAiAnswer] = useState(null);
 
   useEffect(() => {
     const loadJobDetails = async () => {
@@ -67,17 +71,29 @@ const JobDetailsPage = () => {
     setComments(data.results);
   };
 
-
   if (!job) return <p className="text-center my-8">Loading...</p>;
-    // Determine if the user can edit the job
+  // Determine if the user can edit the job
   const isOwner = job.ownerId === appUser?.id;
   const isAdminOrModerator =
     appUser?.role === "admin" || appUser?.role === "moderator";
-    console.log("Job Owner ID:", job.ownerId);
-    console.log("App User ID:", appUser?.id);
+  console.log("Job Owner ID:", job.ownerId);
+  console.log("App User ID:", appUser?.id);
 
   const canEdit = isOwner || isAdminOrModerator;
 
+  /**
+   * Get AI data for the work/life balance of the job
+   */
+  const getAIData = async () => {
+    const question = `What is the work/life balance: for ${job.title}?`;
+    try {
+      const data = await getMockAiAnswers({question,token});
+      setAiAnswer(data.message.content);
+      document.getElementById("my_modal_1").showModal()
+    } catch (error) {
+      toast.error("Failed to get AI data. Please try again.");
+    }
+  }
 
   return (
     <div className="max-w-screen-lg mx-auto p-4 my-8">
@@ -143,6 +159,16 @@ const JobDetailsPage = () => {
           ) : (
             <p className="text-gray-500">No matching users found.</p>
           )}
+          {/* work/life-balance (AI) */}
+          <h3 className="font-bold mt-4 mb-2">Work / Life Balance:</h3>
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <button
+            className="btn"
+            onClick={() => getAIData()}
+          >
+            ask AI
+          </button>
+          <Modal title={`Work / Life Balance for "${job.title}"`} content={aiAnswer} />
 
           {/* Comments */}
           <h3 className="font-bold mt-4 mb-2">Comments:</h3>
