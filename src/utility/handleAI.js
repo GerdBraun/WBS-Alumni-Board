@@ -12,6 +12,8 @@ export const getMockAiAnswers = async ({question,token}) => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            provider: 'open-ai',
+            mode: "development"
           },
         }
       );

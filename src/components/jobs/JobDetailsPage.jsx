@@ -85,7 +85,7 @@ const JobDetailsPage = () => {
    * Get AI data for the work/life balance of the job
    */
   const getAIData = async () => {
-    const question = `What is the work/life balance: for ${job.title}?`;
+    const question = `What is the work/life balance for ${job.title}?`;
     try {
       const data = await getMockAiAnswers({question,token});
       setAiAnswer(data.message.content);
