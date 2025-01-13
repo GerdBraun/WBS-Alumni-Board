@@ -25,16 +25,17 @@ export default function AddJobForm({ job }) {
 
   // Loading companies  from utility
   useEffect(() => {
-    const loadCompanies = async () => {
-      try {
-        const companiesList = await fetchCompanies(token, setLoading);
-        setCompanies(companiesList);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    };
-    loadCompanies();
+    if (token) loadCompanies();
   }, [token]);
+
+  const loadCompanies = async () => {
+    try {
+      const companiesList = await fetchCompanies(token, setLoading);
+      setCompanies(companiesList);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   // Populate the form fields if a job is being edited
   useEffect(() => {
@@ -100,7 +101,8 @@ export default function AddJobForm({ job }) {
 
   // Check if the user is the owner or an admin/moderator
   const isOwner = job?.ownerId === appUser?.id;
-  const isAdminOrModerator = appUser?.role === "admin" || appUser?.role === "moderator";
+  const isAdminOrModerator =
+    appUser?.role === "admin" || appUser?.role === "moderator";
 
   return (
     <form
@@ -120,7 +122,9 @@ export default function AddJobForm({ job }) {
           placeholder="Enter Job Title"
           {...register("title", { required: true })}
         />
-        {errors.title && <span className="text-error">This field is required</span>}
+        {errors.title && (
+          <span className="text-error">This field is required</span>
+        )}
       </label>
 
       {/* Description Field */}
@@ -132,7 +136,9 @@ export default function AddJobForm({ job }) {
           rows={3}
           {...register("description", { required: true })}
         />
-        {errors.description && <span className="text-error">This field is required</span>}
+        {errors.description && (
+          <span className="text-error">This field is required</span>
+        )}
       </label>
 
       {/* Skills Field */}
@@ -179,26 +185,45 @@ export default function AddJobForm({ job }) {
             },
           })}
         />
-        {errors.link && <span className="text-error">{errors.link.message || "This field is required"}</span>}
+        {errors.link && (
+          <span className="text-error">
+            {errors.link.message || "This field is required"}
+          </span>
+        )}
       </label>
 
       {/* Company ID Field */}
       <label className="block mb-4">
         <span className="block text-sm font-medium mb-2">Company</span>
-        <select
-          className="select select-bordered w-full"
-          {...register("companyId", { required: true })}
-          defaultValue={job?.companyId || ""}
-          //onChange={(e) => reset({ ...job, companyId: e.target.value })}
-        >
-          <option value="">Select a Company</option>
-          {companies.map((company) => (
-            <option key={company.id} value={company.id}>
-              {company.name}
-            </option>
-          ))}
-        </select>
-        {errors.companyId && <span className="text-error">This field is required</span>}
+        {(job) ? (
+          <select
+            className="select select-bordered w-full"
+            {...register("companyId", { required: true })}
+            defaultValue={job?.companyId || ""}
+          >
+            <option value="">Select a Company</option>
+            {companies.map((company) => (
+              <option key={company.id} value={company.id}>
+                {company.name}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <select
+            className="select select-bordered w-full"
+            {...register("companyId", { required: true })}
+          >
+            <option value="">Select a Company</option>
+            {companies.map((company) => (
+              <option key={company.id} value={company.id}>
+                {company.name}
+              </option>
+            ))}
+          </select>
+        )}
+        {errors.companyId && (
+          <span className="text-error">This field is required</span>
+        )}
       </label>
 
       {/* Submit Button */}

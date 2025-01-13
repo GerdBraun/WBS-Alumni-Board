@@ -21,6 +21,12 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.navbar .nav-link,
+.navbar summary{
+    font-size: .9rem;
+    font-weight:500;
+}
+
 html[data-theme='dark'] body {
     background-image: url(/bg-dark.jpg);
 }

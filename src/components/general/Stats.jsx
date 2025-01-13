@@ -28,7 +28,7 @@ const Stats = () => {
           <div className="stats shadow w-full text-center">
             <div className="stat">
               <div className="stat-title">Users</div>
-              <div className="stat-value">{stats.users.toLocaleString()}</div>
+              <div className="stat-value text-primary">{stats.users.toLocaleString()}</div>
               <div className="stat-desc">
                 with {stats.skills.toLocaleString()} skills
                 <br />
@@ -44,7 +44,7 @@ const Stats = () => {
           <div className="stats shadow w-full text-center">
             <div className="stat">
               <div className="stat-title">Pojects</div>
-              <div className="stat-value">
+              <div className="stat-value text-primary">
                 {stats.projects.toLocaleString()}
               </div>
               <div className="stat-desc">
@@ -62,7 +62,7 @@ const Stats = () => {
           <div className="stats shadow w-full text-center">
             <div className="stat">
               <div className="stat-title">Job offers</div>
-              <div className="stat-value">{stats.jobs.toLocaleString()}</div>
+              <div className="stat-value text-primary">{stats.jobs.toLocaleString()}</div>
               <div className="stat-desc">
                 with {stats.commentsOnJobs.toLocaleString()} comments
                 <br />
@@ -78,7 +78,7 @@ const Stats = () => {
           <div className="stats shadow w-full text-center">
             <div className="stat">
               <div className="stat-title">Questions</div>
-              <div className="stat-value">
+              <div className="stat-value text-primary">
                 {stats.questions.toLocaleString()}
               </div>
               <div className="stat-desc">
