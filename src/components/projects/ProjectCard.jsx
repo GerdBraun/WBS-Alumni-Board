@@ -2,13 +2,17 @@ import { Link } from "react-router-dom";
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className="card bg-base-100 w-full shadow-xl">
-      <div className="card-body">
-        <h2 className="card-title">{project.title}</h2>
-        <p>posted by {project.User.firstName} {project.User.lastName}</p>
-        <div className="card-actions justify-end">
-          <Link to={`/projects/${project.id}`} className="btn btn-primary">Details</Link>
+    <div className="collapse collapse-arrow bg-base-100 border shadow-xl mb-4">
+      <input type="checkbox" />
+      <div className="collapse-title text-xl font-medium flex items-center gap-4">
+        <h2 className="">{project.title}</h2>
         </div>
+        <div className="collapse-content">
+          {" "}
+          <Link to={`/projects/${project.id}`} className="btn btn-primary">
+            Details
+          </Link>
+        
       </div>
     </div>
   );

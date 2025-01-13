@@ -14,7 +14,7 @@ export default function LoginForm() {
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form
-      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+      className="max-w-md mx-auto bg-base-100 p-6 rounded-lg shadow-xl border"
       onSubmit={handleSubmit(login)}
     >
       <h2 className="text-2xl font-bold mb-4 text-center">Log In</h2>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const UserCard = ({ aUser }) => {
-  return (<>{aUser && (<div tabIndex={0} className="collapse  bg-base-200 border">
+  return (<>{aUser && (<div tabIndex={0} className="collapse collapse-arrow bg-base-100 border shadow-xl">
     {" "}
     <input type="checkbox" />
     <div className="collapse-title text-xl font-medium flex items-center gap-4">

@@ -13,27 +13,27 @@ const ProjectList = () => {
 
   const loader = async () => {
     const props = {
-        model:"projects",
-        setLoading:setLoading,
-        token:token,
-    }
+      model: "projects",
+      setLoading: setLoading,
+      token: token,
+    };
     const data = await fetchDataByModelAndId(props);
     setProjects(data.results);
   };
 
   return (
-    <ul
-      className={`max-w-screen-lg mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 my-8 ${
+    <div
+      className={`container max-w-screen-lg mx-auto p-4 ${
         loading ? "hidden" : ""
       }`}
     >
+      <h1 className="text-2xl font-bold mb-4">Projects Listing</h1>
+
       {projects &&
         projects.map((project) => (
-          <li key={project.id}>
-            <ProjectCard project={project} />
-          </li>
+          <ProjectCard key={project.id} project={project} />
         ))}
-    </ul>
+    </div>
   );
 };
 
