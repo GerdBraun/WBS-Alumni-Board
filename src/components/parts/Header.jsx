@@ -167,6 +167,16 @@ const Header = () => {
                 </ul>
               </li>
               <li>
+                <NavLink
+                  to="/users"
+                  className={(isActive) =>
+                    "nav-link" + (!isActive ? " unselected" : "")
+                  }
+                >
+                  Users
+                </NavLink>
+              </li>
+              {/* <li>
                 <a>User</a>
                 <ul className="p-2">
                   <li>
@@ -190,7 +200,7 @@ const Header = () => {
                     </NavLink>
                   </li>
                 </ul>
-              </li>
+              </li> */}
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost text-xl font-bold text-primary">
@@ -344,6 +354,17 @@ const Header = () => {
               </details>
             </li>
             <li>
+              <NavLink
+                to="/users"
+                className={(isActive) =>
+                  "nav-link" + (!isActive ? " unselected" : "")
+                }
+              >
+                Users
+              </NavLink>
+            </li>
+            {/* 
+            <li>
               <details>
                 <summary>User</summary>
                 <ul className="p-2">
@@ -369,35 +390,45 @@ const Header = () => {
                   </li>
                 </ul>
               </details>
-            </li>
+            </li> */}
           </ul>
         </div>
 
         <div className="navbar-end">
           {/* TODO: remove this for production */}
-          <ThemeSwitcher />
+          <div className="mr-2 hidden lg:flex">
+            <ThemeSwitcher />
+          </div>{" "}
           {!appUser ? (
-            <NavLink to="/signup" className="btn ">
+            <NavLink
+              to="/signup"
+              className="ml-2 btn btn-sm btn-outline btn-primary "
+            >
               Sign Up
             </NavLink>
           ) : (
             console.log("user is logged in")
           )}
-
           {!appUser ? (
-            <NavLink to="/login" className="btn m-1">
+            <NavLink
+              to="/login"
+              className="btn btn-sm btn-outline btn-primary m-1"
+            >
               Login
             </NavLink>
           ) : (
-            <button onClick={logout} className="btn">
+            <button
+              onClick={logout}
+              className="btn btn-sm btn-outline btn-primary"
+            >
               log out
             </button>
           )}
-          <div className="dropdown dropdown-end  ml-3">
+          <div className="dropdown dropdown-end  ml-2">
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar m-3"
+              className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
                 {appUser && (

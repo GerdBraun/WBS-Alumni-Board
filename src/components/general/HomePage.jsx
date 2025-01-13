@@ -65,7 +65,7 @@ const HomePage = () => {
                 </p>
                 <Link
                   to={appUser ? `/jobs/${job.id}` : "/login"} // Conditional link
-                  className="text-blue-500 hover:underline mt-2 inline-block"
+                  className="link link-primary mt-2 link-hover"
                 >
                   {appUser ? "View More" : "Log in to view more"}
                 </Link>
