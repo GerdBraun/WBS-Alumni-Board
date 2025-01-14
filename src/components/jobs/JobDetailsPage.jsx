@@ -127,7 +127,7 @@ const JobDetailsPage = () => {
 
           {/* Description */}
           <h3 className="font-bold ">
-            Description: <span className="font-normal">{job.description}</span>
+            Description: <p className="font-normal">{job.description}</p>
           </h3>
 
           {/* Skills */}
