@@ -1,24 +1,15 @@
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { fetchCompanies } from "../../utility/fetchCompanies";
-import { fetchDataByModelAndId } from "../../utility/fetchData";
-import Select from "react-select";
 
 export default function AddJobForm({ job }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    control,
-  } = useForm();
-  const { createJob, updateJob, deleteJob, appUser, token, setLoading } =
-    useApp();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const { createJob, updateJob, deleteJob, appUser, token, setLoading } = useApp();
   const [companies, setCompanies] = useState([]);
-  const [skills, setSkills] = useState([]);
   const navigate = useNavigate();
 
   // Redirect to login if the user is not logged in
@@ -31,17 +22,16 @@ export default function AddJobForm({ job }) {
 
   // Loading companies  from utility
   useEffect(() => {
-    if (token) loadCompanies();
+    const loadCompanies = async () => {
+      try {
+        const companiesList = await fetchCompanies(token, setLoading);
+        setCompanies(companiesList);
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+    loadCompanies();
   }, [token]);
-
-  const loadCompanies = async () => {
-    try {
-      const companiesList = await fetchCompanies(token, setLoading);
-      setCompanies(companiesList);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
 
   // Populate the form fields if a job is being edited
   useEffect(() => {
@@ -50,48 +40,25 @@ export default function AddJobForm({ job }) {
     }
   }, [job, reset]);
 
-  //Loading skills from utility
-  useEffect(() => {
-    loadSkills();
-  }, []);
-
-  const loadSkills = async () => {
-    const props = {
-      model: "skills",
-      setLoading: setLoading,
-      token: token,
-    };
-    const data = await fetchDataByModelAndId(props);
-    const options = data.results.map((skill) => ({
-      value: skill.id,
-      label: skill.name,
-    }));
-    console.log(options);
-    setSkills(options);
-  };
-
   const onSubmit = async (data) => {
     try {
       data.ownerId = appUser?.id;
 
-      console.log("data.skills", data.skills);
-
-
       if (job) {
         // Update job if job exists
         await updateJob(job.id, data);
-        //toast.success("Job updated successfully!");
+        toast.success("Job updated successfully!");
       } else {
         // Create new job
         await createJob(data);
-        //toast.success("Job created successfully!");
+        toast.success("Job created successfully!");
       }
 
       reset(); // Clear form fields
       navigate("/jobs");
     } catch (error) {
       console.error("Failed to process job:", error);
-      //toast.error("Failed to process job. Please try again.");
+      toast.error("Failed to process job. Please try again.");
     }
   };
 
@@ -99,19 +66,18 @@ export default function AddJobForm({ job }) {
     if (window.confirm("Are you sure you want to delete this job?")) {
       try {
         await deleteJob(job.id);
-        //toast.success("Job deleted successfully!");
+        toast.success("Job deleted successfully!");
         navigate("/jobs");
       } catch (error) {
         console.error("Failed to delete job:", error);
-        //toast.error("Failed to delete job. Please try again.");
+        toast.error("Failed to delete job. Please try again.");
       }
     }
   };
 
   // Check if the user is the owner or an admin/moderator
   const isOwner = job?.ownerId === appUser?.id;
-  const isAdminOrModerator =
-    appUser?.role === "admin" || appUser?.role === "moderator";
+  const isAdminOrModerator = appUser?.role === "admin" || appUser?.role === "moderator";
 
   return (
     <form
@@ -131,9 +97,7 @@ export default function AddJobForm({ job }) {
           placeholder="Enter Job Title"
           {...register("title", { required: true })}
         />
-        {errors.title && (
-          <span className="text-error">This field is required</span>
-        )}
+        {errors.title && <span className="text-error">This field is required</span>}
       </label>
 
       {/* Description Field */}
@@ -145,29 +109,9 @@ export default function AddJobForm({ job }) {
           rows={3}
           {...register("description", { required: true })}
         />
-        {errors.description && (
-          <span className="text-error">This field is required</span>
-        )}
+        {errors.description && <span className="text-error">This field is required</span>}
       </label>
 
-      {/* Skills Field */}
-      <label className="block mb-4">
-        <Controller
-          control={control}
-          defaultValue={job?.Skills && job.Skills.map((c) => c.id)}
-          name="skills"
-          render={({ field: { onChange, value, ref } }) => (
-            <Select
-              inputRef={ref}
-              value={value && skills.filter((c) => value.includes(c.value))}
-              onChange={(val) => onChange(val.map((c) => c.value))}
-              options={skills}
-              placeholder="Select Skills..."
-              isMulti
-            />
-          )}
-        />
-      </label>
       {/* Location Field */}
       <label className="input input-bordered flex items-center gap-2 mb-4">
         Location
@@ -194,46 +138,27 @@ export default function AddJobForm({ job }) {
             },
           })}
         />
-        {errors.link && (
-          <span className="text-error">
-            {errors.link.message || "This field is required"}
-          </span>
-        )}
+        {errors.link && <span className="text-error">{errors.link.message || "This field is required"}</span>}
       </label>
 
       {/* Company ID Field */}
       <label className="block mb-4">
         <span className="block text-sm font-medium mb-2">Company</span>
-        {job ? (
-          <select
-            className="select select-bordered w-full"
-            defaultValue={job?.companyId || ""}
-            {...register("companyId", { required: true })}
-          >
-            <option value="">Select a Company</option>
-            {companies.length > 0 &&
-              companies.map((company) => (
-                <option key={company?.id} value={company?.id}>
-                  {company.name}
-                </option>
-              ))}
-          </select>
-        ) : (
-          <select
-            className="select select-bordered w-full"
-            {...register("companyId", { required: true })}
-          >
-            <option value="">Select a Company</option>
-            {companies.map((company) => (
-              <option key={company.id} value={company.id}>
-                {company.name}
-              </option>
-            ))}
-          </select>
-        )}
-        {errors.companyId && (
-          <span className="text-error">This field is required</span>
-        )}
+        <select
+          className="select select-bordered w-full"
+          defaultValue={job?.companyId || ""}
+          {...register("companyId", { required: true })}
+         // value={job?.companyId || ""}
+          //onChange={(e) => reset({ ...job, companyId: e.target.value })}
+        >
+          <option value="">Select a Company</option>
+          {companies.length > 0 && companies.map((company) => (
+            <option key={company?.id} value={company?.id}>
+              {company.name}
+            </option>
+          ))}
+        </select>
+        {errors.companyId && <span className="text-error">This field is required</span>}
       </label>
 
       {/* Submit Button */}
