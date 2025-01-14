@@ -59,7 +59,7 @@ const UserList = () => {
           <div className="join">
             <Link
               to={`/users?page=${paginationData.currentPage - 1}`}
-              className="join-item btn"
+              className="join-item btn btn-primary"
               disabled={!paginationData.hasPreviousPage}
             >
               «
@@ -69,7 +69,7 @@ const UserList = () => {
             </button>
             <Link
               to={`/users?page=${paginationData.currentPage + 1}`}
-              className="join-item btn"
+              className="join-item btn btn-primary"
               disabled={!paginationData.hasNextPage}
             >
               »
