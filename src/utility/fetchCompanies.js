@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const fetchCompanies = async (token, setLoading) => {
-    const url = `${import.meta.env.VITE_API_SERVER}/companys`;
+    const url = `${import.meta.env.VITE_API_SERVER}/companys?limit=1000`;
     setLoading(true);
     try {
       const response = await axios.get(url, {

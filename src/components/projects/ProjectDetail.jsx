@@ -18,10 +18,11 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(!token || !id) return;
     loader(id);
     commentsLoader(id);
     matchesLoader(id);
-  }, [id]);
+  }, [id, token]);
 
   const loader = async () => {
     const props = {
