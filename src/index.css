@@ -47,3 +47,6 @@ input[type="file"]::-webkit-file-upload-button {
     border-radius: 0.5 rem;
     font-size: 0.75rem;
   }
+  main {
+    white-space: pre-wrap;
+  }

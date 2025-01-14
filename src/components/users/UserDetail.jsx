@@ -56,7 +56,7 @@ const UserDetail = () => {
                   alt={aUser.firstName}
                 />
               </figure>
-              <h2 className="card-title text-xl font-bold">
+              <h2 className="card-title text-xl font-bold mb-4 ">
                 {aUser.firstName + " " + aUser.lastName}
               </h2>
               <h3 className="font-bold">
@@ -114,21 +114,21 @@ const UserDetail = () => {
                 <span className="font-normal">-</span>
               )}
             </div>
+            <div className="card-actions justify-between p-6 ">
+              {" "}
+              <Link to={-1} className="btn btn-primary">
+                Back
+              </Link>
+              {canEdit && (
+                <Link to={`/users/edit/${id}`} className="btn btn-primary">
+                  Edit
+                </Link>
+              )}
+            </div>
           </div>
         </>
       )}
       <br></br>
-      <div className="card-actions justify-between mt-4">
-        {" "}
-        <Link to={-1} className="btn btn-primary">
-          Back
-        </Link>
-        {canEdit && (
-          <Link to={`/users/edit/${id}`} className="btn btn-primary">
-            Edit
-          </Link>
-        )}
-      </div>
     </div>
   );
 };

@@ -278,9 +278,7 @@ const UserEdit = () => {
               </button>
             </form>
             <br></br>
-            <Link to={-1} className="btn btn-primary">
-              Back
-            </Link>
+            
           </div>
         </div>
       )}
