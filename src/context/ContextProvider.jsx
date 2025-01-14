@@ -209,6 +209,7 @@ function ContextProvider({ children }) {
     } catch (error) {
       console.error("Error creating project:", error);
       toast.error("Failed to create project. Please try again.");
+      
     }
   };
 
@@ -226,6 +227,7 @@ function ContextProvider({ children }) {
     } catch (error) {
       console.error("Error updating project:", error);
       toast.error("Failed to update project. Please try again.");
+      
     }
   };
 

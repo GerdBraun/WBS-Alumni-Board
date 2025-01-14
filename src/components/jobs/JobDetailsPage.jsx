@@ -87,32 +87,53 @@ const JobDetailsPage = () => {
   const getAIData = async () => {
     const question = `What is the work/life balance for ${job.title}?`;
     try {
-      const data = await getMockAiAnswers({question,token});
+      const data = await getMockAiAnswers({ question, token });
       setAiAnswer(data.message.content);
-      document.getElementById("my_modal_1").showModal()
+      document.getElementById("my_modal_1").showModal();
     } catch (error) {
       toast.error("Failed to get AI data. Please try again.");
     }
-  }
+  };
 
   return (
     <div className="max-w-screen-lg mx-auto p-4 my-8">
       {/* Job Card */}
       <div className="card bg-base-100 w-full shadow-xl">
         <div className="card-body">
+          {/* Company Logo */}
+
+          <div className="flex items-center gap-6 mb-4">
+            <img
+              src={job.Company?.logo || "/logo.png"}
+              alt={job.Company?.name || "Company Logo"}
+              className="object-contain"
+              style={{ maxWidth: "150px", maxHeight: "150px" }}
+            />
+          </div>
+
           {/* Title */}
           <h2 className="card-title text-3xl font-bold mb-4">{job.title}</h2>
           {/* Posted By */}
           <p className="mb-2">
             posted by&nbsp;
-            <Link to={`/users/${job.User?.id}`} className="link">
+            <Link to={`/users/${job.User?.id}`} className="link link-primary link-hover">
               {job.User?.firstName} {job.User?.lastName}
             </Link>
           </p>
 
           {/* Company */}
           <p className="text-lg mb-2">
-            <strong>Company:</strong> {job.Company?.name || "N/A"}
+            <strong>Company:</strong>&nbsp;
+            {job.Company ? (
+              <Link
+                to={`/companies/${job.Company?.id}`}
+                className="link link-primary link-hover"
+              >
+                {job.Company?.name || "N/A"}
+              </Link>
+            ) : (
+              <span>N/A</span>
+            )}
           </p>
 
           {/* Location */}
@@ -162,13 +183,13 @@ const JobDetailsPage = () => {
           {/* work/life-balance (AI) */}
           <h3 className="font-bold mt-4 mb-2">Work / Life Balance:</h3>
           {/* Open the modal using document.getElementById('ID').showModal() method */}
-          <button
-            className="btn"
-            onClick={() => getAIData()}
-          >
+          <button className="btn" onClick={() => getAIData()}>
             ask AI
           </button>
-          <Modal title={`Work / Life Balance for "${job.title}"`} content={aiAnswer} />
+          <Modal
+            title={`Work / Life Balance for "${job.title}"`}
+            content={aiAnswer}
+          />
 
           {/* Comments */}
           <h3 className="font-bold mt-4 mb-2">Comments:</h3>

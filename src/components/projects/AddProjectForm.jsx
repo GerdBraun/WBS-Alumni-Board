@@ -77,7 +77,7 @@ export default function AddProjectForm({ project }) {
       navigate("/projects");
     } catch (error) {
       console.error("Failed to process project:", error);
-      toast.error("Failed to process project. Please try again.");
+      //toast.error("Failed to process project. Please try again.");
     }
   };
 
