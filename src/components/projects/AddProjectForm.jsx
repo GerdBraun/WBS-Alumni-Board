@@ -150,6 +150,8 @@ export default function AddProjectForm({ project }) {
               options={skills}
               placeholder="Select Skills..."
               isMulti
+              className="react-select-container"
+              classNamePrefix="react-select"
             />
           )}
         />

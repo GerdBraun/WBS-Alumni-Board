@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,43 +10,134 @@
     min-height: 100vh;
 } */
 
-
 body {
-    background-image: url(/bg-light.jpg);
-    background-size: cover;
-    min-height: 100vh;
-    background-position: center;
-    background-attachment: fixed;
+  background-image: url(/bg-light.jpg);
+  background-size: cover;
+  min-height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
 
-    font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .navbar .nav-link,
-.navbar summary{
-    font-size: .9rem;
-    font-weight:500;
+.navbar summary {
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-html[data-theme='dark'] body {
-    background-image: url(/bg-dark.jpg);
+html[data-theme="dark"] body {
+  background-image: url(/bg-dark.jpg);
 }
 
-.hero{
-    background-color: rgb(182 15 15 / 75%);
+.hero {
+  background-color: rgb(182 15 15 / 75%);
 }
-html[data-theme='dark'] .hero{
-    background-color: rgb(78 21 107 / 75%);
+html[data-theme="dark"] .hero {
+  background-color: rgb(78 21 107 / 75%);
 }
 input[type="file"]::-webkit-file-upload-button {
-    border: none;
-    border-radius: 0.5 rem;
-    font-size: 0.75rem;
+  border: none;
+  border-radius: 0.5 rem;
+  font-size: 0.75rem;
+}
+input[type="file"]::-ms-browse {
+  border: none;
+  border-radius: 0.5 rem;
+  font-size: 0.75rem;
+}
+main {
+  white-space: pre-wrap;
+}
+
+
+
+/* react-select */
+
+/* light */
+.react-select-container {
+  width: 100%;
+}
+
+.react-select__control {
+  background-color: var(--daisyui-bg-base-100);
+  border: 1px solid var(--daisyui-border);
+  border-radius: var(--daisyui-rounded);
+  padding: 0.5rem;
+  border-radius: .5rem;
+}
+
+.react-select__menu {
+    background-color: #c6152f;
+}
+
+.react-select__option {
+  padding: 0.5rem;
+}
+
+.react-select__option--is-selected {
+    background-color: #c6152f;
+    color: #f9fafb;
   }
-  input[type="file"]::-ms-browse {
-    border: none;
-    border-radius: 0.5 rem;
-    font-size: 0.75rem;
-  }
-  main {
-    white-space: pre-wrap;
-  }
+
+.react-select__option--is-focused {
+  background-color: #c6152f;
+  color: #f9fafb;
+  /* border-color:#ff0000; */
+}
+
+.react-select__multi-value__label,
+.react-select__multi-value__remove,
+.react-select__multi-value {
+    background-color: #c6152f;
+    color:#f9fafb !important;
+}   
+
+.react-select__multi-value__label {
+    padding-right: .5rem !important;
+}   
+
+/* dark */
+html[data-theme="dark"] .react-select__control {
+  background-color: #1d232a;
+}
+html[data-theme="dark"] .react-select__menu {
+  background-color:#1d232a;
+}
+html[data-theme="dark"] .react-select__option--is-selected {
+  background-color: #1d232a;
+  color: #f9fafb;
+}
+html[data-theme="dark"] .react-select__option--is-focused {
+  background-color: #872eb4;
+  color: #f9fafb;
+}
+/* html[data-theme="dark"] .react-select__option {
+  color: #1d232a;
+} */
+html[data-theme="dark"] .react-select__option--is-selected {
+  color: #f9fafb;
+}
+html[data-theme="dark"] .react-select__multi-value__label,
+html[data-theme="dark"] .react-select__multi-value__remove,
+html[data-theme="dark"] .react-select__multi-value {
+    background-color: #872eb4;
+    color:#f9fafb !important;
+}   
+
+
+.react-select__control{
+    border-radius: var(--rounded-btn, 0.5rem) !important;
+    box-shadow: none !important;
+    border-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+    outline-style: solid !important;
+    outline-width: 2px !important;
+    outline-offset: 2px !important;
+    outline-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+}
+.react-select__control.react-select__control--is-focused.react-select__control--menu-is-open {
+    outline-style: solid !important;
+    outline-width: 2px !important;
+    outline-offset: 2px !important;
+    outline-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+}

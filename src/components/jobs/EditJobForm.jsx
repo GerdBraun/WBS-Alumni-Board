@@ -27,6 +27,7 @@ const EditJobForm = () => {
       }
     };
 
+    if (id && token)
     fetchJob();
   }, [id, token, setLoading]);
 
