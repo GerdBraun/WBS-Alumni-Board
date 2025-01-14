@@ -126,9 +126,16 @@ html[data-theme="dark"] .react-select__multi-value {
 }   
 
 
-.react-select-control.react-select-control--is-focused.react-select-control--menu-is-open {
+.react-select__control{
+    border-radius: var(--rounded-btn, 0.5rem) !important;
     box-shadow: none !important;
     border-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+    outline-style: solid !important;
+    outline-width: 2px !important;
+    outline-offset: 2px !important;
+    outline-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+}
+.react-select__control.react-select__control--is-focused.react-select__control--menu-is-open {
     outline-style: solid !important;
     outline-width: 2px !important;
     outline-offset: 2px !important;
