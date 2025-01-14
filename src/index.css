@@ -124,3 +124,13 @@ html[data-theme="dark"] .react-select__multi-value {
     background-color: #872eb4;
     color:#f9fafb !important;
 }   
+
+
+.react-select-control.react-select-control--is-focused.react-select-control--menu-is-open {
+    box-shadow: none !important;
+    border-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+    outline-style: solid !important;
+    outline-width: 2px !important;
+    outline-offset: 2px !important;
+    outline-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+}
