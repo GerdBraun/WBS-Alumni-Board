@@ -37,3 +37,13 @@ html[data-theme='dark'] body {
 html[data-theme='dark'] .hero{
     background-color: rgb(78 21 107 / 75%);
 }
+input[type="file"]::-webkit-file-upload-button {
+    border: none;
+    border-radius: 0.5 rem;
+    font-size: 0.75rem;
+  }
+  input[type="file"]::-ms-browse {
+    border: none;
+    border-radius: 0.5 rem;
+    font-size: 0.75rem;
+  }

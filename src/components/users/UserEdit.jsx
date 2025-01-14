@@ -112,7 +112,7 @@ const UserEdit = () => {
         });
       if (id == appUser.id) {
         setAppUser(res.data);
-        console.log('new appUser data',res.data);
+        console.log("new appUser data", res.data);
       }
 
       toast.success("user data was saved successfully");
@@ -122,7 +122,6 @@ const UserEdit = () => {
     }
   };
 
-
   return (
     <>
       {user && (
@@ -130,7 +129,7 @@ const UserEdit = () => {
           className={`max-w-screen-lg mx-auto p-4 my-8 ${
             loading ? "hidden" : ""
           }`}
-        > 
+        >
           <div className="">
             <h2 className="text-2xl font-bold mb-4 text-center">
               {user.id === appUser.id ? (
@@ -241,6 +240,32 @@ const UserEdit = () => {
                       classNamePrefix="select"
                       options={skills}
                       onChange={(val) => onChange(val.map((c) => c.value))}
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: state.isFocused ? "#202327" : "grey",
+                          backgroundColor: state.isFocused
+                            ? "#202327"
+                            : "#202327",
+                        }),
+
+                        multiValue: (baseStyles, state) => ({
+                          ...baseStyles,
+                          backgroundColor: state.isFocused
+                            ? "white"
+                            : "#202327",
+                        }),
+                        multiValueLabel: (baseStyles, state) => ({
+                          ...baseStyles,
+                          color: state.isFocused ? "#202327" : "light-grey",
+                        }),
+
+                        option: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: state.isFocused ? "#202327" : "red",
+                          backgroundColor: state.isFocused ? "grey" : "#202327",
+                        }),
+                      }}
                     />
                   )}
                 />

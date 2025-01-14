@@ -42,7 +42,7 @@ const UserProfile = () => {
                 Email: <span className="font-normal">{appUser?.email}</span>
               </h3>
               <h3 className="font-bold">
-                Skills:
+                Skills:{" "}
                 {appUser.Skills ? (
                   appUser.Skills.map((skill) => (
                     <Link
