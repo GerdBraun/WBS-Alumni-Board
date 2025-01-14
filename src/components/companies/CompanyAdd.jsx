@@ -8,18 +8,13 @@ function CompanyAdd() {
     formState: { errors },
   } = useForm();
 
-  //testing form out put
-
-  //   const onSubmit = (data) => {
-  //     console.log(data.name, data.logo[0].name, data.logo[0]);
-  //   };
-
+  
   const { addCompany } = useApp();
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <>
       <form
-        className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+        className="max-w-md mx-auto bg-base-100 p-6 rounded-lg shadow-xl border"
         method="post"
         encType="multipart/form-data"
         onSubmit={handleSubmit(addCompany)}

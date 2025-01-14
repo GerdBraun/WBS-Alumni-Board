@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return <footer className="footer footer-center bg-base-100 text-base-content  shadow-xl p-10">
   <nav className="grid grid-flow-col gap-4">
-    <Link to="/about" className="link link-hover">About us</Link>
-    <Link to="/contact" className="link link-hover">Contact</Link>
-    <Link to="/terms" className="link link-hover">Terms and conditions</Link>
-    <Link to="/privacy" className="link link-hover">Privacy policy</Link>
+    <Link to="/about" className="link link-primary link-hover">About us</Link>
+    <Link to="/contact" className="link link-hover link-primary">Contact</Link>
+    <Link to="/terms" className="link link-hover link-primary">Terms and conditions</Link>
+    <Link to="/privacy" className="link link-hover link-primary">Privacy policy</Link>
   </nav>
   <nav>
     <div className="grid grid-flow-col gap-4">

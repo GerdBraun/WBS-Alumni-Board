@@ -90,6 +90,7 @@ const JobDetailsPage = () => {
       const data = await getMockAiAnswers({ question, token });
       setAiAnswer(data.message.content);
       document.getElementById("my_modal_1").showModal();
+      document.getElementById("my_modal_1").showModal();
     } catch (error) {
       toast.error("Failed to get AI data. Please try again.");
     }
@@ -97,6 +98,8 @@ const JobDetailsPage = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto p-4 my-8">
+      <h1 className="text-2xl font-bold mb-4">Job Details</h1>
+
       {/* Job Card */}
       <div className="card bg-base-100 w-full shadow-xl">
         <div className="card-body">
@@ -112,11 +115,14 @@ const JobDetailsPage = () => {
           </div>
 
           {/* Title */}
-          <h2 className="card-title text-3xl font-bold mb-4">{job.title}</h2>
+          <h2 className="card-title text-2xl font-bold mb-4">{job.title}</h2>
           {/* Posted By */}
           <p className="mb-2">
-            posted by&nbsp;
-            <Link to={`/users/${job.User?.id}`} className="link link-primary link-hover">
+            Posted by&nbsp;
+            <Link
+              to={`/users/${job.User?.id}`}
+              className="link link-primary link-hover"
+            >
               {job.User?.firstName} {job.User?.lastName}
             </Link>
           </p>
@@ -137,41 +143,44 @@ const JobDetailsPage = () => {
           </p>
 
           {/* Location */}
-          <p className="text-lg mb-4">
+          <p className="mb-4">
             <strong>Location:</strong> {job.location || "Not specified"}
           </p>
 
           {/* Description */}
-          <h3 className="font-bold mt-4">Description:</h3>
-          <p className="text-gray-700 mb-4">{job.description}</p>
+          <h3 className="font-bold ">
+            Description: <p className="font-normal">{job.description}</p>
+          </h3>
 
           {/* Skills */}
           {job.Skills?.length > 0 && (
             <>
-              <h3 className="font-bold mb-2">Skills Required:</h3>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {job.Skills.map((skill) => (
-                  <Link
-                    to={`/skills/${skill.id}`}
-                    key={skill.id}
-                    className="badge badge-outline"
-                  >
-                    {skill.name}
-                  </Link>
-                ))}
-              </div>
+              <h3 className="font-bold mb-2">
+                Skills Required:
+                <span className="flex flex-wrap gap-2 font-medium mb-4">
+                  {job.Skills.map((skill) => (
+                    <Link
+                      to={`/skills/${skill.id}`}
+                      key={skill.id}
+                      className="badge badge-outline mr-2 mt-1"
+                    >
+                      {skill.name}
+                    </Link>
+                  ))}
+                </span>
+              </h3>
             </>
           )}
 
           {/* Matching Users */}
-          <h3 className="font-bold mt-4 mb-2">Matching Users:</h3>
+          <h3 className="font-bold">Matching Users:</h3>
           {matchingUsers.length > 0 ? (
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 font-medium mb-4">
               {matchingUsers.map((user) => (
                 <Link
                   to={`/users/${user.id}`}
                   key={user.id}
-                  className="badge badge-outline"
+                  className="badge badge-outline link link-primary link-hover"
                 >
                   {user.firstName} {user.lastName}
                 </Link>
@@ -217,14 +226,9 @@ const JobDetailsPage = () => {
 
           {/* Apply, Edit and Back Buttons */}
           <div className="card-actions justify-between mt-4">
-            <a
-              href={job.link}
-              className="btn btn-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Apply Here
-            </a>
+            <Link to={-1} className="btn btn-primary">
+              Back
+            </Link>
             {canEdit && (
               <button
                 className="btn btn-primary"
@@ -234,9 +238,14 @@ const JobDetailsPage = () => {
               </button>
             )}
 
-            <Link to={-1} className="btn btn-primary">
-              Back
-            </Link>
+            <a
+              href={job.link}
+              className="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Apply Here
+            </a>
           </div>
         </div>
       </div>

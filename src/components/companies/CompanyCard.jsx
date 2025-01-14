@@ -4,9 +4,9 @@ const CompanyCard = ({company}) => {
     console.log(company);
 
   return (
-    <li className="collapse bg-gray-100 rounded-lg mb-4">
+    <div tabIndex={0} className="collapse collapse-arrow bg-base-100 border shadow-xl mb-4">
     <input type="checkbox" />
-    <div className="collapse-title text-lg font-medium flex items-center gap-4">
+    <div className="collapse-title text-xl font-medium flex items-center gap-4">
       {/* Company Logo */}
       <img
         src={company?.logo || "/logo.png"} // Use default logo if null
@@ -23,7 +23,7 @@ const CompanyCard = ({company}) => {
         More Details
       </Link>
     </div>
-  </li>
+  </div>
   )
 }
 

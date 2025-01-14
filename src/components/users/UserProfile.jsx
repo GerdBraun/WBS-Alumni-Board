@@ -14,18 +14,18 @@ const UserProfile = () => {
           className={`max-w-screen-lg mx-auto p-4 my-8 ${
             loading ? "hidden" : ""
           }`}
-        >
+        ><h2 className="text-2xl font-bold mb-4 ">
+        Your Profile
+      </h2>
           <div className="card bg-base-100 w-full shadow-xl">
-            <h2 className="text-2xl font-bold mb-4 text-center">
-              Your Profile
-            </h2>
+          <div className="card-body ">
             <figure className="w-56 h-auto">
               <img
                 src={appUser?.avatar || "/profile.png"}
                 alt={appUser.firstName}
               />
             </figure>
-            <div className="card-body ">
+           
               <h2 className="card-title text-xl font-bold">
                 {appUser.firstName + " " + appUser.lastName}
               </h2>
@@ -42,7 +42,7 @@ const UserProfile = () => {
                 Email: <span className="font-normal">{appUser?.email}</span>
               </h3>
               <h3 className="font-bold">
-                Skills:
+                Skills:{" "}
                 {appUser.Skills ? (
                   appUser.Skills.map((skill) => (
                     <Link
@@ -64,7 +64,7 @@ const UserProfile = () => {
                   <Link
                     to={`/projects/${project.id}`}
                     key={project.id}
-                    className="Link underline text-blue-800"
+                    className="Link link-primary link-hover"
                   >
                     {project.title}
                   </Link>
@@ -78,7 +78,7 @@ const UserProfile = () => {
                   <Link
                     to={`/jobs/${job.id}`}
                     key={job.id}
-                    className="Link underline text-blue-800"
+                    className="Link link-primary link-hover"
                   >
                     {job.title}
                   </Link>
@@ -89,7 +89,7 @@ const UserProfile = () => {
 
               <Link
                 to={`/users/edit/${appUser?.id}`}
-                className="btn btn-primary mt-3 ml-11"
+                className="btn btn-primary mt-4"
               >
                 Edit Profile
               </Link>

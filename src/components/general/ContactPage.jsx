@@ -27,7 +27,7 @@ const ContactPage = () => {
   };
   return (
     <form
-      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+      className="max-w-md mx-auto bg-base-100 border p-6 rounded-lg shadow-xl"
       onSubmit={handleSubmit(addPropsAndSend)}
     >
       <h2 className="text-2xl font-bold mb-4 text-center">Contact Us</h2>
@@ -61,8 +61,8 @@ const ContactPage = () => {
       <label className="">
         <textarea
           name="request"
-          className="textarea w-full"
-          placeholder="Your Request"
+          className="textarea textarea-bordered textarea-md w-full max-w-full mb-4"
+          placeholder="Type Your Request Here"
           {...register("request", {
             required: true,
           })}

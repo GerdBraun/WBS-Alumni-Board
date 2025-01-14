@@ -66,7 +66,7 @@ export default function AddQAForm({ question }) {
 
   return (
     <form
-      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+      className="max-w-md mx-auto bg-base-100 border p-6 rounded-lg shadow-xl mb-4"
       onSubmit={handleSubmit(onSubmit)}
     >
        <h2 className="text-2xl font-bold mb-4 text-center">

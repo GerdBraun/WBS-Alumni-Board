@@ -39,6 +39,7 @@ const SkillsList = () => {
         loading ? "hidden" : ""
       }`}
     >
+      <h1 className="text-2xl font-bold mb-4">Skills Listing</h1>
       <ul>
         {skills &&
           skills.map((skill) => (

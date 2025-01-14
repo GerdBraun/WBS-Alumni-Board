@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const JobCard = ({ job }) => {
   return (
-    <div className="collapse bg-gray-100 rounded-lg mb-4">
+    <div className="collapse collapse-arrow bg-base-100 border shadow-xl mb-4">
       <input type="checkbox" />
-      <div className="collapse-title text-lg font-medium flex items-center gap-4">
+      <div className="collapse-title text-xl font-medium flex items-center gap-4">
         {/* Company Logo */}
         <img
           src={job.Company?.logo || "/logo.png"} // Use default logo if null

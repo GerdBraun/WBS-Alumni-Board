@@ -36,15 +36,15 @@ const CommentAddForm = ({ model, id, reload }) => {
     <>
       {appUser && (
         <form
-          className="w-full p-6 rounded-lg shadow-md"
+          className="w-full p-2 rounded-lg shadow-md"
           onSubmit={handleSubmit(addPropsAndSend)}
         >
-          <h3 className="font-bold">Leave your idea</h3>
+          <h3 className="font-semibold">Share your ideas</h3>
           <label className="">
             <textarea
               name="comment"
-              className="textarea w-full bg-base-300"
-              placeholder="Your thoughts"
+              className="textarea textarea-bordered textarea-md w-full bg-base-100 border shadow-xl"
+              placeholder="Type here..."
               {...register("comment", {
                 required: true,
               })}
@@ -53,6 +53,7 @@ const CommentAddForm = ({ model, id, reload }) => {
           </label>
 
           {/* Submit Button */}
+          <br></br>
           <button
             type="submit"
             className="btn btn-primary w-full"

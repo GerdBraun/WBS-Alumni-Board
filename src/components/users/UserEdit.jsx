@@ -98,10 +98,10 @@ const UserEdit = () => {
       file: file[0],
       skills: skills,
     };
-    // console.log({ data }, "user id: ", appUser?.id);
+
     try {
       const res = await axios
-        .put(`${import.meta.env.VITE_API_SERVER}/users/${appUser?.id}`, data, {
+        .put(`${import.meta.env.VITE_API_SERVER}/users/${id}`, data, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: "Bearer " + token,
@@ -112,7 +112,7 @@ const UserEdit = () => {
         });
       if (id == appUser.id) {
         setAppUser(res.data);
-        console.log('new appUser data',res.data);
+        console.log("new appUser data", res.data);
       }
 
       toast.success("user data was saved successfully");
@@ -122,7 +122,6 @@ const UserEdit = () => {
     }
   };
 
-
   return (
     <>
       {user && (
@@ -131,16 +130,16 @@ const UserEdit = () => {
             loading ? "hidden" : ""
           }`}
         >
-          <div className="card bg-base-100 w-full shadow-xl">
+          <div className="">
             <h2 className="text-2xl font-bold mb-4 text-center">
               {user.id === appUser.id ? (
-                <span>Edit Your Profile</span>
+                <span className="">Edit Your Profile</span>
               ) : (
                 <span>Edit {user.firstName}&apos;s Profile</span>
               )}
             </h2>
             <form
-              className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+              className="max-w-md mx-auto bg-base-100 border p-6 rounded-lg shadow-md"
               method="post"
               encType="multipart/form-data"
               onSubmit={handleSubmit(saveUser)}
@@ -241,6 +240,32 @@ const UserEdit = () => {
                       classNamePrefix="select"
                       options={skills}
                       onChange={(val) => onChange(val.map((c) => c.value))}
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: state.isFocused ? "#202327" : "grey",
+                          backgroundColor: state.isFocused
+                            ? "#202327"
+                            : "#202327",
+                        }),
+
+                        multiValue: (baseStyles, state) => ({
+                          ...baseStyles,
+                          backgroundColor: state.isFocused
+                            ? "white"
+                            : "#202327",
+                        }),
+                        multiValueLabel: (baseStyles, state) => ({
+                          ...baseStyles,
+                          color: state.isFocused ? "#202327" : "light-grey",
+                        }),
+
+                        option: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: state.isFocused ? "#202327" : "red",
+                          backgroundColor: state.isFocused ? "grey" : "#202327",
+                        }),
+                      }}
                     />
                   )}
                 />
@@ -253,9 +278,7 @@ const UserEdit = () => {
               </button>
             </form>
             <br></br>
-            <Link to={-1} className="btn btn-primary">
-              Back
-            </Link>
+            
           </div>
         </div>
       )}
