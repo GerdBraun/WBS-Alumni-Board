@@ -236,37 +236,11 @@ const UserEdit = () => {
                         value && skills.filter((c) => value.includes(c.value))
                       }
                       isMulti
-                      className="basic-multi-select"
-                      classNamePrefix="select"
                       options={skills}
                       onChange={(val) => onChange(val.map((c) => c.value))}
-                      styles={{
-                        control: (baseStyles, state) => ({
-                          ...baseStyles,
-                          borderColor: state.isFocused ? "#202327" : "grey",
-                          backgroundColor: state.isFocused
-                            ? "#202327"
-                            : "#202327",
-                        }),
-
-                        multiValue: (baseStyles, state) => ({
-                          ...baseStyles,
-                          backgroundColor: state.isFocused
-                            ? "white"
-                            : "#202327",
-                        }),
-                        multiValueLabel: (baseStyles, state) => ({
-                          ...baseStyles,
-                          color: state.isFocused ? "#202327" : "light-grey",
-                        }),
-
-                        option: (baseStyles, state) => ({
-                          ...baseStyles,
-                          borderColor: state.isFocused ? "#202327" : "red",
-                          backgroundColor: state.isFocused ? "grey" : "#202327",
-                        }),
-                      }}
-                    />
+                      className="react-select-container"
+                      classNamePrefix="react-select"
+                            />
                   )}
                 />
               </label>
