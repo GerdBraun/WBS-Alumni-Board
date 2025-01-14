@@ -152,7 +152,8 @@ export default function AddJobForm({ job }) {
 
       {/* Skills Field */}
       <label className="block mb-4">
-        <Controller
+      <span className="block text-sm font-medium mb-2">Skills</span>
+      <Controller
           control={control}
           defaultValue={job?.Skills && job.Skills.map((c) => c.id)}
           name="skills"
@@ -164,6 +165,8 @@ export default function AddJobForm({ job }) {
               options={skills}
               placeholder="Select Skills..."
               isMulti
+              className="react-select-container"
+              classNamePrefix="react-select"
             />
           )}
         />
@@ -204,7 +207,7 @@ export default function AddJobForm({ job }) {
       {/* Company ID Field */}
       <label className="block mb-4">
         <span className="block text-sm font-medium mb-2">Company</span>
-        {job ? (
+        {(job && companies) ? (
           <select
             className="select select-bordered w-full"
             defaultValue={job?.companyId || ""}
