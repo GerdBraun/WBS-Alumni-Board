@@ -88,7 +88,6 @@ const JobDetailsPage = () => {
     const question = `What is the work/life balance for ${job.title}?`;
     try {
       const data = await getMockAiAnswers({ question, token });
-      const data = await getMockAiAnswers({ question, token });
       setAiAnswer(data.message.content);
       document.getElementById("my_modal_1").showModal();
       document.getElementById("my_modal_1").showModal();

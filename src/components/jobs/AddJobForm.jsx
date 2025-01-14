@@ -1,7 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { useApp } from "../../context/AppContext";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { fetchCompanies } from "../../utility/fetchCompanies";
@@ -198,12 +197,12 @@ export default function AddJobForm({ job }) {
         {(job) ? (
           <select
             className="select select-bordered w-full"
-            {...register("companyId", { required: true })}
             defaultValue={job?.companyId || ""}
+            {...register("companyId", { required: true })}
           >
             <option value="">Select a Company</option>
-            {companies.map((company) => (
-              <option key={company.id} value={company.id}>
+            {companies.length > 0 && companies.map((company) => (
+              <option key={company?.id} value={company?.id}>
                 {company.name}
               </option>
             ))}

@@ -98,10 +98,10 @@ const UserEdit = () => {
       file: file[0],
       skills: skills,
     };
-    // console.log({ data }, "user id: ", appUser?.id);
+
     try {
       const res = await axios
-        .put(`${import.meta.env.VITE_API_SERVER}/users/${appUser?.id}`, data, {
+        .put(`${import.meta.env.VITE_API_SERVER}/users/${id}`, data, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: "Bearer " + token,
