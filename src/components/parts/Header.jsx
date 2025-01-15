@@ -462,9 +462,9 @@ const Header = () => {
                     Profile
                   </NavLink>
                 </li>
-                <NavLink to="/settings" className="nav-link">
+                {/* <NavLink to="/settings" className="nav-link">
                   Settings
-                </NavLink>
+                </NavLink> */}
               </ul>
             )}
           </div>
