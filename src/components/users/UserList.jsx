@@ -3,6 +3,7 @@ import { fetchDataByModelAndId } from "../../utility/fetchData";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import UserCard from "./UserCard";
+import SearchForm from "../parts/SearchForm";
 
 const UserList = () => {
   const [usersData, setUsersData] = useState([null]);
@@ -48,7 +49,8 @@ const UserList = () => {
             Please log in to see users
           </h1>
         )}
-        {usersData?.map((aUser) => (
+       <SearchForm searchPlaceholder="Search users..." searchModel="users" />
+       {usersData?.map((aUser) => (
           <li key={aUser?.id} className="mb-4">
             <UserCard aUser={aUser} />
           </li>

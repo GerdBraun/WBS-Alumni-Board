@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { fetchDataByModelAndId } from "../../utility/fetchData";
 import { useApp } from "../../context/AppContext";
 import JobCard from "./JobCard";
+import SearchForm from "../parts/SearchForm";
 
 const JobListPage = () => {
   const [jobs, setJobs] = useState([]);
@@ -40,6 +41,7 @@ const JobListPage = () => {
       }`}
     >
       <h1 className="text-2xl font-bold mb-4">Job Listings</h1>
+      <SearchForm searchPlaceholder="Search jobs..." searchModel="jobs" />
       {jobs.map((job) => (
         <JobCard key={job.id} job={job} />
       ))}

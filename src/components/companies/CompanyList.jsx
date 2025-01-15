@@ -3,6 +3,7 @@ import { fetchDataByModelAndId } from "../../utility/fetchData";
 import { useEffect, useState } from "react";
 import CompanyCard from "./CompanyCard";
 import { Link, useSearchParams } from "react-router-dom";
+import SearchForm from "../parts/SearchForm";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
@@ -48,6 +49,7 @@ const CompanyList = () => {
             </h1>
           </>
         )}
+        <SearchForm searchPlaceholder="Search companies..." searchModel="companies" />
         {companies &&
           companies?.map((company) => (
             <CompanyCard key={company?.id} company={company} />
