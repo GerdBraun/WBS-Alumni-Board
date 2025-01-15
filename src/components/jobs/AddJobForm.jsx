@@ -36,8 +36,19 @@ export default function AddJobForm({ job }) {
 
   const loadCompanies = async () => {
     try {
-      const companiesList = await fetchCompanies(token, setLoading);
-      setCompanies(companiesList);
+      const props = {
+        model: "companys",
+        token: token,
+        setLoading: setLoading,
+        limit: 1000, //limiting the number of companies to 1000
+      };
+      const data = await fetchDataByModelAndId(props);
+      const options = data.results.map((company) => ({
+        value: company.id,
+        label: company.name,
+      }));
+
+      setCompanies(options);
     } catch (error) {
       toast.error(error.message);
     }
@@ -76,19 +87,19 @@ export default function AddJobForm({ job }) {
 
       console.log("data.skills", data.skills);
 
-
       if (job) {
         // Update job if job exists
         await updateJob(job.id, data);
         //toast.success("Job updated successfully!");
+        reset(); // Clear form fields
+        navigate(-1);
       } else {
         // Create new job
         await createJob(data);
         //toast.success("Job created successfully!");
+        reset(); // Clear form fields
+        navigate("/jobs");
       }
-
-      reset(); // Clear form fields
-      navigate("/jobs");
     } catch (error) {
       console.error("Failed to process job:", error);
       //toast.error("Failed to process job. Please try again.");
@@ -152,8 +163,8 @@ export default function AddJobForm({ job }) {
 
       {/* Skills Field */}
       <label className="block mb-4">
-      <span className="block text-sm font-medium mb-2">Skills</span>
-      <Controller
+        <span className="block text-sm font-medium mb-2">Skills</span>
+        <Controller
           control={control}
           defaultValue={job?.Skills && job.Skills.map((c) => c.id)}
           name="skills"
@@ -207,33 +218,20 @@ export default function AddJobForm({ job }) {
       {/* Company ID Field */}
       <label className="block mb-4">
         <span className="block text-sm font-medium mb-2">Company</span>
-        {(job && companies) ? (
-          <select
-            className="select select-bordered w-full"
-            defaultValue={job?.companyId || ""}
-            {...register("companyId", { required: true })}
-          >
-            <option value="">Select a Company</option>
-            {companies.length > 0 &&
-              companies.map((company) => (
-                <option key={company?.id} value={company?.id}>
-                  {company.name}
-                </option>
-              ))}
-          </select>
-        ) : (
-          <select
-            className="select select-bordered w-full"
-            {...register("companyId", { required: true })}
-          >
-            <option value="">Select a Company</option>
-            {companies.map((company) => (
-              <option key={company.id} value={company.id}>
-                {company.name}
-              </option>
-            ))}
-          </select>
-        )}
+        <Controller
+          control={control}
+          name="companyId"
+          render={({ field: { onChange, value, ref } }) => (
+            <Select
+              inputRef={ref}
+              value={companies.find((c) => c.value === value) || ""}
+              onChange={(val) => onChange(val.value)}
+              options={companies}
+              className="react-select-container"
+              classNamePrefix="react-select"
+            />
+          )}
+        />
         {errors.companyId && (
           <span className="text-error">This field is required</span>
         )}

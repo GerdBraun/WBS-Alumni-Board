@@ -10,7 +10,8 @@ export const fetchDataByModelAndId = async (props) => {
   const { model, id, token, setLoading, offset,limit,page } = props;
   const idString = id ? `/${id}` : "";
   const pageString = page ? `?page=${page}` : "";
-  const url = `${import.meta.env.VITE_API_SERVER}/${model}${idString}${pageString}`;
+  const limitString = limit ? `?limit=${limit}` : "";
+  const url = `${import.meta.env.VITE_API_SERVER}/${model}${idString}${pageString}${limitString}`;
   setLoading(true);
   try {
     const { data } = await axios

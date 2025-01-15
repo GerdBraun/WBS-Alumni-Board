@@ -124,7 +124,9 @@ html[data-theme="dark"] .react-select__multi-value {
     background-color: #872eb4;
     color:#f9fafb !important;
 }   
-
+html[data-theme="dark"] .react-select__single-value {
+    color: #f9fafb;
+}
 
 .react-select__control{
     border-radius: var(--rounded-btn, 0.5rem) !important;

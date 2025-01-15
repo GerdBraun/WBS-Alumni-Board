@@ -74,9 +74,15 @@ const UserEdit = () => {
       model: "companys",
       token: token,
       setLoading: setLoading,
+      limit: 1000, //limiting the number of companies to 1000
     };
     const data = await fetchDataByModelAndId(props);
-    setCompanies(data.results);
+    const options = data.results.map((company) => ({
+      value: company.id,
+      label: company.name,
+    }));
+
+    setCompanies(options);
   };
 
   const {
@@ -206,23 +212,25 @@ const UserEdit = () => {
               {/* Company ID Field */}
               <label className="block mb-4">
                 <span className="block text-sm font-medium mb-2">Company</span>
-                <select
-                  className="select select-bordered w-full"
-                  defaultValue={user.Company?.id || ""}
-                  {...register("companyId", { required: false })}
-                >
-                  <option value="">Select a Company</option>
-                  {companies.length > 0 &&
-                    companies.map((company) => (
-                      <option key={company?.id} value={company?.id}>
-                        {company.name}
-                      </option>
-                    ))}
-                </select>
+                <Controller
+                  control={control}
+                  name="companyId"
+                  render={({ field: { onChange, value, ref } }) => (
+                    <Select
+                      inputRef={ref}
+                      value={companies.find((c) => c.value === value) || ""}
+                      onChange={(val) => onChange(val.value)}
+                      options={companies}
+                      className="react-select-container"
+                      classNamePrefix="react-select"
+                    />
+                  )}
+                />
                 {errors.companyId && (
                   <span className="text-error">This field is required</span>
                 )}
               </label>
+
               <label className="block mb-4">
                 <span className="block text-sm font-medium mb-2">Skills</span>
                 <Controller
@@ -240,7 +248,7 @@ const UserEdit = () => {
                       onChange={(val) => onChange(val.map((c) => c.value))}
                       className="react-select-container"
                       classNamePrefix="react-select"
-                            />
+                    />
                   )}
                 />
               </label>
@@ -252,7 +260,6 @@ const UserEdit = () => {
               </button>
             </form>
             <br></br>
-            
           </div>
         </div>
       )}
