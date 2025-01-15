@@ -7,11 +7,14 @@ import axios from "axios";
  */
 export const fetchDataByModelAndId = async (props) => {
   console.log(props);
-  const { model, id, token, setLoading, offset,limit,page } = props;
+  const { model, id, token, setLoading, offset, limit, page, search } = props;
   const idString = id ? `/${id}` : "";
+  const searchString = search ? `?search=${search}` : "";
   const pageString = page ? `?page=${page}` : "";
   const limitString = limit ? `?limit=${limit}` : "";
-  const url = `${import.meta.env.VITE_API_SERVER}/${model}${idString}${pageString}${limitString}`;
+  const url = `${
+    import.meta.env.VITE_API_SERVER
+  }/${model}${idString}${pageString}${limitString}${searchString}`;
   setLoading(true);
   try {
     const { data } = await axios
@@ -24,7 +27,7 @@ export const fetchDataByModelAndId = async (props) => {
       .catch((error) => {
         console.error(error);
       });
-      console.log(data)
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -66,11 +69,13 @@ export const getCommentsByModelAndId = async (props) => {
 /**
  * gets matches between users /  jobs / projects
  * @param {Object} props { getModel, fromModel, fromId, token, setLoading }
- * @returns 
+ * @returns
  */
 export const getMatches = async (props) => {
   const { getModel, fromModel, fromId, token, setLoading } = props;
-  const url = `${import.meta.env.VITE_API_SERVER}/match/${getModel}/${fromModel}/${fromId}`;
+  const url = `${
+    import.meta.env.VITE_API_SERVER
+  }/match/${getModel}/${fromModel}/${fromId}`;
   setLoading(true);
   try {
     const { data } = await axios

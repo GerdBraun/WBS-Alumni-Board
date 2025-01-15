@@ -11,7 +11,17 @@ const SkillsList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [paginationData, setPaginationData] = useState(null);
 
+  // TODO: check functionality!!!
+  const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
+    console.log("searchTerm: ", searchTerm);
+    searchParams.set("search", searchTerm);
+    if(token) loader();
+  }, [searchTerm,token]);
+
+  useEffect(() => {
+    setSearchTerm(searchParams.get("search"));
     if (token) loader();
   }, [token, searchParams]);
 
@@ -21,6 +31,7 @@ const SkillsList = () => {
       setLoading: setLoading,
       token: token,
       page: searchParams.get("page"),
+      search: searchTerm,
     };
     const data = await fetchDataByModelAndId(props);
     setSkills(data.results);
@@ -41,7 +52,7 @@ const SkillsList = () => {
       }`}
     >
       <h1 className="text-2xl font-bold mb-4">Skills Listing</h1>
-      <SearchForm searchPlaceholder="Search skills..." searchModel="skills" />
+      <SearchForm searchPlaceholder="Search skills..." searchModel="skills" searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <ul>
         {skills &&
           skills.map((skill) => (

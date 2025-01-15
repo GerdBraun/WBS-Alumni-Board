@@ -18,7 +18,7 @@ const JobCard = ({ job }) => {
         </span>
       </div>
       <div className="collapse-content">
-        <p>{job.description}</p>
+        <p className="mb-4">{job.description.substring(0, 200)+"..."}</p>
         <Link to={`/jobs/${job.id}`} className="btn btn-primary mt-2">
           More Details
         </Link>

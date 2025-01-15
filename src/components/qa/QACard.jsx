@@ -8,7 +8,7 @@ const QACard = ({ question }) => {
         <p>{question.title}</p>
       </div>
       <div className="collapse-content">
-        <p>{question.description}</p>
+        <p className="mb-4">{question.description.substring(0, 200)+"..."}</p>
         <Link to={`/qa/${question.id}`} className="btn btn-primary mt-2">
           More Details
         </Link>
