@@ -39,7 +39,7 @@ function PasswordReset() {
 
   return (
     <div>
-      <h2>Reset Your Password</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Reset Your Password</h2>
       <form
         onSubmit={handleSubmit}
         className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"

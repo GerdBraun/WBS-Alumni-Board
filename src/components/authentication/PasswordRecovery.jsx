@@ -21,7 +21,7 @@ function PasswordRecovery() {
 
   return (
     <div >
-      <h2>Recover Password</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Recover Password</h2>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
         <label className="input input-bordered flex items-center gap-2 mb-4">
           Email
