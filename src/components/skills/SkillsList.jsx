@@ -58,9 +58,12 @@ const SkillsList = () => {
             >
               «
             </Link>
-            <button className="join-item btn bg-base-100">
+            <Link
+              to={`/companies?page=${paginationData.currentPage}`}
+              className="join-item btn bg-base-100 hover:bg-base-100"
+            >
               Page {paginationData.currentPage}
-            </button>
+            </Link>
             <Link
               to={`/skills?page=${paginationData.currentPage + 1}`}
               className="join-item btn btn-primary"
