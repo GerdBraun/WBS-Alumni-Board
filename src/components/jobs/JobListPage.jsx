@@ -53,7 +53,7 @@ const JobListPage = () => {
             >
               «
             </Link>
-            <button className="join-item btn">
+            <button className="join-item btn bg-base-100">
               Page {paginationData.currentPage}
             </button>
             <Link
