@@ -3,6 +3,7 @@ import { useApp } from "../../context/AppContext";
 import { fetchDataByModelAndId } from "../../utility/fetchData";
 import { Link, useSearchParams } from "react-router-dom";
 import ProjectCard from "./ProjectCard";
+import SearchForm from "../parts/SearchForm";
 
 const ProjectList = () => {
   const [projects, setProjects] = useState(null);
@@ -43,6 +44,7 @@ const ProjectList = () => {
         }`}
       >
         <h1 className="text-2xl font-bold mb-4">Projects Listing</h1>
+        <SearchForm searchPlaceholder="Search projects..." searchModel="projects" />
         {projects &&
           projects.map((project) => (
               <ProjectCard key={project.id} project={project} />

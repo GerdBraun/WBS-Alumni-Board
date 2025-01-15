@@ -3,6 +3,7 @@ import { useApp } from "../../context/AppContext";
 import { fetchDataByModelAndId } from "../../utility/fetchData";
 import { Link, useSearchParams } from "react-router-dom";
 import SkillsCard from "./SkillsCard";
+import SearchForm from "../parts/SearchForm";
 
 const SkillsList = () => {
   const [skills, setSkills] = useState(null);
@@ -40,6 +41,7 @@ const SkillsList = () => {
       }`}
     >
       <h1 className="text-2xl font-bold mb-4">Skills Listing</h1>
+      <SearchForm searchPlaceholder="Search skills..." searchModel="skills" />
       <ul>
         {skills &&
           skills.map((skill) => (

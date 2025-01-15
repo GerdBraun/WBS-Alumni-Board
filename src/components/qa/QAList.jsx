@@ -3,6 +3,7 @@ import { useApp } from "../../context/AppContext";
 import { fetchDataByModelAndId } from "../../utility/fetchData";
 import QACard from "./QACard";
 import { Link, useSearchParams } from "react-router-dom";
+import SearchForm from "../parts/SearchForm";
 
 const QAList = () => {
   const [questions, setQuestions] = useState(null);
@@ -41,7 +42,7 @@ const QAList = () => {
         }`}
       >
         <h1 className="text-2xl font-bold mb-4">Questions & Answers</h1>
-
+        <SearchForm searchPlaceholder="Search questions..." searchModel="questions" />
         <ul>
           {questions &&
             questions.map((question) => (
