@@ -43,7 +43,7 @@ const Stats = () => {
           </div>
           <div className="stats shadow w-full text-center">
             <div className="stat">
-              <div className="stat-title">Pojects</div>
+              <div className="stat-title">Projects</div>
               <div className="stat-value text-primary">
                 {stats.projects.toLocaleString()}
               </div>
