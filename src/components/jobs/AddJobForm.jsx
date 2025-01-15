@@ -71,6 +71,7 @@ export default function AddJobForm({ job }) {
       model: "skills",
       setLoading: setLoading,
       token: token,
+      limit: 1000, //limiting the number of companies to 1000
     };
     const data = await fetchDataByModelAndId(props);
     const options = data.results.map((skill) => ({
