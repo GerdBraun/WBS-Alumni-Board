@@ -212,20 +212,6 @@ const UserEdit = () => {
               {/* Company ID Field */}
               <label className="block mb-4">
                 <span className="block text-sm font-medium mb-2">Company</span>
-                {/* <select
-                  className="select select-bordered w-full"
-                  defaultValue={user.Company?.id || ""}
-                  {...register("companyId", { required: false })}
-                >
-                  <option value="">Select a Company</option>
-                  {companies.length > 0 &&
-                    companies.map((company) => (
-                      <option key={company?.id} value={company?.id}>
-                        {company.name}
-                      </option>
-                    ))}
-                </select> */}
-
                 <Controller
                   control={control}
                   name="companyId"
