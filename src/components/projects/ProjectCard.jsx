@@ -6,13 +6,12 @@ const ProjectCard = ({ project }) => {
       <input type="checkbox" />
       <div className="collapse-title text-xl font-medium flex items-center gap-4">
         <h2 className="">{project.title}</h2>
-        </div>
-        <div className="collapse-content">
-          {" "}
-          <Link to={`/projects/${project.id}`} className="btn btn-primary">
-            Details
-          </Link>
-        
+      </div>
+      <div className="collapse-content">
+        <p className="mb-4">{project.description.substring(0, 200) + "..."}</p>
+        <Link to={`/projects/${project.id}`} className="btn btn-primary">
+          Details
+        </Link>
       </div>
     </div>
   );
