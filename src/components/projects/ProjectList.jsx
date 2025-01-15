@@ -59,7 +59,7 @@ const ProjectList = () => {
               «
             </Link>
             <Link
-              to={`/companies?page=${paginationData.currentPage}`}
+              to={`/projects?page=${paginationData.currentPage}`}
               className="join-item btn bg-base-100 hover:bg-base-100"
             >
               Page {paginationData.currentPage}
