@@ -35,7 +35,12 @@ const CompanyList = () => {
   }, [token, searchParams]);
 
   return (
-    <div className="max-w-screen-lg mx-auto p-4 my-8">
+    <div className="max-w-screen-lg mx-auto ">
+      {" "}
+      <SearchForm
+        searchPlaceholder="Search companies..."
+        searchModel="companies"
+      />
       <ul className={`container ${loading ? "hidden" : ""}`}>
         {appUser && (
           <>
@@ -49,7 +54,7 @@ const CompanyList = () => {
             </h1>
           </>
         )}
-        <SearchForm searchPlaceholder="Search companies..." searchModel="companies" />
+
         {companies &&
           companies?.map((company) => (
             <CompanyCard key={company?.id} company={company} />

@@ -37,17 +37,21 @@ const ProjectList = () => {
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto p-4 my-8">
+    <div className="max-w-screen-lg mx-auto ">
+      <SearchForm
+        searchPlaceholder="Search projects..."
+        searchModel="projects"
+      />
       <div
         className={`container max-w-screen-lg mx-auto ${
           loading ? "hidden" : ""
         }`}
       >
         <h1 className="text-2xl font-bold mb-4">Projects Listing</h1>
-        <SearchForm searchPlaceholder="Search projects..." searchModel="projects" />
+
         {projects &&
           projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            <ProjectCard key={project.id} project={project} />
           ))}
       </div>
       {paginationData && (

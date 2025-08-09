@@ -40,8 +40,9 @@ const JobListPage = () => {
         loading ? "hidden" : ""
       }`}
     >
-      <h1 className="text-2xl font-bold mb-4">Job Listings</h1>
       <SearchForm searchPlaceholder="Search jobs..." searchModel="jobs" />
+      <h1 className="text-2xl font-bold mb-4">Job Listings</h1>
+
       {jobs.map((job) => (
         <JobCard key={job.id} job={job} />
       ))}
