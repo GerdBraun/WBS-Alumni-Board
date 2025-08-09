@@ -49,3 +49,5 @@ WBS Alumni Board is a hub for alumni of WBS Coding School to connect, share info
 ---
 
 For backend setup and more details, see the README in the `backend` directory.
+
+You can try the live demo here: [https://wbs-alumni-board.onrender.com/](https://wbs-alumni-board.onrender.com/)
